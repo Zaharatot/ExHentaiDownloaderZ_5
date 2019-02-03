@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExHentaiDownloaderZ_5", "ExHentaiDownloaderZ_5\ExHentaiDownloaderZ_5.csproj", "{270195F1-7CEF-4D64-90CD-6CF91290557F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "customTopBar", "customTopBar\customTopBar.csproj", "{53A1A6AE-2C5F-43B2-A065-FC82235A46E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "customProgressBar", "CustomProgressBar\customProgressBar.csproj", "{5A87BDDC-ED2C-4537-9CDC-1039039292F7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{270195F1-7CEF-4D64-90CD-6CF91290557F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{270195F1-7CEF-4D64-90CD-6CF91290557F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{270195F1-7CEF-4D64-90CD-6CF91290557F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{270195F1-7CEF-4D64-90CD-6CF91290557F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53A1A6AE-2C5F-43B2-A065-FC82235A46E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53A1A6AE-2C5F-43B2-A065-FC82235A46E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53A1A6AE-2C5F-43B2-A065-FC82235A46E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53A1A6AE-2C5F-43B2-A065-FC82235A46E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A87BDDC-ED2C-4537-9CDC-1039039292F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A87BDDC-ED2C-4537-9CDC-1039039292F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A87BDDC-ED2C-4537-9CDC-1039039292F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A87BDDC-ED2C-4537-9CDC-1039039292F7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4C73B853-8D10-400E-9069-D92E67A80492}
+	EndGlobalSection
+EndGlobal
