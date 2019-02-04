@@ -95,6 +95,10 @@
     <None Include="Resources\icon_256.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\customPanel\customButton.csproj">
+      <Project>{4F1E20D4-9A04-4662-BED6-164A49AA8E44}</Project>
+      <Name>customButton</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CustomProgressBar\customProgressBar.csproj">
       <Project>{5A87BDDC-ED2C-4537-9CDC-1039039292F7}</Project>
       <Name>customProgressBar</Name>

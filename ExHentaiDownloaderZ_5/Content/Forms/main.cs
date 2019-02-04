@@ -28,10 +28,30 @@ namespace ExHentaiDownloaderZ_5
         /// </summary>
         private void init()
         {
-            ExHentaiDownloaderZ_5.Content.Clases.WorkClases.ClipboardScanner cs = new Content.Clases.WorkClases.ClipboardScanner();
+            Content.Clases.WorkClases.ClipboardScanner cs = new Content.Clases.WorkClases.ClipboardScanner();
 
             cs.findUrl += Cs_findUrl;
             cs.start();
+
+
+            downloadTable.Rows.Add(new object[] {
+                "https://exhentai.org/g/1354108/b3daf602b9/",
+                "[Odenden] Korekara Onii-chan ni 〇〇〇 Shichaimasu [Chinese] [墨染个人汉化]",
+                "0/25",
+                "Busy"
+            });
+            downloadTable.Rows.Add(new object[] {
+                "https://exhentai.org/g/1323041/e1e1601f40/",
+                "[Anthology] 2D Comic Magazine Otokonoko o Shiriana Kairaku de Mesu Ochi Ryoujoku! Vol. 1 [Korean] [Digital]",
+                "0/93",
+                "Busy"
+            });
+            downloadTable.Rows.Add(new object[] {
+                "https://exhentai.org/g/1331624/15a549933d/",
+                "[Binbi] Tabegoro Otokonoko [Digital]",
+                "0/207",
+                "Busy"
+            });
 
 
             //Инициализируем события
@@ -75,7 +95,7 @@ namespace ExHentaiDownloaderZ_5
         private void Main_Paint(object sender, PaintEventArgs e)
         {
             //Рисуем обводку формы
-            e.Graphics.DrawRectangle(Pens.Fuchsia, new Rectangle(1, 1, this.Width - 2, this.Height - 2));
+            e.Graphics.DrawRectangle(Pens.Purple, new Rectangle(1, 1, this.Width - 2, this.Height - 2));
         }
 
         /// <summary>

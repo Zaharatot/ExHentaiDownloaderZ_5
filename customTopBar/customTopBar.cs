@@ -60,6 +60,10 @@ namespace CustomTopBar
         /// Цвет выделения кнопок
         /// </summary>
         private Color buttonsSelectColorVal;
+        /// <summary>
+        /// Цвет текста заголовка
+        /// </summary>
+        private Color headerColorVal;
 
         /// <summary>
         /// Флаг значения видимости иконки
@@ -132,10 +136,28 @@ namespace CustomTopBar
             }
             set
             {
-                //Проставляем значение иконки
+                //Проставляем значение цвета
                 buttonsSelectColorVal = value;
                 //Обновляем цвета выделения
                 updateColors();
+            }
+        }
+
+        /// <summary>
+        /// Цвет текста заголовка
+        /// </summary>
+        public Color headerColor
+        {
+            get
+            {
+                return headerColorVal;
+            }
+            set
+            {
+                //Проставляем значение цвета
+                headerColorVal = value;
+                //Обновляем цвет
+                headerLabel.ForeColor = headerColorVal;
             }
         }
 
@@ -259,6 +281,8 @@ namespace CustomTopBar
             oldPos = new Point(0, 0);
             //Выставляем цвет выделения
             buttonsSelectColorVal = Color.Red;
+            //Выставляем цвет текста заголовка
+            headerColorVal = Color.Black;
             //Обновляем цвета выделения
             updateColors();
         }
