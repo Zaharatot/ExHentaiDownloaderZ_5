@@ -56,6 +56,10 @@
     <Compile Include="Content\Clases\WorkClases\Parcer\htmlGeHentaiParcer.cs" />
     <Compile Include="Content\Clases\WorkClases\mainWorker.cs" />
     <Compile Include="Content\Clases\WorkClases\otherFuncs.cs" />
+    <Compile Include="Content\Clases\WorkClases\SaveFile\DataClases\DownloadList.cs" />
+    <Compile Include="Content\Clases\WorkClases\SaveFile\DataClases\Manga.cs" />
+    <Compile Include="Content\Clases\WorkClases\SaveFile\DataClases\MangaPage.cs" />
+    <Compile Include="Content\Clases\WorkClases\SaveFile\XmlWorker.cs" />
     <Compile Include="Content\Forms\main.cs">
       <SubType>Form</SubType>
     </Compile>

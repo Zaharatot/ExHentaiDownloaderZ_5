@@ -12,6 +12,10 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.DataClases
     class page
     {
         /// <summary>
+        /// id страницы
+        /// </summary>
+        public int id { get; set; }
+        /// <summary>
         /// Адрес страницы на сайте
         /// </summary>
         public string url { get; set; }

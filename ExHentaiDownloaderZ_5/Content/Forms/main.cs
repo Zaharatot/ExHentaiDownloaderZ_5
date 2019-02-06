@@ -81,6 +81,62 @@ namespace ExHentaiDownloaderZ_5
         }
 
         /// <summary>
+        /// Запускаем загрузку списка
+        /// </summary>
+        private void load()
+        {
+            //Если файл был открыт
+            if(loadDialog.ShowDialog() == DialogResult.OK)
+            {
+                string s = loadDialog.FileName;
+            }
+        }
+
+        /// <summary>
+        /// Запускаем сохранение списка
+        /// </summary>
+        private void save()
+        {
+            //Если файл был открыт
+            if (saveDialog.ShowDialog() == DialogResult.OK)
+            {
+                string s = saveDialog.FileName;
+            }
+        }
+
+        /// <summary>
+        /// Удаляем выделенный элемент из списка
+        /// </summary>
+        private void remove()
+        {
+            //Получаем список выбранных строк
+            var select = downloadTable.SelectedRows;
+            //Если выбрана хоть одна строка
+            if(select.Count > 0)
+            {
+                //Получаем её ID
+                int id = select[0].Index;
+            }
+        }
+
+        /// <summary>
+        /// Запуск загрузки
+        /// </summary>
+        private void download()
+        {
+
+        }
+
+
+        /// <summary>
+        /// Открытие окна настроек
+        /// </summary>
+        private void settings()
+        {
+
+        }
+
+        /// <summary>
         /// Событие изменения размера формы
         /// </summary>
         private void Main_Resize(object sender, EventArgs e)
@@ -132,6 +188,50 @@ namespace ExHentaiDownloaderZ_5
         }
 
 
+        /// <summary>
+        /// Клик по кнопке загрузки
+        /// </summary>
+        private void loadButton_Click(object sender, EventArgs e)
+        {
+            //Запускаем загрузку списка
+            load();
+        }
+
+        /// <summary>
+        /// Клик по кнопке сохранения
+        /// </summary>
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            //Запускаем сохранение списка
+            save();
+        }
+
+        /// <summary>
+        /// Клик по кнопке удаления
+        /// </summary>
+        private void removeButton_Click(object sender, EventArgs e)
+        {
+            //Удаляем выбранный элемент
+            remove();
+        }
+
+        /// <summary>
+        /// Клик по кнопке запуска загрузки
+        /// </summary>
+        private void downloadButton_Click(object sender, EventArgs e)
+        {
+            //Запускаем загрузку
+            download();
+        }
+
+        /// <summary>
+        /// Клик по кнопке настроек
+        /// </summary>
+        private void settingsButton_Click(object sender, EventArgs e)
+        {
+            //Открываем окно настроек
+            settings();
+        }
 
         /// <summary>
         /// Завершаем всю работу
@@ -141,5 +241,6 @@ namespace ExHentaiDownloaderZ_5
             //Закрываем форму
             this.Close();
         }
+
     }
 }

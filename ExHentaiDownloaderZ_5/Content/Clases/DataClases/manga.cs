@@ -14,7 +14,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.DataClases
         /// <summary>
         /// Список страниц манги
         /// </summary>
-        public List<page> pages { get; private set; }
+        public List<page> pages { get; set; }
 
         /// <summary>
         /// Название манги
@@ -28,11 +28,11 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.DataClases
         /// <summary>
         /// Адрес корневой страницы манги
         /// </summary>
-        public string url { get; private set; }
+        public string url { get; set; }
         /// <summary>
         /// Путь к папке, куда качаем
         /// </summary>
-        public string rootPath { get; private set; }
+        public string rootPath { get; set; }
 
         /// <summary>
         /// Статус загрузки манги

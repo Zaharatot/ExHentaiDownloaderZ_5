@@ -38,11 +38,11 @@
             this.pages = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.controlPanel = new System.Windows.Forms.Panel();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.settingsButton = new System.Windows.Forms.Button();
+            this.downloadButton = new System.Windows.Forms.Button();
+            this.loadButton = new System.Windows.Forms.Button();
+            this.saveButton = new System.Windows.Forms.Button();
+            this.removeButton = new System.Windows.Forms.Button();
             this.tablePanel = new System.Windows.Forms.Panel();
             this.progressPanel = new System.Windows.Forms.Panel();
             this.secondaryProgress = new CustomProgressBar.customProgressBar();
@@ -50,6 +50,8 @@
             this.mainProgress = new CustomProgressBar.customProgressBar();
             this.mainProgressLabel = new System.Windows.Forms.Label();
             this.customTopBar1 = new CustomTopBar.customTopBar();
+            this.loadDialog = new System.Windows.Forms.OpenFileDialog();
+            this.saveDialog = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.downloadTable)).BeginInit();
             this.controlPanel.SuspendLayout();
             this.tablePanel.SuspendLayout();
@@ -143,71 +145,76 @@
             // 
             // controlPanel
             // 
-            this.controlPanel.Controls.Add(this.button5);
-            this.controlPanel.Controls.Add(this.button4);
-            this.controlPanel.Controls.Add(this.button3);
-            this.controlPanel.Controls.Add(this.button2);
-            this.controlPanel.Controls.Add(this.button1);
+            this.controlPanel.Controls.Add(this.settingsButton);
+            this.controlPanel.Controls.Add(this.downloadButton);
+            this.controlPanel.Controls.Add(this.loadButton);
+            this.controlPanel.Controls.Add(this.saveButton);
+            this.controlPanel.Controls.Add(this.removeButton);
             this.controlPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.controlPanel.Location = new System.Drawing.Point(3, 38);
             this.controlPanel.Name = "controlPanel";
             this.controlPanel.Size = new System.Drawing.Size(794, 62);
             this.controlPanel.TabIndex = 3;
             // 
-            // button5
+            // settingsButton
             // 
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.button5.Location = new System.Drawing.Point(608, 14);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(144, 32);
-            this.button5.TabIndex = 4;
-            this.button5.Text = "button5";
-            this.button5.UseVisualStyleBackColor = true;
+            this.settingsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.settingsButton.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.settingsButton.Location = new System.Drawing.Point(625, 14);
+            this.settingsButton.Name = "settingsButton";
+            this.settingsButton.Size = new System.Drawing.Size(144, 32);
+            this.settingsButton.TabIndex = 4;
+            this.settingsButton.Text = "Настройки";
+            this.settingsButton.UseVisualStyleBackColor = true;
+            this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
             // 
-            // button4
+            // downloadButton
             // 
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.button4.Location = new System.Drawing.Point(458, 14);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(144, 32);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = true;
+            this.downloadButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.downloadButton.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.downloadButton.Location = new System.Drawing.Point(475, 14);
+            this.downloadButton.Name = "downloadButton";
+            this.downloadButton.Size = new System.Drawing.Size(144, 32);
+            this.downloadButton.TabIndex = 3;
+            this.downloadButton.Text = "Запуск загрузки";
+            this.downloadButton.UseVisualStyleBackColor = true;
+            this.downloadButton.Click += new System.EventHandler(this.downloadButton_Click);
             // 
-            // button3
+            // loadButton
             // 
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.button3.Location = new System.Drawing.Point(308, 14);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(144, 32);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
+            this.loadButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.loadButton.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.loadButton.Location = new System.Drawing.Point(325, 14);
+            this.loadButton.Name = "loadButton";
+            this.loadButton.Size = new System.Drawing.Size(144, 32);
+            this.loadButton.TabIndex = 2;
+            this.loadButton.Text = "Загрузить список";
+            this.loadButton.UseVisualStyleBackColor = true;
+            this.loadButton.Click += new System.EventHandler(this.loadButton_Click);
             // 
-            // button2
+            // saveButton
             // 
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.button2.Location = new System.Drawing.Point(158, 14);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(144, 32);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.saveButton.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.saveButton.Location = new System.Drawing.Point(175, 14);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(144, 32);
+            this.saveButton.TabIndex = 1;
+            this.saveButton.Text = "Сохранить список";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
-            // button1
+            // removeButton
             // 
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.button1.Location = new System.Drawing.Point(8, 14);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(144, 32);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.removeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.removeButton.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.removeButton.Location = new System.Drawing.Point(25, 14);
+            this.removeButton.Name = "removeButton";
+            this.removeButton.Size = new System.Drawing.Size(144, 32);
+            this.removeButton.TabIndex = 0;
+            this.removeButton.Text = "Удалить из списка";
+            this.removeButton.UseVisualStyleBackColor = true;
+            this.removeButton.Click += new System.EventHandler(this.removeButton_Click);
             // 
             // tablePanel
             // 
@@ -308,6 +315,14 @@
             this.customTopBar1.Size = new System.Drawing.Size(794, 35);
             this.customTopBar1.TabIndex = 0;
             // 
+            // loadDialog
+            // 
+            this.loadDialog.Filter = "Файл сохранения|*.EHDZS";
+            // 
+            // saveDialog
+            // 
+            this.saveDialog.Filter = "Файл сохранения|*.EHDZS";
+            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -347,11 +362,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
         private System.Windows.Forms.DataGridViewTextBoxColumn pages;
         private System.Windows.Forms.DataGridViewTextBoxColumn status;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button downloadButton;
+        private System.Windows.Forms.Button loadButton;
+        private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.Button removeButton;
+        private System.Windows.Forms.Button settingsButton;
+        private System.Windows.Forms.OpenFileDialog loadDialog;
+        private System.Windows.Forms.SaveFileDialog saveDialog;
     }
 }
 
