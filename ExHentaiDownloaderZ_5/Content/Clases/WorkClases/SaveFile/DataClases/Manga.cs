@@ -72,7 +72,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases.SaveFile.DataClases
                 countPages = manga.countPages;
                 url = manga.url;
                 rootPath = manga.rootPath;
-                status = manga.status;
+                status = (byte)manga.status;
 
                 //Инициализируем список страниц
                 pages = new List<MangaPage>();
@@ -121,7 +121,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases.SaveFile.DataClases
                 ex.name = name;
                 ex.countPages = countPages;
                 ex.rootPath = rootPath;
-                ex.status = status;
+                ex.status = (MangaStatus.status)status;
 
                 //Проходимся по списку страниц
                 foreach (var pg in pages)

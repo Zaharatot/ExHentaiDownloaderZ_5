@@ -37,7 +37,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.DataClases
         /// <summary>
         /// Статус загрузки манги
         /// </summary>
-        public byte status { get; set; }
+        public MangaStatus.status status { get; set; }
 
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.DataClases
             //Проставляем адрес
             this.url = url;
             //Статус - манга создана
-            status = 0;
+            status = MangaStatus.status.Манга_добавлена;
         }
 
         /// <summary>

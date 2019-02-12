@@ -49,8 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Content\Clases\DataClases\DownloadProgressInfo.cs" />
     <Compile Include="Content\Clases\DataClases\manga.cs" />
+    <Compile Include="Content\Clases\DataClases\MangaStatus.cs" />
     <Compile Include="Content\Clases\DataClases\page.cs" />
+    <Compile Include="Content\Clases\DataClases\TableMangaInfo.cs" />
     <Compile Include="Content\Clases\WorkClases\ClipboardScanner.cs" />
     <Compile Include="Content\Clases\WorkClases\Parcer\geHentaiLoader.cs" />
     <Compile Include="Content\Clases\WorkClases\Parcer\htmlGeHentaiParcer.cs" />

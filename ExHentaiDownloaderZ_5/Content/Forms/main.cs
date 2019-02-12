@@ -7,11 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ExHentaiDownloaderZ_5.Content.Clases.DataClases;
+using ExHentaiDownloaderZ_5.Content.Clases.WorkClases;
+
 
 namespace ExHentaiDownloaderZ_5
 {
     public partial class main : Form
     {
+        /// <summary>
+        /// Главный рабочий класс программы
+        /// </summary>
+        private mainWorker mw;
+
         /// <summary>
         /// Конструктор формы
         /// </summary>
@@ -28,31 +36,8 @@ namespace ExHentaiDownloaderZ_5
         /// </summary>
         private void init()
         {
-            Content.Clases.WorkClases.ClipboardScanner cs = new Content.Clases.WorkClases.ClipboardScanner();
-
-            cs.findUrl += Cs_findUrl;
-            cs.start();
-
-
-            downloadTable.Rows.Add(new object[] {
-                "https://exhentai.org/g/1354108/b3daf602b9/",
-                "[Odenden] Korekara Onii-chan ni 〇〇〇 Shichaimasu [Chinese] [墨染个人汉化]",
-                "0/25",
-                "Busy"
-            });
-            downloadTable.Rows.Add(new object[] {
-                "https://exhentai.org/g/1323041/e1e1601f40/",
-                "[Anthology] 2D Comic Magazine Otokonoko o Shiriana Kairaku de Mesu Ochi Ryoujoku! Vol. 1 [Korean] [Digital]",
-                "0/93",
-                "Busy"
-            });
-            downloadTable.Rows.Add(new object[] {
-                "https://exhentai.org/g/1331624/15a549933d/",
-                "[Binbi] Tabegoro Otokonoko [Digital]",
-                "0/207",
-                "Busy"
-            });
-
+            //Инициализируем основной рабочий класс
+            mw = new mainWorker();
 
             //Инициализируем события
             initEvents();
@@ -70,6 +55,9 @@ namespace ExHentaiDownloaderZ_5
         /// </summary>
         private void initEvents()
         {
+            //Событие обновления процесса загрузки
+            mw.onUpdateDownload += Mw_onUpdateDownload;
+
             //Клики по кнопкам управления окном
             customTopBar1.onCloseButtonClick += CustomTopBar1_onCloseButtonClick;
             customTopBar1.onMaximizeButtonClick += CustomTopBar1_onMaximizeButtonClick;
@@ -78,6 +66,75 @@ namespace ExHentaiDownloaderZ_5
             this.Paint += Main_Paint;
             //Событие изменения размера формы
             this.Resize += Main_Resize;
+        }
+
+        /// <summary>
+        /// Событие обновления процесса загрузки
+        /// </summary>
+        /// <param name="downloadInfo">Информация о процессе загрузки</param>
+        /// <param name="mangaTable">Список манги, для таблицы</param>
+        private void Mw_onUpdateDownload(DownloadProgressInfo downloadInfo, List<TableMangaInfo> mangaTable)
+        {
+            //Выполняем действия в основном потоке
+            this.BeginInvoke(new Action(()=> {
+                //Обновляем таблицу манги
+                updateTable(mangaTable);
+                //Обновляем значения контроллов
+                updateElems(downloadInfo);
+            }));
+        }
+
+        /// <summary>
+        /// Обновляем значеняи контроллов
+        /// </summary>
+        /// <param name="info">ИНформация о процессе загрузки</param>
+        private void updateElems(DownloadProgressInfo info)
+        {
+            //Обновляем строки статусов
+            mainProgressLabel.Text = info.getFullStatus();
+            secondaryProgressLabel.Text = info.getCurrentStatus();
+            //Обновляем прогрессбары
+            mainProgress.max = info.maxFull;
+            mainProgress.value = info.currentFull;
+            secondaryProgress.max = info.maxCurr;
+            secondaryProgress.value = info.currentCurr;
+            //Проставляем активность кнопкам
+            setButtonsEnableStatus(!info.finalFlag);
+        }
+
+        /// <summary>
+        /// Проставляем активность кнопкам
+        /// </summary>
+        /// <param name="status">Статус активности. True - если активны</param>
+        private void setButtonsEnableStatus(bool status)
+        {
+            //Проходимся по панели с кнопками
+            foreach (var elem in controlPanel.Controls)
+                //Если элемент - кнопка
+                if (elem.GetType().Equals(typeof(Button)))
+                    //Проставляем активность
+                    ((Button)elem).Enabled = status;
+        }
+
+
+        /// <summary>
+        /// Обновляем таблицу манги
+        /// </summary>
+        /// <param name="mangaTable">Список манги, для таблицы</param>
+        private void updateTable(List<TableMangaInfo> mangaTable)
+        {
+            //Очищаем список строк
+            downloadTable.Rows.Clear();
+
+            //Проходимся по списку
+            foreach (var row in mangaTable)
+                //Добавляем строку
+                downloadTable.Rows.Add(row.getRow());
+
+            /*
+             Этот метод самый примитивный, и имеет много минусов.
+             Но, на первое время сойдёт.
+             */
         }
 
         /// <summary>
@@ -124,7 +181,8 @@ namespace ExHentaiDownloaderZ_5
         /// </summary>
         private void download()
         {
-
+            //Делаем все кнопки неактивными
+            setButtonsEnableStatus(false);
         }
 
 

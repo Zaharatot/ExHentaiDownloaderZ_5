@@ -16,6 +16,17 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
     class mainWorker
     {
         /// <summary>
+        /// Делегат события обновления информации о загрузке манги
+        /// </summary>
+        /// <param name="downloadInfo">ИНформация о процессе загрузки</param>
+        /// <param name="mangaTable">Список манги, для вывода в таблицу</param>
+        public delegate void updateDownload(DownloadProgressInfo downloadInfo, List<TableMangaInfo> mangaTable);
+        /// <summary>
+        /// Событие обновления процесса загрузки манги
+        /// </summary>
+        public event updateDownload onUpdateDownload;
+
+        /// <summary>
         /// Делей между подгрузками страниц на корневой
         /// при получении полного списка страниц манги
         /// </summary>
@@ -35,6 +46,15 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
         private const int downloadMangaPageDelay = 2000;
 
         /// <summary>
+        /// Дефолтная средняя скорость загрузки манги
+        /// </summary>
+        private const int defaultAverageFullLoadTime = 300;
+        /// <summary>
+        /// Дефолтная средняя скорость загрузки страницы манги
+        /// </summary>
+        private const int defaultAverageCurrentLoadTime = 5;
+
+        /// <summary>
         /// Класс сканера буфера обмена
         /// </summary>
         private ClipboardScanner cs;
@@ -46,6 +66,10 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
         /// Путь к папке, куда качаем
         /// </summary>
         private string downloadPath;
+        /// <summary>
+        /// Флаг активной работы
+        /// </summary>
+        private bool workFlag;
 
         /// <summary>
         /// Список манги, которую нужно загрузить
@@ -53,19 +77,45 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
         private List<manga> downloadList;
 
         /// <summary>
+        /// Средняя скорость загрузки манги
+        /// </summary>
+        private decimal averageFullLoadTime;
+        /// <summary>
+        /// Средняя скорость загрузки страницы манги
+        /// </summary>
+        private decimal averageCurrentLoadTime;
+
+
+
+        /// <summary>
         /// Конструктор класса
         /// </summary>
-        /// <param name="downloadPath">Путь к папке загрузки, без слеша</param>
-        public mainWorker(string downloadPath)
+        public mainWorker()
         {
             //Инициализируем сканер буфера обмена
             cs = new ClipboardScanner();
             //Инициализируем класс загрузки
             loader = new geHentaiLoader("2279705", "264fea3a06727ea0cd68b52867415b43");
-            //Запоминаем путь
-            this.downloadPath = downloadPath;
             //Инициализиурем список манги для загрузки
             downloadList = new List<manga>();
+            //Ставим флаг в режим сбора ссылок
+            workFlag = false;
+            //Добавляем обработчик события нахождения ссылки в буфере обмена
+            cs.findUrl += Cs_findUrl;
+        }
+
+        /// <summary>
+        /// Событие нахождения адреса страницы манги в буфере обмена
+        /// </summary>
+        /// <param name="url">Полученный из буфера адрес</param>
+        private void Cs_findUrl(string url)
+        {
+            //Ссылки не могут добавляться во время работы
+            if(!workFlag)
+                //Если манга не найдена в списке
+                if (downloadList.Count(mn => (mn.url.Equals(url))) == 0)
+                    //Добавляем страницу манги в список
+                    downloadList.Add(new manga(url));
         }
 
         /// <summary>
@@ -126,7 +176,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
                             if (code.Length == 0)
                             {
                                 //ОШибка - во время загрузки списка страниц манги
-                                info.status = 3;
+                                info.status = MangaStatus.status.Ошибка_загрузки_страниц;
                                 //То выходим из цикла
                                 break;
                             }
@@ -137,15 +187,15 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
                     } while (complete);
 
                     //Манга загружена корректно
-                    info.status = 4;
+                    info.status = MangaStatus.status.Загрузка_завершена;
                 }
                 else
                     //Ошибка - корневая страница не была загружена
-                    info.status = 2;
+                    info.status = MangaStatus.status.Ошибка_загрузки_информации;
             }
             catch
             {
-                info.status = 1;
+                info.status = MangaStatus.status.Общая_ошибка_загрузки;
             }
 
             return info;
@@ -247,7 +297,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
             {
                 //Если данная манга ещё не была загружена,
                 //и её статус - корректен
-                if (info[i].status == 4)
+                if (info[i].status == MangaStatus.status.Загрузка_завершена)
                 {
                     //Получаем список файлов
                     files = getDirectoryFileNames(info[i].rootPath);
@@ -281,7 +331,8 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
                     if (info[i].checkLoad())
                         //Если количество страниц совпадает - то всё ок
                         //Иначе - ставим статус о несовпадении
-                        info[i].status = (byte)((info[i].checkCount()) ? 5 : 6);
+                        info[i].status = (info[i].checkCount()) ? MangaStatus.status.Страницы_проверены 
+                            : MangaStatus.status.Ошибка_количества_страниц;
 
                     //Спим, чтобы сайт особо не бузил
                     Thread.Sleep(downloadMangaDelay);
@@ -351,5 +402,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
                 System.Windows.Forms.MessageBox.Show("Fin");
             }).Start();
         }
+
+ //       private void 
     }
 }
