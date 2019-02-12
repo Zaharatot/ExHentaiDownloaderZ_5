@@ -92,5 +92,13 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.DataClases
         /// <returns>True - всё ок</returns>
         public bool checkCount() =>
             (pages.Count == countPages);
+
+        /// <summary>
+        /// Возвращает количество загруженных страниц манги
+        /// </summary>
+        /// <returns>Количество загруженных страниц</returns>
+        public int downloadPages() =>
+            (pages.Count(pg => (pg.loaded)));
+        
     }
 }

@@ -34,14 +34,13 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.DataClases
         public int currentCurr { get; set; }
 
         /// <summary>
-        /// Среднее время общей загрузки в секундах
+        /// Среднее время загрузки страницы манги в секундах
         /// </summary>
-        public decimal approximateFullTime { get; set; }
-
+        public decimal approximateLoadTime { get; set; }
         /// <summary>
-        /// Среднее время текущей загрузки в секундах
+        /// Оставшееся для загрузки количество страниц манги
         /// </summary>
-        public decimal approximateCurrentTime { get; set; }
+        public int countPages { get; set; }
 
 
         /// <summary>
@@ -51,32 +50,83 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.DataClases
         {
             //Проставляем дефолтные значения
             finalFlag = false;
-            currentCurr = currentFull = maxCurr = maxFull = 0;
-            approximateFullTime = approximateCurrentTime = -1;
+            countPages = currentCurr = currentFull = maxCurr = maxFull = 0;
+            approximateLoadTime = -1;
         }
+
+        /// <summary>
+        /// Возвращает строку со временем
+        /// </summary>
+        /// <param name="time">Количество секунд</param>
+        /// <returns>Красивая строка с овременем</returns>
+        private string getTime(int time)
+        {
+            //Чисто по фану - дефолтное значение
+            string ex = "бесконечно много.";
+
+            try
+            {
+                //Если меньше минуты
+                if (time < 60)
+                    ex = "меньше минуты";
+                //Больше 1 минуты - идём в минуты
+                else
+                {
+                    //Получаем минуты
+                    time /= 60;
+                    //Если меньше часа
+                    if (time < 60)
+                        ex = time.ToString() + " минут";
+                    //Больше 1 часа - идём в часы
+                    else
+                    {
+                        //Получаем Часы
+                        time /= 60;
+                        //Если меньше суток
+                        if (time < 24)
+                            ex = time.ToString() + " часов";
+                        //Если больше 1 дня, то считаем в днях
+                        else
+                        {
+                            //Получаем дни
+                            time /= 24;
+                            ex = time.ToString() + " дней";
+                        }
+                    }
+                }
+            }
+            catch { }
+
+
+            return ex;
+        }
+
 
         /// <summary>
         /// Получаем общее время загрузки
         /// </summary>
-        /// <param name="apprTime">Среднее время загрузки</param>
-        /// <param name="count">Количество</param>
         /// <returns>Строка времени загрузки</returns>
-        private string getLoadTime(decimal apprTime, int count) =>
-            $"Осталось примерно {apprTime * count} секунд.";
-
+        public string getLoadTime()
+        {
+            //Получаем время загрузки в секундах
+            int loadTime = (int)(approximateLoadTime * countPages);
+            //Выводим в красивом формате
+            return $"Осталось примерно {getTime(loadTime)}.";
+        }
+        
         /// <summary>
         /// Возврат общей строки статуса 
         /// </summary>
         /// <returns>Текст общей строки</returns>
         public string getFullStatus() =>
-            $"Статус загрузки: {currentFull} / {maxFull}. {getLoadTime(approximateFullTime, maxFull)}";
+            $"Статус загрузки: {currentFull} / {maxFull}.";
 
         /// <summary>
         /// Возврат текущей строки статуса 
         /// </summary>
         /// <returns>Текст текущей строки</returns>
         public string getCurrentStatus() =>
-            $"Статус загрузки: {currentCurr} / {maxCurr}. {getLoadTime(approximateCurrentTime, maxCurr)}";
+            $"Статус загрузки: {currentCurr} / {maxCurr}.";
 
     }
 }

@@ -93,6 +93,7 @@ namespace ExHentaiDownloaderZ_5
             //Обновляем строки статусов
             mainProgressLabel.Text = info.getFullStatus();
             secondaryProgressLabel.Text = info.getCurrentStatus();
+            loadTimeLabel.Text = info.getLoadTime();
             //Обновляем прогрессбары
             mainProgress.max = info.maxFull;
             mainProgress.value = info.currentFull;

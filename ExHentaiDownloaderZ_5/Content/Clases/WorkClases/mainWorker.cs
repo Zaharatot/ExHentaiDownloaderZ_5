@@ -46,13 +46,9 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
         private const int downloadMangaPageDelay = 2000;
 
         /// <summary>
-        /// Дефолтная средняя скорость загрузки манги
-        /// </summary>
-        private const int defaultAverageFullLoadTime = 300;
-        /// <summary>
         /// Дефолтная средняя скорость загрузки страницы манги
         /// </summary>
-        private const int defaultAverageCurrentLoadTime = 5;
+        private const int defaultAverageLoadTime = 5;
 
         /// <summary>
         /// Класс сканера буфера обмена
@@ -70,6 +66,10 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
         /// Флаг активной работы
         /// </summary>
         private bool workFlag;
+        /// <summary>
+        /// Основной рабочий поток
+        /// </summary>
+        private Thread main;
 
         /// <summary>
         /// Список манги, которую нужно загрузить
@@ -77,13 +77,9 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
         private List<manga> downloadList;
 
         /// <summary>
-        /// Средняя скорость загрузки манги
-        /// </summary>
-        private decimal averageFullLoadTime;
-        /// <summary>
         /// Средняя скорость загрузки страницы манги
         /// </summary>
-        private decimal averageCurrentLoadTime;
+        private decimal averageLoadTime;
 
 
 
@@ -100,8 +96,12 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
             downloadList = new List<manga>();
             //Ставим флаг в режим сбора ссылок
             workFlag = false;
+            //Ставим время загрузки страницы в дефолтное
+            averageLoadTime = defaultAverageLoadTime;
             //Добавляем обработчик события нахождения ссылки в буфере обмена
             cs.findUrl += Cs_findUrl;
+            //Запускаем поиск ссылок
+            cs.start();
         }
 
         /// <summary>
@@ -115,7 +115,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
                 //Если манга не найдена в списке
                 if (downloadList.Count(mn => (mn.url.Equals(url))) == 0)
                     //Добавляем страницу манги в список
-                    downloadList.Add(new manga(url));
+                    addMangaToList(url);
         }
 
         /// <summary>
@@ -187,7 +187,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
                     } while (complete);
 
                     //Манга загружена корректно
-                    info.status = MangaStatus.status.Загрузка_завершена;
+                    info.status = MangaStatus.status.Информация_загружена;
                 }
                 else
                     //Ошибка - корневая страница не была загружена
@@ -297,8 +297,11 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
             {
                 //Если данная манга ещё не была загружена,
                 //и её статус - корректен
-                if (info[i].status == MangaStatus.status.Загрузка_завершена)
+                if (info[i].status == MangaStatus.status.Информация_загружена)
                 {
+                    //Ставим статус загрузки страниц
+                    info[i].status = MangaStatus.status.Загрузка_страниц;
+
                     //Получаем список файлов
                     files = getDirectoryFileNames(info[i].rootPath);
                     //Проходимся по страницам манги
@@ -331,7 +334,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
                     if (info[i].checkLoad())
                         //Если количество страниц совпадает - то всё ок
                         //Иначе - ставим статус о несовпадении
-                        info[i].status = (info[i].checkCount()) ? MangaStatus.status.Страницы_проверены 
+                        info[i].status = (info[i].checkCount()) ? MangaStatus.status.Страницы_загружены 
                             : MangaStatus.status.Ошибка_количества_страниц;
 
                     //Спим, чтобы сайт особо не бузил
@@ -369,6 +372,55 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
         }
 
         /// <summary>
+        /// Вызываем обновление списков загрузки
+        /// </summary>
+        private void updateDownloadExec()
+        {
+            //Инициализируем переменные
+            DownloadProgressInfo info = new DownloadProgressInfo();
+            List<TableMangaInfo> mangaTable = new List<TableMangaInfo>();
+
+            int currentCurr, currentFull, maxCurr, countPages;
+
+            //Инициализируем рассчитываемые значения нолями
+            currentCurr = maxCurr = currentFull = countPages = 0;
+
+            //Проходимся по списку загрузок
+            foreach (var mn in downloadList)
+            {
+                //Добавляем мангу в список загрузок
+                mangaTable.Add(new TableMangaInfo() {
+                    count = mn.countPages,
+                    downloadCount = mn.downloadPages(),
+                    name = mn.name,
+                    status = mn.status,
+                    url = mn.url
+                });
+
+                //Если данная манга сейчас загружается
+                if(mn.status == MangaStatus.status.Загрузка_страниц)
+                {
+
+                }
+
+            }
+
+            //Передаём информацию в класс
+            info = new DownloadProgressInfo() {
+                finalFlag = !workFlag,
+                approximateLoadTime = averageLoadTime,
+                maxFull = downloadList.Count,
+                countPages = countPages,
+                currentCurr = currentCurr,
+                currentFull = currentFull,
+                maxCurr = maxCurr
+            };
+
+            //Вызываем событие обновления
+            onUpdateDownload?.Invoke(info, mangaTable);
+        }
+
+        /// <summary>
         /// Добавляем мангу в список
         /// </summary>
         /// <param name="url">Адрес манги</param>
@@ -378,6 +430,8 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
             url = loader.verificateUrl(url);
             //Добавляем информацию о манге
             downloadList.Add(new manga(url));
+            //Обновляем инфу на форме
+            updateDownloadExec();
         }
 
         /// <summary>
@@ -385,22 +439,57 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
         /// </summary>
         public void clearMangaList()
         {
+            //Очищаем список загрузки
             downloadList.Clear();
+            //Обновляем инфу на форме
+            updateDownloadExec();
         }
 
         /// <summary>
         /// Загружаем информацию о манге
         /// </summary>
-        public void downloadManga()
+        private void downloadManga()
         {
-            new Thread(() => {
-                //Загружаем информацию о манге
-                loadManga(ref downloadList);
-                //Загружаем страницы манги
-                downloadPages(ref downloadList);
+            //Загружаем информацию о манге
+            loadManga(ref downloadList);
+            //Загружаем страницы манги
+            downloadPages(ref downloadList);
+        }
 
-                System.Windows.Forms.MessageBox.Show("Fin");
-            }).Start();
+        /// <summary>
+        /// Запуск загрузки
+        /// </summary>
+        /// <param name="path">Путь загрузки</param>
+        public void start(string path)
+        {
+            //Прописываем текущий путь загрузки
+            downloadPath = path;
+            //Если основной поток уже существовал
+            if (main != null)
+                //Прерываем его выполнение
+                main.Abort();
+            //Инициализируем поток
+            main = new Thread(downloadManga);
+            //Запускаем основной рабочий поток
+            main.Start();
+        }
+
+        /// <summary>
+        /// Равершение работы всех потоков
+        /// </summary>
+        public void stop()
+        {
+            //Завершаем поток сканера буфера обмена
+            cs.stop();
+
+            //Если основной поток уже существовал
+            if (main != null)
+            {
+                //Прерываем его выполнение
+                main.Abort();
+                //Очищаем информацию о потоке
+                main = null;
+            }
         }
 
  //       private void 

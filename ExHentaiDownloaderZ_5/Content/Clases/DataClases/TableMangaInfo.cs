@@ -48,7 +48,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.DataClases
         /// </summary>
         /// <returns>Строка статуса</returns>
         private string getStatusString() =>
-            status.ToString().Replace("_", "");
+            status.ToString().Replace("_", " ");
 
         /// <summary>
         /// Возвращаем строку для таблицы

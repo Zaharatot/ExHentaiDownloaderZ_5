@@ -33,10 +33,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(main));
             this.downloadTable = new System.Windows.Forms.DataGridView();
-            this.url = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pages = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.controlPanel = new System.Windows.Forms.Panel();
             this.settingsButton = new System.Windows.Forms.Button();
             this.downloadButton = new System.Windows.Forms.Button();
@@ -45,17 +41,24 @@
             this.removeButton = new System.Windows.Forms.Button();
             this.tablePanel = new System.Windows.Forms.Panel();
             this.progressPanel = new System.Windows.Forms.Panel();
+            this.customTopBar1 = new CustomTopBar.customTopBar();
+            this.loadDialog = new System.Windows.Forms.OpenFileDialog();
+            this.saveDialog = new System.Windows.Forms.SaveFileDialog();
+            this.mainStatusLabelPanel = new System.Windows.Forms.Panel();
             this.secondaryProgress = new CustomProgressBar.customProgressBar();
             this.secondaryProgressLabel = new System.Windows.Forms.Label();
             this.mainProgress = new CustomProgressBar.customProgressBar();
             this.mainProgressLabel = new System.Windows.Forms.Label();
-            this.customTopBar1 = new CustomTopBar.customTopBar();
-            this.loadDialog = new System.Windows.Forms.OpenFileDialog();
-            this.saveDialog = new System.Windows.Forms.SaveFileDialog();
+            this.loadTimeLabel = new System.Windows.Forms.Label();
+            this.url = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pages = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.downloadTable)).BeginInit();
             this.controlPanel.SuspendLayout();
             this.tablePanel.SuspendLayout();
             this.progressPanel.SuspendLayout();
+            this.mainStatusLabelPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // downloadTable
@@ -109,39 +112,8 @@
             this.downloadTable.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.downloadTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.downloadTable.ShowEditingIcon = false;
-            this.downloadTable.Size = new System.Drawing.Size(788, 598);
+            this.downloadTable.Size = new System.Drawing.Size(838, 641);
             this.downloadTable.TabIndex = 2;
-            // 
-            // url
-            // 
-            this.url.HeaderText = "URL";
-            this.url.Name = "url";
-            this.url.ReadOnly = true;
-            this.url.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.url.Width = 250;
-            // 
-            // name
-            // 
-            this.name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.name.HeaderText = "Название";
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            this.name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // pages
-            // 
-            this.pages.HeaderText = "Страницы";
-            this.pages.Name = "pages";
-            this.pages.ReadOnly = true;
-            this.pages.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // status
-            // 
-            this.status.HeaderText = "Статус";
-            this.status.Name = "status";
-            this.status.ReadOnly = true;
-            this.status.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.status.Width = 120;
             // 
             // controlPanel
             // 
@@ -153,7 +125,7 @@
             this.controlPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.controlPanel.Location = new System.Drawing.Point(3, 38);
             this.controlPanel.Name = "controlPanel";
-            this.controlPanel.Size = new System.Drawing.Size(794, 62);
+            this.controlPanel.Size = new System.Drawing.Size(844, 62);
             this.controlPanel.TabIndex = 3;
             // 
             // settingsButton
@@ -223,7 +195,7 @@
             this.tablePanel.Location = new System.Drawing.Point(3, 100);
             this.tablePanel.Name = "tablePanel";
             this.tablePanel.Padding = new System.Windows.Forms.Padding(3);
-            this.tablePanel.Size = new System.Drawing.Size(794, 604);
+            this.tablePanel.Size = new System.Drawing.Size(844, 647);
             this.tablePanel.TabIndex = 4;
             // 
             // progressPanel
@@ -231,69 +203,13 @@
             this.progressPanel.Controls.Add(this.secondaryProgress);
             this.progressPanel.Controls.Add(this.secondaryProgressLabel);
             this.progressPanel.Controls.Add(this.mainProgress);
-            this.progressPanel.Controls.Add(this.mainProgressLabel);
+            this.progressPanel.Controls.Add(this.mainStatusLabelPanel);
             this.progressPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.progressPanel.Location = new System.Drawing.Point(3, 604);
+            this.progressPanel.Location = new System.Drawing.Point(3, 647);
             this.progressPanel.Name = "progressPanel";
             this.progressPanel.Padding = new System.Windows.Forms.Padding(3);
-            this.progressPanel.Size = new System.Drawing.Size(794, 100);
+            this.progressPanel.Size = new System.Drawing.Size(844, 100);
             this.progressPanel.TabIndex = 5;
-            // 
-            // secondaryProgress
-            // 
-            this.secondaryProgress.backgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.secondaryProgress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.secondaryProgress.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.secondaryProgress.foregroundColor = System.Drawing.Color.Purple;
-            this.secondaryProgress.Location = new System.Drawing.Point(3, 70);
-            this.secondaryProgress.max = 100;
-            this.secondaryProgress.min = 0;
-            this.secondaryProgress.MinimumSize = new System.Drawing.Size(100, 25);
-            this.secondaryProgress.Name = "secondaryProgress";
-            this.secondaryProgress.Size = new System.Drawing.Size(788, 27);
-            this.secondaryProgress.TabIndex = 4;
-            this.secondaryProgress.value = 100;
-            // 
-            // secondaryProgressLabel
-            // 
-            this.secondaryProgressLabel.AutoEllipsis = true;
-            this.secondaryProgressLabel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.secondaryProgressLabel.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.secondaryProgressLabel.Location = new System.Drawing.Point(3, 50);
-            this.secondaryProgressLabel.Name = "secondaryProgressLabel";
-            this.secondaryProgressLabel.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.secondaryProgressLabel.Size = new System.Drawing.Size(788, 20);
-            this.secondaryProgressLabel.TabIndex = 3;
-            this.secondaryProgressLabel.Text = "label1";
-            this.secondaryProgressLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // mainProgress
-            // 
-            this.mainProgress.backgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.mainProgress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.mainProgress.Dock = System.Windows.Forms.DockStyle.Top;
-            this.mainProgress.foregroundColor = System.Drawing.Color.Purple;
-            this.mainProgress.Location = new System.Drawing.Point(3, 23);
-            this.mainProgress.max = 100;
-            this.mainProgress.min = 0;
-            this.mainProgress.MinimumSize = new System.Drawing.Size(100, 25);
-            this.mainProgress.Name = "mainProgress";
-            this.mainProgress.Size = new System.Drawing.Size(788, 27);
-            this.mainProgress.TabIndex = 2;
-            this.mainProgress.value = 100;
-            // 
-            // mainProgressLabel
-            // 
-            this.mainProgressLabel.AutoEllipsis = true;
-            this.mainProgressLabel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.mainProgressLabel.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.mainProgressLabel.Location = new System.Drawing.Point(3, 3);
-            this.mainProgressLabel.Name = "mainProgressLabel";
-            this.mainProgressLabel.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.mainProgressLabel.Size = new System.Drawing.Size(788, 20);
-            this.mainProgressLabel.TabIndex = 0;
-            this.mainProgressLabel.Text = "label1";
-            this.mainProgressLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customTopBar1
             // 
@@ -312,7 +228,7 @@
             this.customTopBar1.MinimumSize = new System.Drawing.Size(300, 35);
             this.customTopBar1.Name = "customTopBar1";
             this.customTopBar1.Padding = new System.Windows.Forms.Padding(2);
-            this.customTopBar1.Size = new System.Drawing.Size(794, 35);
+            this.customTopBar1.Size = new System.Drawing.Size(844, 35);
             this.customTopBar1.TabIndex = 0;
             // 
             // loadDialog
@@ -323,12 +239,123 @@
             // 
             this.saveDialog.Filter = "Файл сохранения|*.EHDZS";
             // 
+            // mainStatusLabelPanel
+            // 
+            this.mainStatusLabelPanel.Controls.Add(this.loadTimeLabel);
+            this.mainStatusLabelPanel.Controls.Add(this.mainProgressLabel);
+            this.mainStatusLabelPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.mainStatusLabelPanel.Location = new System.Drawing.Point(3, 3);
+            this.mainStatusLabelPanel.Name = "mainStatusLabelPanel";
+            this.mainStatusLabelPanel.Size = new System.Drawing.Size(838, 20);
+            this.mainStatusLabelPanel.TabIndex = 0;
+            // 
+            // secondaryProgress
+            // 
+            this.secondaryProgress.backgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.secondaryProgress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.secondaryProgress.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.secondaryProgress.foregroundColor = System.Drawing.Color.Purple;
+            this.secondaryProgress.Location = new System.Drawing.Point(3, 70);
+            this.secondaryProgress.max = 100;
+            this.secondaryProgress.min = 0;
+            this.secondaryProgress.MinimumSize = new System.Drawing.Size(100, 25);
+            this.secondaryProgress.Name = "secondaryProgress";
+            this.secondaryProgress.Size = new System.Drawing.Size(838, 27);
+            this.secondaryProgress.TabIndex = 8;
+            this.secondaryProgress.value = 100;
+            // 
+            // secondaryProgressLabel
+            // 
+            this.secondaryProgressLabel.AutoEllipsis = true;
+            this.secondaryProgressLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.secondaryProgressLabel.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.secondaryProgressLabel.Location = new System.Drawing.Point(3, 50);
+            this.secondaryProgressLabel.Name = "secondaryProgressLabel";
+            this.secondaryProgressLabel.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.secondaryProgressLabel.Size = new System.Drawing.Size(838, 20);
+            this.secondaryProgressLabel.TabIndex = 7;
+            this.secondaryProgressLabel.Text = "label1";
+            this.secondaryProgressLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // mainProgress
+            // 
+            this.mainProgress.backgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.mainProgress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.mainProgress.Dock = System.Windows.Forms.DockStyle.Top;
+            this.mainProgress.foregroundColor = System.Drawing.Color.Purple;
+            this.mainProgress.Location = new System.Drawing.Point(3, 23);
+            this.mainProgress.max = 100;
+            this.mainProgress.min = 0;
+            this.mainProgress.MinimumSize = new System.Drawing.Size(100, 25);
+            this.mainProgress.Name = "mainProgress";
+            this.mainProgress.Size = new System.Drawing.Size(838, 27);
+            this.mainProgress.TabIndex = 6;
+            this.mainProgress.value = 100;
+            // 
+            // mainProgressLabel
+            // 
+            this.mainProgressLabel.AutoEllipsis = true;
+            this.mainProgressLabel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.mainProgressLabel.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.mainProgressLabel.Location = new System.Drawing.Point(0, 0);
+            this.mainProgressLabel.Name = "mainProgressLabel";
+            this.mainProgressLabel.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.mainProgressLabel.Size = new System.Drawing.Size(375, 20);
+            this.mainProgressLabel.TabIndex = 6;
+            this.mainProgressLabel.Text = "label1";
+            this.mainProgressLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // loadTimeLabel
+            // 
+            this.loadTimeLabel.AutoEllipsis = true;
+            this.loadTimeLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.loadTimeLabel.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.loadTimeLabel.Location = new System.Drawing.Point(375, 0);
+            this.loadTimeLabel.Name = "loadTimeLabel";
+            this.loadTimeLabel.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.loadTimeLabel.Size = new System.Drawing.Size(463, 20);
+            this.loadTimeLabel.TabIndex = 7;
+            this.loadTimeLabel.Text = "label1";
+            this.loadTimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // url
+            // 
+            this.url.HeaderText = "URL";
+            this.url.Name = "url";
+            this.url.ReadOnly = true;
+            this.url.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.url.Width = 250;
+            // 
+            // name
+            // 
+            this.name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.name.HeaderText = "Название";
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            this.name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // pages
+            // 
+            this.pages.HeaderText = "Страницы";
+            this.pages.Name = "pages";
+            this.pages.ReadOnly = true;
+            this.pages.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.pages.Width = 120;
+            // 
+            // status
+            // 
+            this.status.HeaderText = "Статус";
+            this.status.Name = "status";
+            this.status.ReadOnly = true;
+            this.status.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.status.Width = 170;
+            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.ClientSize = new System.Drawing.Size(800, 707);
+            this.ClientSize = new System.Drawing.Size(850, 750);
             this.Controls.Add(this.progressPanel);
             this.Controls.Add(this.tablePanel);
             this.Controls.Add(this.controlPanel);
@@ -343,6 +370,7 @@
             this.controlPanel.ResumeLayout(false);
             this.tablePanel.ResumeLayout(false);
             this.progressPanel.ResumeLayout(false);
+            this.mainStatusLabelPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -354,14 +382,6 @@
         private System.Windows.Forms.Panel controlPanel;
         private System.Windows.Forms.Panel tablePanel;
         private System.Windows.Forms.Panel progressPanel;
-        private CustomProgressBar.customProgressBar secondaryProgress;
-        private System.Windows.Forms.Label secondaryProgressLabel;
-        private CustomProgressBar.customProgressBar mainProgress;
-        private System.Windows.Forms.Label mainProgressLabel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn url;
-        private System.Windows.Forms.DataGridViewTextBoxColumn name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn pages;
-        private System.Windows.Forms.DataGridViewTextBoxColumn status;
         private System.Windows.Forms.Button downloadButton;
         private System.Windows.Forms.Button loadButton;
         private System.Windows.Forms.Button saveButton;
@@ -369,6 +389,16 @@
         private System.Windows.Forms.Button settingsButton;
         private System.Windows.Forms.OpenFileDialog loadDialog;
         private System.Windows.Forms.SaveFileDialog saveDialog;
+        private CustomProgressBar.customProgressBar secondaryProgress;
+        private System.Windows.Forms.Label secondaryProgressLabel;
+        private CustomProgressBar.customProgressBar mainProgress;
+        private System.Windows.Forms.Panel mainStatusLabelPanel;
+        private System.Windows.Forms.Label loadTimeLabel;
+        private System.Windows.Forms.Label mainProgressLabel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn url;
+        private System.Windows.Forms.DataGridViewTextBoxColumn name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pages;
+        private System.Windows.Forms.DataGridViewTextBoxColumn status;
     }
 }
 
