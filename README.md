@@ -3,10 +3,10 @@
 Это уже пятая версия данной программы.
 
 #### История версий
-[Перенесена в отдельный файл](ExHentaiDownloaderZ_5/HISTORY.md)
+[Перенесена в отдельный файл](https://github.com/Zaharatot/ExHentaiDownloaderZ_5/blob/master/HISTORY.md)
 
 #### Журнал обновлений
-[Перенесён в отдельный файл](ExHentaiDownloaderZ_5/CHANGELOG.md)
+[Перенесён в отдельный файл](https://github.com/Zaharatot/ExHentaiDownloaderZ_5/blob/master/CHANGELOG.md)
 
 #### Список задач
 + Добавить форму настроек;
