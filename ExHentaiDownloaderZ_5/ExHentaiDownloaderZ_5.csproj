@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Content\Clases\DataClases\DownloadProgressInfo.cs" />
+    <Compile Include="Content\Clases\DataClases\DownloadStep.cs" />
     <Compile Include="Content\Clases\DataClases\manga.cs" />
     <Compile Include="Content\Clases\DataClases\MangaStatus.cs" />
     <Compile Include="Content\Clases\DataClases\page.cs" />

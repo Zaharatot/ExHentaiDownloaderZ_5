@@ -42,6 +42,10 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.DataClases
         /// </summary>
         public int countPages { get; set; }
 
+        /// <summary>
+        /// Текущий шаг загрузки
+        /// </summary>
+        public DownloadStep.Steps step { get; set; }
 
         /// <summary>
         /// Конструктор класса
@@ -52,6 +56,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.DataClases
             finalFlag = false;
             countPages = currentCurr = currentFull = maxCurr = maxFull = 0;
             approximateLoadTime = -1;
+            step = DownloadStep.Steps.Сбор_ссылок;
         }
 
         /// <summary>
@@ -62,35 +67,39 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.DataClases
         private string getTime(int time)
         {
             //Чисто по фану - дефолтное значение
-            string ex = "бесконечно много.";
+            string ex = "бесконечно много времени";
 
             try
             {
-                //Если меньше минуты
-                if (time < 60)
-                    ex = "меньше минуты";
-                //Больше 1 минуты - идём в минуты
-                else
+                //Если время не дефолтное
+                if (time > 0)
                 {
-                    //Получаем минуты
-                    time /= 60;
-                    //Если меньше часа
+                    //Если меньше минуты
                     if (time < 60)
-                        ex = time.ToString() + " минут";
-                    //Больше 1 часа - идём в часы
+                        ex = "меньше минуты";
+                    //Больше 1 минуты - идём в минуты
                     else
                     {
-                        //Получаем Часы
+                        //Получаем минуты
                         time /= 60;
-                        //Если меньше суток
-                        if (time < 24)
-                            ex = time.ToString() + " часов";
-                        //Если больше 1 дня, то считаем в днях
+                        //Если меньше часа
+                        if (time < 60)
+                            ex = time.ToString() + " минут";
+                        //Больше 1 часа - идём в часы
                         else
                         {
-                            //Получаем дни
-                            time /= 24;
-                            ex = time.ToString() + " дней";
+                            //Получаем Часы
+                            time /= 60;
+                            //Если меньше суток
+                            if (time < 24)
+                                ex = time.ToString() + " часов";
+                            //Если больше 1 дня, то считаем в днях
+                            else
+                            {
+                                //Получаем дни
+                                time /= 24;
+                                ex = time.ToString() + " дней";
+                            }
                         }
                     }
                 }
@@ -111,7 +120,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.DataClases
             //Получаем время загрузки в секундах
             int loadTime = (int)(approximateLoadTime * countPages);
             //Выводим в красивом формате
-            return $"Осталось примерно {getTime(loadTime)}.";
+            return $"Осталось {getTime(loadTime)}";
         }
         
         /// <summary>
@@ -119,14 +128,20 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.DataClases
         /// </summary>
         /// <returns>Текст общей строки</returns>
         public string getFullStatus() =>
-            $"Статус загрузки: {currentFull} / {maxFull}.";
+            $"Статус загрузки: {currentFull} / {maxFull}";
 
         /// <summary>
         /// Возврат текущей строки статуса 
         /// </summary>
         /// <returns>Текст текущей строки</returns>
         public string getCurrentStatus() =>
-            $"Статус загрузки: {currentCurr} / {maxCurr}.";
+            $"Статус загрузки: {currentCurr} / {maxCurr}";
 
+        /// <summary>
+        /// Возвращаем текущий шаг загрузки
+        /// </summary>
+        /// <returns>Строка с описанием шага</returns>
+        public string getStep() =>
+            $"Текущий шаг: {step.ToString().Replace("_", " ")}";
     }
 }

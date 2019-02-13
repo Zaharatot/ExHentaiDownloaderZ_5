@@ -19,6 +19,10 @@ namespace ExHentaiDownloaderZ_5
         /// Главный рабочий класс программы
         /// </summary>
         private mainWorker mw;
+        /// <summary>
+        /// Путь загрузки
+        /// </summary>
+        private string downloadPath;
 
         /// <summary>
         /// Конструктор формы
@@ -38,16 +42,8 @@ namespace ExHentaiDownloaderZ_5
         {
             //Инициализируем основной рабочий класс
             mw = new mainWorker();
-
             //Инициализируем события
             initEvents();
-        }
-
-        private void Cs_findUrl(string url)
-        {
-            this.BeginInvoke(new Action(() => { 
-                //listBox1.Items.Add(url);
-            }));
         }
 
         /// <summary>
@@ -66,6 +62,17 @@ namespace ExHentaiDownloaderZ_5
             this.Paint += Main_Paint;
             //Событие изменения размера формы
             this.Resize += Main_Resize;
+            //Событие завершения загрузки формы
+            this.Load += Main_Load;
+        }
+
+        /// <summary>
+        /// Обработчик события первой загрузки формы
+        /// </summary>
+        private void Main_Load(object sender, EventArgs e)
+        {
+            //Запрашиваем обновление данных на форме 
+            mw.updateDownloadExec();
         }
 
         /// <summary>
@@ -94,6 +101,7 @@ namespace ExHentaiDownloaderZ_5
             mainProgressLabel.Text = info.getFullStatus();
             secondaryProgressLabel.Text = info.getCurrentStatus();
             loadTimeLabel.Text = info.getLoadTime();
+            stepInfoLabel.Text = info.getStep();
             //Обновляем прогрессбары
             mainProgress.max = info.maxFull;
             mainProgress.value = info.currentFull;
@@ -184,6 +192,8 @@ namespace ExHentaiDownloaderZ_5
         {
             //Делаем все кнопки неактивными
             setButtonsEnableStatus(false);
+            //Зaпускаем загрузку
+            mw.start(downloadPath);
         }
 
 
@@ -297,6 +307,8 @@ namespace ExHentaiDownloaderZ_5
         /// </summary>
         private void exit()
         {
+            //Останавливаем все рабочие потоки приложения
+            mw.stop();
             //Закрываем форму
             this.Close();
         }
