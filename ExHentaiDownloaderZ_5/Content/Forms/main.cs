@@ -42,6 +42,13 @@ namespace ExHentaiDownloaderZ_5
         {
             //Инициализируем основной рабочий класс
             mw = new mainWorker();
+
+            /* ВРЕМЕННОЕ РЕШЕНИЕ */
+            downloadPath = Application.StartupPath + @"\Files\";
+
+            //Добавляем номер версии в заголовок окна
+            customTopBar1.headerText += $" (ver. {Application.ProductVersion})";
+
             //Инициализируем события
             initEvents();
         }
@@ -154,7 +161,12 @@ namespace ExHentaiDownloaderZ_5
             //Если файл был открыт
             if(loadDialog.ShowDialog() == DialogResult.OK)
             {
-                string s = loadDialog.FileName;
+                //Загружаем список манги
+                byte result = mw.loadManga(loadDialog.FileName);
+                //Если загрузка была успешна
+                if (result == 0)
+                    //Обновляем инфу на форме
+                    mw.updateDownloadExec();
             }
         }
 
@@ -166,7 +178,8 @@ namespace ExHentaiDownloaderZ_5
             //Если файл был открыт
             if (saveDialog.ShowDialog() == DialogResult.OK)
             {
-                string s = saveDialog.FileName;
+                //Загружаем список манги
+                byte result = mw.saveManga(saveDialog.FileName);
             }
         }
 
@@ -182,8 +195,20 @@ namespace ExHentaiDownloaderZ_5
             {
                 //Получаем её ID
                 int id = select[0].Index;
+                //Удаляем мангу из списка
+                mw.removeMangaReomList(id);
             }
         }
+
+        /// <summary>
+        /// Удаляем все элементы из списка
+        /// </summary>
+        private void clear()
+        {
+            //Очищаем список манги
+            mw.clearMangaList();
+        }
+
 
         /// <summary>
         /// Запуск загрузки
@@ -285,6 +310,15 @@ namespace ExHentaiDownloaderZ_5
         }
 
         /// <summary>
+        /// Клик по кнопке очистки
+        /// </summary>
+        private void clearButton_Click(object sender, EventArgs e)
+        {
+            //Удаляем все элементы из списка
+            clear();
+        }
+
+        /// <summary>
         /// Клик по кнопке запуска загрузки
         /// </summary>
         private void downloadButton_Click(object sender, EventArgs e)
@@ -312,6 +346,5 @@ namespace ExHentaiDownloaderZ_5
             //Закрываем форму
             this.Close();
         }
-
     }
 }

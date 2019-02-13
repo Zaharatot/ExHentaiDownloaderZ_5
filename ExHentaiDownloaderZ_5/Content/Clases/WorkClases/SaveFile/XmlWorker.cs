@@ -30,7 +30,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases.SaveFile
             //Инициализируем путь автосохранения
             autosavePath = Environment.CurrentDirectory + @"\autosave.EHDZS";
             //На всякий случай, перезсоздаём путь (если он не существует)
-            Directory.CreateDirectory(autosavePath);
+            Directory.CreateDirectory(Environment.CurrentDirectory);
         }
 
 
@@ -61,7 +61,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases.SaveFile
                         //Указываем путь автосохранения
                         path = autosavePath;
                     //Инициализируем поток записи в файл
-                    using (StreamWriter sw = new StreamWriter(autosavePath))
+                    using (StreamWriter sw = new StreamWriter(path))
                     {
                         //Сериализуем в файл наш класс
                         xs.Serialize(sw, list);
@@ -77,7 +77,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases.SaveFile
                     ex = 2;
             }
             catch { ex = 1; }
-
+            
             return ex;
         }
 
@@ -107,7 +107,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases.SaveFile
                 if (File.Exists(path))
                 {
                     //Инициализируем поток загрузки из файла
-                    using (StreamReader sr = new StreamReader(autosavePath))
+                    using (StreamReader sr = new StreamReader(path))
                     {
                         //Десериализуем наш класс из файла
                         buff = (DownloadList)xs.Deserialize(sr);

@@ -9,7 +9,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.DataClases
     /// <summary>
     /// Класс, хранящий перечисление статусов щагрузки манги
     /// </summary>
-    class MangaStatus
+    public class MangaStatus
     {
         /// <summary>
         /// Перечисление статусов загрузки манги

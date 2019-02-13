@@ -9,7 +9,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.DataClases
     /// <summary>
     /// Класс, хранящий информацию о манге
     /// </summary>
-    class manga
+    public class manga
     {
         /// <summary>
         /// Список страниц манги

@@ -11,7 +11,8 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases.SaveFile.DataClases
     /// Класс, реализующий информацию о странице манги
     /// для сохранения в xml
     /// </summary>
-    class MangaPage
+    [Serializable]
+    public class MangaPage
     {
         /// <summary>
         /// id страницы

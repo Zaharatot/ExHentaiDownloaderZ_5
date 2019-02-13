@@ -10,7 +10,8 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases.SaveFile.DataClases
     /// <summary>
     /// Класс, реализующий список загружаемой манги, для сохранения в xml
     /// </summary>
-    class DownloadList
+    [Serializable]
+    public class DownloadList
     {
         /// <summary>
         /// Список манги, для загрузки

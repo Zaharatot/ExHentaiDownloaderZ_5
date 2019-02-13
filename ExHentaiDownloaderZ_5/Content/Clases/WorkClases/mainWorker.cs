@@ -1,5 +1,6 @@
 ﻿using ExHentaiDownloaderZ_5.Content.Clases.DataClases;
 using ExHentaiDownloaderZ_5.Content.Clases.WorkClases.Parcer;
+using ExHentaiDownloaderZ_5.Content.Clases.WorkClases.SaveFile;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -63,6 +64,11 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
         /// </summary>
         private geHentaiLoader loader;
         /// <summary>
+        /// Класс сохранения и загрузки
+        /// </summary>
+        XmlWorker xw;
+
+        /// <summary>
         /// Путь к папке, куда качаем
         /// </summary>
         private string downloadPath;
@@ -98,6 +104,8 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
         {
             //Инициализируем сканер буфера обмена
             cs = new ClipboardScanner();
+            //ИНициализируем класс сохранения/загрузки
+            xw = new XmlWorker();
             //Инициализируем класс загрузки
             loader = new geHentaiLoader("2279705", "264fea3a06727ea0cd68b52867415b43");
             //Инициализиурем список манги для загрузки
@@ -109,9 +117,14 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
             averageLoadInfoTime = defaultAverageLoadInfoTime;
             //Добавляем обработчик события нахождения ссылки в буфере обмена
             cs.findUrl += Cs_findUrl;
+
+            //Запускаем загрузку манги
+            loadManga();
             //Запускаем поиск ссылок
             cs.start();
         }
+
+
 
 
         /// <summary>
@@ -488,6 +501,18 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
         }
 
         /// <summary>
+        /// Удаляем мангу из списка по id
+        /// </summary>
+        /// <param name="id">id удаляемого элемента в списке</param>
+        public void removeMangaReomList(int id)
+        {
+            //Удаляем элемент
+            downloadList.RemoveAt(id);
+            //Обновляем инфу на форме
+            updateDownloadExec();
+        }
+
+        /// <summary>
         /// Очищаем список загрузки
         /// </summary>
         public void clearMangaList()
@@ -503,18 +528,24 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
         /// </summary>
         private void downloadManga()
         {
+            //Перед началом загрузки, автоматом сохраняем список манги
+            saveManga();
             //Переходим к первому шагу загрузки
             workStep = DownloadStep.Steps.Загрузка_информации_о_манге;
             //Обновляем инфу на форме
             updateDownloadExec();
             //Загружаем информацию о манге
             loadManga(ref downloadList);
+            
+            //После загрузки инфы, автоматом сохраняем список манги
+            saveManga();
             //Переходим ко второму шагу загрузки
             workStep = DownloadStep.Steps.Загрузка_страниц_манги;
             //Обновляем инфу на форме
             updateDownloadExec();
             //Загружаем страницы манги
             downloadPages(ref downloadList);
+
             //Возвращаемся к сбору ссылок
             workStep = DownloadStep.Steps.Сбор_ссылок;
             //Обновляем инфу на форме
@@ -557,6 +588,83 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
             }
         }
 
- //       private void 
+        /// <summary>
+        /// Сохраняем мангу
+        /// </summary>
+        /// <param name="path">Путь сохранения манги. По дефолту - путь автосохранения</param>
+        /// <returns>Результат выполнения операции. 0 - всё ок, иначе - код ошибки.</returns>
+        public byte saveManga(string path = null)
+        {
+            byte ex = 1;
+
+            try
+            {
+                //Если путь не пустой
+                if ((path == null) || (path.Length != 0))
+                {
+                    //Если список загрузки был создан
+                    if (downloadList != null)
+                        //Выполняем сохранение списка манги
+                        ex = xw.saveManga(downloadList, path);
+                    else
+                        //Список загрузки ещё не было проинициализирован
+                        ex = 3;
+                }
+                else
+                    //ОШибка - пустой путь
+                    ex = 4;
+            }
+            catch { ex = 1; }
+
+            return ex;
+        }
+
+        /// <summary>
+        /// Загружаем мангу
+        /// </summary>
+        /// <param name="path">Путь загрузки манги. По дефолту - путь автозагрузки</param>
+        /// <returns>Результат выполнения операции. 0 - всё ок, иначе - код ошибки.</returns>
+        public byte loadManga(string path = null)
+        {
+            byte ex = 1;
+
+            try
+            {
+                //Если список загрузки был создан
+                if (downloadList != null)
+                {
+                    //Если путь не пустой
+                    if ((path == null) || (path.Length != 0))
+                    {
+                        //Очищаем список загрузки
+                        downloadList.Clear();
+                        //Загружаем мангу
+                        downloadList = xw.loadManga(path);
+
+                        //Если была ошибка загрузки
+                        if (downloadList == null)
+                        {
+                            //РЕинициализируем список
+                            downloadList = new List<manga>();
+                            //Возвращаем код ошибки загрузки
+                            ex = 3;
+                        }
+                        else
+                            //Всё ок
+                            ex = 0;
+                    }
+                    else
+                        //ОШибка - пустой путь
+                        ex = 4;
+                }
+                else
+                    //Список загрузки ещё не было проинициализирован
+                    ex = 2;
+            }
+            catch { ex = 1; }
+
+            return ex;
+        }
+
     }
 }

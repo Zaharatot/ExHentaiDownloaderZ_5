@@ -10,7 +10,8 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases.SaveFile.DataClases
     /// <summary>
     /// Класс, использующийся для сохранения информации о манге
     /// </summary>
-    class Manga
+    [Serializable]
+    public class Manga
     {
         /// <summary>
         /// Список страниц манги
@@ -29,11 +30,11 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases.SaveFile.DataClases
         /// <summary>
         /// Адрес корневой страницы манги
         /// </summary>
-        public string url { get; private set; }
+        public string url { get; set; }
         /// <summary>
         /// Путь к папке, куда качаем
         /// </summary>
-        public string rootPath { get; private set; }
+        public string rootPath { get; set; }
 
         /// <summary>
         /// Статус загрузки манги

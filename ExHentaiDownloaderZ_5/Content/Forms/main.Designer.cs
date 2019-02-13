@@ -45,16 +45,17 @@
             this.removeButton = new System.Windows.Forms.Button();
             this.tablePanel = new System.Windows.Forms.Panel();
             this.progressPanel = new System.Windows.Forms.Panel();
-            this.customTopBar1 = new CustomTopBar.customTopBar();
-            this.loadDialog = new System.Windows.Forms.OpenFileDialog();
-            this.saveDialog = new System.Windows.Forms.SaveFileDialog();
-            this.stepInfoPanel = new System.Windows.Forms.Panel();
-            this.stepInfoLabel = new System.Windows.Forms.Label();
-            this.loadTimeLabel = new System.Windows.Forms.Label();
-            this.mainProgressLabel = new System.Windows.Forms.Label();
             this.secondaryProgress = new CustomProgressBar.customProgressBar();
             this.secondaryProgressLabel = new System.Windows.Forms.Label();
             this.mainProgress = new CustomProgressBar.customProgressBar();
+            this.mainProgressLabel = new System.Windows.Forms.Label();
+            this.stepInfoPanel = new System.Windows.Forms.Panel();
+            this.loadTimeLabel = new System.Windows.Forms.Label();
+            this.stepInfoLabel = new System.Windows.Forms.Label();
+            this.customTopBar1 = new CustomTopBar.customTopBar();
+            this.loadDialog = new System.Windows.Forms.OpenFileDialog();
+            this.saveDialog = new System.Windows.Forms.SaveFileDialog();
+            this.clearButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.downloadTable)).BeginInit();
             this.controlPanel.SuspendLayout();
             this.tablePanel.SuspendLayout();
@@ -150,6 +151,7 @@
             // 
             // controlPanel
             // 
+            this.controlPanel.Controls.Add(this.clearButton);
             this.controlPanel.Controls.Add(this.settingsButton);
             this.controlPanel.Controls.Add(this.downloadButton);
             this.controlPanel.Controls.Add(this.loadButton);
@@ -165,9 +167,9 @@
             // 
             this.settingsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.settingsButton.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.settingsButton.Location = new System.Drawing.Point(625, 14);
+            this.settingsButton.Location = new System.Drawing.Point(655, 14);
             this.settingsButton.Name = "settingsButton";
-            this.settingsButton.Size = new System.Drawing.Size(144, 32);
+            this.settingsButton.Size = new System.Drawing.Size(120, 32);
             this.settingsButton.TabIndex = 4;
             this.settingsButton.Text = "Настройки";
             this.settingsButton.UseVisualStyleBackColor = true;
@@ -177,9 +179,9 @@
             // 
             this.downloadButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.downloadButton.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.downloadButton.Location = new System.Drawing.Point(475, 14);
+            this.downloadButton.Location = new System.Drawing.Point(529, 14);
             this.downloadButton.Name = "downloadButton";
-            this.downloadButton.Size = new System.Drawing.Size(144, 32);
+            this.downloadButton.Size = new System.Drawing.Size(120, 32);
             this.downloadButton.TabIndex = 3;
             this.downloadButton.Text = "Запуск загрузки";
             this.downloadButton.UseVisualStyleBackColor = true;
@@ -189,9 +191,9 @@
             // 
             this.loadButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.loadButton.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.loadButton.Location = new System.Drawing.Point(325, 14);
+            this.loadButton.Location = new System.Drawing.Point(403, 14);
             this.loadButton.Name = "loadButton";
-            this.loadButton.Size = new System.Drawing.Size(144, 32);
+            this.loadButton.Size = new System.Drawing.Size(120, 32);
             this.loadButton.TabIndex = 2;
             this.loadButton.Text = "Загрузить список";
             this.loadButton.UseVisualStyleBackColor = true;
@@ -201,9 +203,9 @@
             // 
             this.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.saveButton.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.saveButton.Location = new System.Drawing.Point(175, 14);
+            this.saveButton.Location = new System.Drawing.Point(277, 14);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(144, 32);
+            this.saveButton.Size = new System.Drawing.Size(120, 32);
             this.saveButton.TabIndex = 1;
             this.saveButton.Text = "Сохранить список";
             this.saveButton.UseVisualStyleBackColor = true;
@@ -215,7 +217,7 @@
             this.removeButton.ForeColor = System.Drawing.Color.MediumSlateBlue;
             this.removeButton.Location = new System.Drawing.Point(25, 14);
             this.removeButton.Name = "removeButton";
-            this.removeButton.Size = new System.Drawing.Size(144, 32);
+            this.removeButton.Size = new System.Drawing.Size(120, 32);
             this.removeButton.TabIndex = 0;
             this.removeButton.Text = "Удалить из списка";
             this.removeButton.UseVisualStyleBackColor = true;
@@ -244,80 +246,6 @@
             this.progressPanel.Padding = new System.Windows.Forms.Padding(3);
             this.progressPanel.Size = new System.Drawing.Size(844, 120);
             this.progressPanel.TabIndex = 5;
-            // 
-            // customTopBar1
-            // 
-            this.customTopBar1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(42)))), ((int)(((byte)(42)))));
-            this.customTopBar1.buttonsSelectColor = System.Drawing.Color.Purple;
-            this.customTopBar1.closeVisible = true;
-            this.customTopBar1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.customTopBar1.headerColor = System.Drawing.Color.MediumSlateBlue;
-            this.customTopBar1.headerText = "ExHentaiDownloaderZ_5";
-            this.customTopBar1.icon = global::ExHentaiDownloaderZ_5.Properties.Resources.icon_256;
-            this.customTopBar1.iconVisible = true;
-            this.customTopBar1.Location = new System.Drawing.Point(3, 3);
-            this.customTopBar1.maximizeVisible = true;
-            this.customTopBar1.MaximumSize = new System.Drawing.Size(9999, 100);
-            this.customTopBar1.minimizeVisible = true;
-            this.customTopBar1.MinimumSize = new System.Drawing.Size(300, 35);
-            this.customTopBar1.Name = "customTopBar1";
-            this.customTopBar1.Padding = new System.Windows.Forms.Padding(2);
-            this.customTopBar1.Size = new System.Drawing.Size(844, 35);
-            this.customTopBar1.TabIndex = 0;
-            // 
-            // loadDialog
-            // 
-            this.loadDialog.Filter = "Файл сохранения|*.EHDZS";
-            // 
-            // saveDialog
-            // 
-            this.saveDialog.Filter = "Файл сохранения|*.EHDZS";
-            // 
-            // stepInfoPanel
-            // 
-            this.stepInfoPanel.Controls.Add(this.loadTimeLabel);
-            this.stepInfoPanel.Controls.Add(this.stepInfoLabel);
-            this.stepInfoPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.stepInfoPanel.Location = new System.Drawing.Point(3, 3);
-            this.stepInfoPanel.Name = "stepInfoPanel";
-            this.stepInfoPanel.Size = new System.Drawing.Size(838, 20);
-            this.stepInfoPanel.TabIndex = 1;
-            // 
-            // stepInfoLabel
-            // 
-            this.stepInfoLabel.AutoEllipsis = true;
-            this.stepInfoLabel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.stepInfoLabel.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.stepInfoLabel.Location = new System.Drawing.Point(0, 0);
-            this.stepInfoLabel.Name = "stepInfoLabel";
-            this.stepInfoLabel.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.stepInfoLabel.Size = new System.Drawing.Size(375, 20);
-            this.stepInfoLabel.TabIndex = 7;
-            this.stepInfoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // loadTimeLabel
-            // 
-            this.loadTimeLabel.AutoEllipsis = true;
-            this.loadTimeLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.loadTimeLabel.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.loadTimeLabel.Location = new System.Drawing.Point(375, 0);
-            this.loadTimeLabel.Name = "loadTimeLabel";
-            this.loadTimeLabel.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.loadTimeLabel.Size = new System.Drawing.Size(463, 20);
-            this.loadTimeLabel.TabIndex = 8;
-            this.loadTimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // mainProgressLabel
-            // 
-            this.mainProgressLabel.AutoEllipsis = true;
-            this.mainProgressLabel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.mainProgressLabel.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.mainProgressLabel.Location = new System.Drawing.Point(3, 23);
-            this.mainProgressLabel.Name = "mainProgressLabel";
-            this.mainProgressLabel.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.mainProgressLabel.Size = new System.Drawing.Size(838, 20);
-            this.mainProgressLabel.TabIndex = 7;
-            this.mainProgressLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // secondaryProgress
             // 
@@ -360,6 +288,92 @@
             this.mainProgress.Size = new System.Drawing.Size(838, 27);
             this.mainProgress.TabIndex = 15;
             this.mainProgress.value = 100;
+            // 
+            // mainProgressLabel
+            // 
+            this.mainProgressLabel.AutoEllipsis = true;
+            this.mainProgressLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.mainProgressLabel.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.mainProgressLabel.Location = new System.Drawing.Point(3, 23);
+            this.mainProgressLabel.Name = "mainProgressLabel";
+            this.mainProgressLabel.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.mainProgressLabel.Size = new System.Drawing.Size(838, 20);
+            this.mainProgressLabel.TabIndex = 7;
+            this.mainProgressLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // stepInfoPanel
+            // 
+            this.stepInfoPanel.Controls.Add(this.loadTimeLabel);
+            this.stepInfoPanel.Controls.Add(this.stepInfoLabel);
+            this.stepInfoPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.stepInfoPanel.Location = new System.Drawing.Point(3, 3);
+            this.stepInfoPanel.Name = "stepInfoPanel";
+            this.stepInfoPanel.Size = new System.Drawing.Size(838, 20);
+            this.stepInfoPanel.TabIndex = 1;
+            // 
+            // loadTimeLabel
+            // 
+            this.loadTimeLabel.AutoEllipsis = true;
+            this.loadTimeLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.loadTimeLabel.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.loadTimeLabel.Location = new System.Drawing.Point(375, 0);
+            this.loadTimeLabel.Name = "loadTimeLabel";
+            this.loadTimeLabel.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.loadTimeLabel.Size = new System.Drawing.Size(463, 20);
+            this.loadTimeLabel.TabIndex = 8;
+            this.loadTimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // stepInfoLabel
+            // 
+            this.stepInfoLabel.AutoEllipsis = true;
+            this.stepInfoLabel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.stepInfoLabel.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.stepInfoLabel.Location = new System.Drawing.Point(0, 0);
+            this.stepInfoLabel.Name = "stepInfoLabel";
+            this.stepInfoLabel.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.stepInfoLabel.Size = new System.Drawing.Size(375, 20);
+            this.stepInfoLabel.TabIndex = 7;
+            this.stepInfoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // customTopBar1
+            // 
+            this.customTopBar1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(42)))), ((int)(((byte)(42)))));
+            this.customTopBar1.buttonsSelectColor = System.Drawing.Color.Purple;
+            this.customTopBar1.closeVisible = true;
+            this.customTopBar1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.customTopBar1.headerColor = System.Drawing.Color.MediumSlateBlue;
+            this.customTopBar1.headerText = "ExHentaiDownloaderZ_5";
+            this.customTopBar1.icon = global::ExHentaiDownloaderZ_5.Properties.Resources.icon_256;
+            this.customTopBar1.iconVisible = true;
+            this.customTopBar1.Location = new System.Drawing.Point(3, 3);
+            this.customTopBar1.maximizeVisible = false;
+            this.customTopBar1.MaximumSize = new System.Drawing.Size(9999, 100);
+            this.customTopBar1.minimizeVisible = true;
+            this.customTopBar1.MinimumSize = new System.Drawing.Size(300, 35);
+            this.customTopBar1.Name = "customTopBar1";
+            this.customTopBar1.Padding = new System.Windows.Forms.Padding(2);
+            this.customTopBar1.Size = new System.Drawing.Size(844, 35);
+            this.customTopBar1.TabIndex = 0;
+            // 
+            // loadDialog
+            // 
+            this.loadDialog.Filter = "Файл сохранения|*.EHDZS";
+            // 
+            // saveDialog
+            // 
+            this.saveDialog.Filter = "Файл сохранения|*.EHDZS";
+            // 
+            // clearButton
+            // 
+            this.clearButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.clearButton.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.clearButton.Location = new System.Drawing.Point(151, 14);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(120, 32);
+            this.clearButton.TabIndex = 5;
+            this.clearButton.Text = "Очистить список";
+            this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
             // 
             // main
             // 
@@ -411,6 +425,7 @@
         private System.Windows.Forms.Panel stepInfoPanel;
         private System.Windows.Forms.Label loadTimeLabel;
         private System.Windows.Forms.Label stepInfoLabel;
+        private System.Windows.Forms.Button clearButton;
     }
 }
 
