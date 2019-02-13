@@ -13,16 +13,20 @@ using ExHentaiDownloaderZ_5.Content.Clases.WorkClases;
 
 namespace ExHentaiDownloaderZ_5
 {
+    /// <summary>
+    /// Класс основной формы приложения
+    /// </summary>
     public partial class main : Form
     {
         /// <summary>
         /// Главный рабочий класс программы
         /// </summary>
         private mainWorker mw;
+
         /// <summary>
-        /// Путь загрузки
+        /// Форма настроек приложения
         /// </summary>
-        private string downloadPath;
+        private settings sf;
 
         /// <summary>
         /// Конструктор формы
@@ -40,12 +44,12 @@ namespace ExHentaiDownloaderZ_5
         /// </summary>
         private void init()
         {
+            //Инициализируем форму настроек
+            sf = new settings();
+
             //Инициализируем основной рабочий класс
             mw = new mainWorker();
-
-            /* ВРЕМЕННОЕ РЕШЕНИЕ */
-            downloadPath = Application.StartupPath + @"\Files\";
-
+            
             //Добавляем номер версии в заголовок окна
             customTopBar1.headerText += $" (ver. {Application.ProductVersion})";
 
@@ -63,7 +67,8 @@ namespace ExHentaiDownloaderZ_5
 
             //Клики по кнопкам управления окном
             customTopBar1.onCloseButtonClick += CustomTopBar1_onCloseButtonClick;
-            customTopBar1.onMaximizeButtonClick += CustomTopBar1_onMaximizeButtonClick;
+            //Кнопку разворачивания мы пока что отключили
+            //   customTopBar1.onMaximizeButtonClick += CustomTopBar1_onMaximizeButtonClick;
             customTopBar1.onMinimizeButtonClick += CustomTopBar1_onMinimizeButtonClick;
             //Событие перерисовки формы
             this.Paint += Main_Paint;
@@ -217,8 +222,10 @@ namespace ExHentaiDownloaderZ_5
         {
             //Делаем все кнопки неактивными
             setButtonsEnableStatus(false);
+            //Скрываем форму настроек
+            sf.Hide();
             //Зaпускаем загрузку
-            mw.start(downloadPath);
+            mw.start();
         }
 
 
@@ -227,7 +234,8 @@ namespace ExHentaiDownloaderZ_5
         /// </summary>
         private void settings()
         {
-
+            //Отображаем форму настроек приложения
+            sf.Show();
         }
 
         /// <summary>

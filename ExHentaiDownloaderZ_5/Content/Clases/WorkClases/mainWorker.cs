@@ -106,8 +106,6 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
             cs = new ClipboardScanner();
             //ИНициализируем класс сохранения/загрузки
             xw = new XmlWorker();
-            //Инициализируем класс загрузки
-            loader = new geHentaiLoader("2279705", "264fea3a06727ea0cd68b52867415b43");
             //Инициализиурем список манги для загрузки
             downloadList = new List<manga>();
             //Ставим шаг в режим сбора ссылок
@@ -555,11 +553,16 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
         /// <summary>
         /// Запуск загрузки
         /// </summary>
-        /// <param name="path">Путь загрузки</param>
-        public void start(string path)
+        public void start()
         {
             //Прописываем текущий путь загрузки
-            downloadPath = path;
+            downloadPath = Properties.Settings.Default.downloadPath;
+
+            //Инициализируем класс загрузки нужными параметрами
+            loader = new geHentaiLoader(
+                Properties.Settings.Default.ipb_member_id,
+                Properties.Settings.Default.ipb_pass_hash);
+
             //Если основной поток уже существовал
             if (main != null)
                 //Прерываем его выполнение
