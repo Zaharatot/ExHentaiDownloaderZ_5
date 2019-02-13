@@ -27,6 +27,10 @@ namespace ExHentaiDownloaderZ_5
         /// Форма настроек приложения
         /// </summary>
         private settings sf;
+        /// <summary>
+        /// Форма донатов
+        /// </summary>
+        private donates df;
 
         /// <summary>
         /// Конструктор формы
@@ -46,6 +50,8 @@ namespace ExHentaiDownloaderZ_5
         {
             //Инициализируем форму настроек
             sf = new settings();
+            //Инициализируем форму предзагрузчика
+            df = new donates();
 
             //Инициализируем основной рабочий класс
             mw = new mainWorker();
@@ -353,6 +359,15 @@ namespace ExHentaiDownloaderZ_5
             mw.stop();
             //Закрываем форму
             this.Close();
+        }
+
+        /// <summary>
+        /// Клик по кнопке доната
+        /// </summary>
+        private void donateButton_Click(object sender, EventArgs e)
+        {
+            //Отображаем форму предзагрузчика
+            df.Show();
         }
     }
 }

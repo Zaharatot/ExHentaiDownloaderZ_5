@@ -38,6 +38,7 @@
             this.pages = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.controlPanel = new System.Windows.Forms.Panel();
+            this.clearButton = new System.Windows.Forms.Button();
             this.settingsButton = new System.Windows.Forms.Button();
             this.downloadButton = new System.Windows.Forms.Button();
             this.loadButton = new System.Windows.Forms.Button();
@@ -52,10 +53,10 @@
             this.stepInfoPanel = new System.Windows.Forms.Panel();
             this.loadTimeLabel = new System.Windows.Forms.Label();
             this.stepInfoLabel = new System.Windows.Forms.Label();
-            this.customTopBar1 = new CustomTopBar.customTopBar();
             this.loadDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveDialog = new System.Windows.Forms.SaveFileDialog();
-            this.clearButton = new System.Windows.Forms.Button();
+            this.donateButton = new System.Windows.Forms.Button();
+            this.customTopBar1 = new CustomTopBar.customTopBar();
             ((System.ComponentModel.ISupportInitialize)(this.downloadTable)).BeginInit();
             this.controlPanel.SuspendLayout();
             this.tablePanel.SuspendLayout();
@@ -151,6 +152,7 @@
             // 
             // controlPanel
             // 
+            this.controlPanel.Controls.Add(this.donateButton);
             this.controlPanel.Controls.Add(this.clearButton);
             this.controlPanel.Controls.Add(this.settingsButton);
             this.controlPanel.Controls.Add(this.downloadButton);
@@ -162,6 +164,18 @@
             this.controlPanel.Name = "controlPanel";
             this.controlPanel.Size = new System.Drawing.Size(844, 62);
             this.controlPanel.TabIndex = 3;
+            // 
+            // clearButton
+            // 
+            this.clearButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.clearButton.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.clearButton.Location = new System.Drawing.Point(151, 14);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(120, 32);
+            this.clearButton.TabIndex = 5;
+            this.clearButton.Text = "Очистить список";
+            this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
             // 
             // settingsButton
             // 
@@ -335,6 +349,28 @@
             this.stepInfoLabel.TabIndex = 7;
             this.stepInfoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // loadDialog
+            // 
+            this.loadDialog.Filter = "Файл сохранения|*.EHDZS";
+            // 
+            // saveDialog
+            // 
+            this.saveDialog.Filter = "Файл сохранения|*.EHDZS";
+            // 
+            // donateButton
+            // 
+            this.donateButton.BackgroundImage = global::ExHentaiDownloaderZ_5.Properties.Resources.donate;
+            this.donateButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.donateButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.donateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.donateButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.donateButton.Location = new System.Drawing.Point(787, 14);
+            this.donateButton.Name = "donateButton";
+            this.donateButton.Size = new System.Drawing.Size(32, 32);
+            this.donateButton.TabIndex = 6;
+            this.donateButton.UseVisualStyleBackColor = true;
+            this.donateButton.Click += new System.EventHandler(this.donateButton_Click);
+            // 
             // customTopBar1
             // 
             this.customTopBar1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(42)))), ((int)(((byte)(42)))));
@@ -354,26 +390,6 @@
             this.customTopBar1.Padding = new System.Windows.Forms.Padding(2);
             this.customTopBar1.Size = new System.Drawing.Size(844, 35);
             this.customTopBar1.TabIndex = 0;
-            // 
-            // loadDialog
-            // 
-            this.loadDialog.Filter = "Файл сохранения|*.EHDZS";
-            // 
-            // saveDialog
-            // 
-            this.saveDialog.Filter = "Файл сохранения|*.EHDZS";
-            // 
-            // clearButton
-            // 
-            this.clearButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.clearButton.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.clearButton.Location = new System.Drawing.Point(151, 14);
-            this.clearButton.Name = "clearButton";
-            this.clearButton.Size = new System.Drawing.Size(120, 32);
-            this.clearButton.TabIndex = 5;
-            this.clearButton.Text = "Очистить список";
-            this.clearButton.UseVisualStyleBackColor = true;
-            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
             // 
             // main
             // 
@@ -426,6 +442,7 @@
         private System.Windows.Forms.Label loadTimeLabel;
         private System.Windows.Forms.Label stepInfoLabel;
         private System.Windows.Forms.Button clearButton;
+        private System.Windows.Forms.Button donateButton;
     }
 }
 

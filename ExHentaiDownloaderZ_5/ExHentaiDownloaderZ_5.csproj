@@ -70,6 +70,12 @@
     <Compile Include="Content\Forms\main.Designer.cs">
       <DependentUpon>main.cs</DependentUpon>
     </Compile>
+    <Compile Include="Content\Forms\donates.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Content\Forms\donates.Designer.cs">
+      <DependentUpon>donates.cs</DependentUpon>
+    </Compile>
     <Compile Include="Content\Forms\settings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +86,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Content\Forms\main.resx">
       <DependentUpon>main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\Forms\donates.resx">
+      <DependentUpon>donates.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Content\Forms\settings.resx">
       <DependentUpon>settings.cs</DependentUpon>
@@ -109,6 +118,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon_256.ico" />
+    <None Include="Resources\donate.png" />
     <None Include="Resources\icon_256.png" />
   </ItemGroup>
   <ItemGroup>

@@ -121,10 +121,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
             //Запускаем поиск ссылок
             cs.start();
         }
-
-
-
-
+        
         /// <summary>
         /// Событие нахождения адреса страницы манги в буфере обмена
         /// </summary>
@@ -137,6 +134,17 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
                 if (downloadList.Count(mn => (mn.url.Equals(url))) == 0)
                     //Добавляем страницу манги в список
                     addMangaToList(url);
+        }
+
+
+        /// <summary>
+        /// Получаем время, со значением микросекунд
+        /// </summary>
+        /// <returns>Дабловое число секунд</returns>
+        public static decimal timeMicro()
+        {
+            //Получаем время с долями секунды
+            return (decimal)((DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalSeconds);
         }
 
         /// <summary>
@@ -152,9 +160,13 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
             int pageId;
             List<string> buff;
             htmlGeHentaiParcer hp;
+            decimal startTime, finTime;
 
             try
             {
+                //Получаем время запуска загрузки
+                startTime = timeMicro();
+
                 //Загружаем страницу 
                 code = loader.loadHtmlPage(info.url);
                 //Инициализируем парсер 
@@ -209,6 +221,11 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
 
                     //Манга загружена корректно
                     info.status = MangaStatus.status.Информация_загружена;
+
+                    //Получаем время завершения загрузки
+                    finTime = timeMicro();
+                    //Пересчитываем среднее время загрузки
+                    averageLoadInfoTime = (averageLoadInfoTime + (finTime - startTime)) / 2;
                 }
                 else
                     //Ошибка - корневая страница не была загружена
@@ -268,9 +285,13 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
         {
             byte ex = 1;
             string imageUrl, code, ext, imagePath;
+            decimal startTime, finTime;
 
             try
             {
+                //Получаем время запуска загрузки
+                startTime = timeMicro();
+
                 //Загружаем страницу 
                 code = loader.loadHtmlPage(url);
                 //Если страница была загружена
@@ -290,6 +311,12 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
                         imagePath = $"{path}{id}{ext}";
                         //Грузим страницу, и получаем результат
                         ex = loader.downloadFile(imageUrl, imagePath);
+
+
+                        //Получаем время завершения загрузки
+                        finTime = timeMicro();
+                        //Пересчитываем среднее время загрузки
+                        averageLoadTime = (averageLoadTime + (finTime - startTime)) / 2;
                     }
                     else
                         //Ошибка - адрес картинки не был найден
