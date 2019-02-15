@@ -54,12 +54,14 @@
     <Compile Include="Content\Clases\DataClases\manga.cs" />
     <Compile Include="Content\Clases\DataClases\MangaStatus.cs" />
     <Compile Include="Content\Clases\DataClases\page.cs" />
+    <Compile Include="Content\Clases\DataClases\PopupMessageInfo.cs" />
     <Compile Include="Content\Clases\DataClases\TableMangaInfo.cs" />
     <Compile Include="Content\Clases\WorkClases\ClipboardScanner.cs" />
     <Compile Include="Content\Clases\WorkClases\Parcer\geHentaiLoader.cs" />
     <Compile Include="Content\Clases\WorkClases\Parcer\htmlGeHentaiParcer.cs" />
     <Compile Include="Content\Clases\WorkClases\mainWorker.cs" />
     <Compile Include="Content\Clases\WorkClases\otherFuncs.cs" />
+    <Compile Include="Content\Clases\WorkClases\PopupLoader.cs" />
     <Compile Include="Content\Clases\WorkClases\SaveFile\DataClases\DownloadList.cs" />
     <Compile Include="Content\Clases\WorkClases\SaveFile\DataClases\Manga.cs" />
     <Compile Include="Content\Clases\WorkClases\SaveFile\DataClases\MangaPage.cs" />
@@ -76,11 +78,32 @@
     <Compile Include="Content\Forms\donates.Designer.cs">
       <DependentUpon>donates.cs</DependentUpon>
     </Compile>
+    <Compile Include="Content\Forms\PopUp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Content\Forms\PopUp.Designer.cs">
+      <DependentUpon>PopUp.cs</DependentUpon>
+    </Compile>
     <Compile Include="Content\Forms\settings.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Content\Forms\settings.Designer.cs">
       <DependentUpon>settings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Locales\ButtonsText.Designer.cs">
+      <DependentUpon>ButtonsText.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Content\Locales\PopupHeaders.Designer.cs">
+      <DependentUpon>PopupHeaders.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Content\Locales\PopupMessages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PopupMessages.resx</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -90,8 +113,26 @@
     <EmbeddedResource Include="Content\Forms\donates.resx">
       <DependentUpon>donates.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Content\Forms\PopUp.resx">
+      <DependentUpon>PopUp.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Content\Forms\settings.resx">
       <DependentUpon>settings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\Locales\ButtonsText.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ButtonsText.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\Locales\PopupHeaders.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PopupHeaders.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\Locales\PopupMessages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PopupMessages.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
