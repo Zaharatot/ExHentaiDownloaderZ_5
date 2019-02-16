@@ -28,18 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(settings));
             this.customTopBar1 = new CustomTopBar.customTopBar();
             this.buttonsPanel = new System.Windows.Forms.Panel();
             this.cancelSettingsButton = new System.Windows.Forms.Button();
             this.saveSettingsButton = new System.Windows.Forms.Button();
             this.elementsPanel = new System.Windows.Forms.Panel();
-            this.downloadPathLabel = new System.Windows.Forms.Label();
-            this.downloadPathTextBox = new System.Windows.Forms.TextBox();
-            this.memberIdTextBox = new System.Windows.Forms.TextBox();
-            this.memberIdLabel = new System.Windows.Forms.Label();
             this.passHashTextBox = new System.Windows.Forms.TextBox();
             this.passHashLabel = new System.Windows.Forms.Label();
+            this.memberIdTextBox = new System.Windows.Forms.TextBox();
+            this.memberIdLabel = new System.Windows.Forms.Label();
+            this.downloadPathTextBox = new System.Windows.Forms.TextBox();
+            this.downloadPathLabel = new System.Windows.Forms.Label();
             this.buttonsPanel.SuspendLayout();
             this.elementsPanel.SuspendLayout();
             this.SuspendLayout();
@@ -78,11 +77,11 @@
             // 
             this.cancelSettingsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cancelSettingsButton.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.cancelSettingsButton.Location = new System.Drawing.Point(313, 8);
+            this.cancelSettingsButton.Location = new System.Drawing.Point(16, 8);
             this.cancelSettingsButton.Name = "cancelSettingsButton";
             this.cancelSettingsButton.Size = new System.Drawing.Size(120, 32);
             this.cancelSettingsButton.TabIndex = 2;
-            this.cancelSettingsButton.Text = "Сброс";
+            this.cancelSettingsButton.Text = "Сброс параметров";
             this.cancelSettingsButton.UseVisualStyleBackColor = true;
             this.cancelSettingsButton.Click += new System.EventHandler(this.cancelSettingsButton_Click);
             // 
@@ -113,22 +112,22 @@
             this.elementsPanel.Size = new System.Drawing.Size(569, 130);
             this.elementsPanel.TabIndex = 2;
             // 
-            // downloadPathLabel
+            // passHashTextBox
             // 
-            this.downloadPathLabel.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.downloadPathLabel.Location = new System.Drawing.Point(13, 21);
-            this.downloadPathLabel.Name = "downloadPathLabel";
-            this.downloadPathLabel.Size = new System.Drawing.Size(270, 23);
-            this.downloadPathLabel.TabIndex = 0;
-            this.downloadPathLabel.Text = "Путь загрузки";
-            this.downloadPathLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.passHashTextBox.Location = new System.Drawing.Point(289, 91);
+            this.passHashTextBox.Name = "passHashTextBox";
+            this.passHashTextBox.Size = new System.Drawing.Size(267, 20);
+            this.passHashTextBox.TabIndex = 5;
             // 
-            // downloadPathTextBox
+            // passHashLabel
             // 
-            this.downloadPathTextBox.Location = new System.Drawing.Point(289, 23);
-            this.downloadPathTextBox.Name = "downloadPathTextBox";
-            this.downloadPathTextBox.Size = new System.Drawing.Size(267, 20);
-            this.downloadPathTextBox.TabIndex = 1;
+            this.passHashLabel.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.passHashLabel.Location = new System.Drawing.Point(13, 89);
+            this.passHashLabel.Name = "passHashLabel";
+            this.passHashLabel.Size = new System.Drawing.Size(270, 23);
+            this.passHashLabel.TabIndex = 4;
+            this.passHashLabel.Text = "Значение \"ipb_pass_hash\" из куков:";
+            this.passHashLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // memberIdTextBox
             // 
@@ -147,22 +146,22 @@
             this.memberIdLabel.Text = "Значение \"ipb_member_id\" из куков:";
             this.memberIdLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // passHashTextBox
+            // downloadPathTextBox
             // 
-            this.passHashTextBox.Location = new System.Drawing.Point(289, 91);
-            this.passHashTextBox.Name = "passHashTextBox";
-            this.passHashTextBox.Size = new System.Drawing.Size(267, 20);
-            this.passHashTextBox.TabIndex = 5;
+            this.downloadPathTextBox.Location = new System.Drawing.Point(289, 23);
+            this.downloadPathTextBox.Name = "downloadPathTextBox";
+            this.downloadPathTextBox.Size = new System.Drawing.Size(267, 20);
+            this.downloadPathTextBox.TabIndex = 1;
             // 
-            // passHashLabel
+            // downloadPathLabel
             // 
-            this.passHashLabel.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.passHashLabel.Location = new System.Drawing.Point(13, 89);
-            this.passHashLabel.Name = "passHashLabel";
-            this.passHashLabel.Size = new System.Drawing.Size(270, 23);
-            this.passHashLabel.TabIndex = 4;
-            this.passHashLabel.Text = "Значение \"ipb_pass_hash\" из куков:";
-            this.passHashLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.downloadPathLabel.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.downloadPathLabel.Location = new System.Drawing.Point(13, 21);
+            this.downloadPathLabel.Name = "downloadPathLabel";
+            this.downloadPathLabel.Size = new System.Drawing.Size(270, 23);
+            this.downloadPathLabel.TabIndex = 0;
+            this.downloadPathLabel.Text = "Путь загрузки:";
+            this.downloadPathLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // settings
             // 
@@ -174,7 +173,6 @@
             this.Controls.Add(this.buttonsPanel);
             this.Controls.Add(this.customTopBar1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "settings";
             this.Padding = new System.Windows.Forms.Padding(3);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

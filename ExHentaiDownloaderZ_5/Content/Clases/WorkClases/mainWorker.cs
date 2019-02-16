@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
+
 namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
 {
     /// <summary>
@@ -21,7 +22,8 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
         /// </summary>
         /// <param name="downloadInfo">ИНформация о процессе загрузки</param>
         /// <param name="mangaTable">Список манги, для вывода в таблицу</param>
-        public delegate void updateDownload(DownloadProgressInfo downloadInfo, List<TableMangaInfo> mangaTable);
+        /// <param name="finalWork">Флаг завершения работы</param>
+        public delegate void updateDownload(DownloadProgressInfo downloadInfo, List<TableMangaInfo> mangaTable, bool finalWork);
         /// <summary>
         /// Событие обновления процесса загрузки манги
         /// </summary>
@@ -75,7 +77,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
         /// <summary>
         /// Текущий шаг работы
         /// </summary>
-        private DownloadStep.Steps workStep;
+        public DownloadStep.Steps workStep { get; private set; }
         /// <summary>
         /// Основной рабочий поток
         /// </summary>
@@ -151,9 +153,10 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
         /// Загружаем информацию о манге
         /// </summary>
         /// <param name="info">Информация о манге</param>
-        /// <returns>ЗЩагруженная инфомрация о манге</returns>
-        private manga loadMangaInfo(manga info)
+        /// <returns>Флаг загрузки информации. True - загрузка была</returns>
+        private bool loadMangaInfo(ref manga info)
         {
+            bool ex = false;
             //Объявляем переменные
             bool complete;
             string pageUrl, code;
@@ -164,79 +167,86 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
 
             try
             {
-                //Получаем время запуска загрузки
-                startTime = timeMicro();
-
-                //Загружаем страницу 
-                code = loader.loadHtmlPage(info.url);
-                //Инициализируем парсер 
-                hp = new htmlGeHentaiParcer(code);
-
-                //Если страница была загружена корректно
-                if (code.Length > 0)
+                //Если инфа о манге ещё не была загружена
+                if (info.status == MangaStatus.status.Манга_добавлена)
                 {
-                    //Получаем название манги
-                    info.name = hp.getTitle();
-                    //Получаем и парсим количество страниц
-                    info.countPages = otherFuncs.parceInt(hp.getCountPages());
-                    //Прописываем путь загрузки
-                    info.setRootPath(downloadPath);
-                    //Ставим дефолтные значения получения страниц
-                    complete = true;
-                    pageId = 0;
+                    //Получаем время запуска загрузки
+                    startTime = timeMicro();
 
-                    //В цикле подгружаем все страницы манги
-                    do
+                    //Загружаем страницу 
+                    code = loader.loadHtmlPage(info.url);
+                    //Инициализируем парсер 
+                    hp = new htmlGeHentaiParcer(code);
+
+                    //Если страница была загружена корректно
+                    if (code.Length > 0)
                     {
-                        //Получаем картинки с текущей страницы
-                        buff = hp.getPagesUrl();
-                        //Добавляем их в основной список
-                        addMangaPages(buff, ref info);
-                        //Если есть ещё одна страница - продолжаем загрузку
-                        complete = hp.nextPageExists();
-                        //Если страница есть
-                        if (complete)
+                        //Получаем название манги
+                        info.name = hp.getTitle();
+                        //Получаем и парсим количество страниц
+                        info.countPages = otherFuncs.parceInt(hp.getCountPages());
+                        //Прописываем путь загрузки
+                        info.setRootPath(downloadPath);
+                        //Ставим дефолтные значения получения страниц
+                        complete = true;
+                        pageId = 0;
+
+                        //В цикле подгружаем все страницы манги
+                        do
                         {
-                            //Спим, чтобы сайт особо не бузил
-                            Thread.Sleep(rootPageLoadDelay);
-                            //Переходим к id новой страницы
-                            pageId++;
-                            //Формируем путь к новой странице
-                            pageUrl = loader.compileUrlWithId(info.url, pageId);
-                            //Загружаем страницу 
-                            code = loader.loadHtmlPage(pageUrl);
-                            //Если ошибка загрузки страницы
-                            if (code.Length == 0)
+                            //Получаем картинки с текущей страницы
+                            buff = hp.getPagesUrl();
+                            //Добавляем их в основной список
+                            addMangaPages(buff, ref info);
+                            //Если есть ещё одна страница - продолжаем загрузку
+                            complete = hp.nextPageExists();
+                            //Если страница есть
+                            if (complete)
                             {
-                                //ОШибка - во время загрузки списка страниц манги
-                                info.status = MangaStatus.status.Ошибка_загрузки_страниц;
-                                //То выходим из цикла
-                                break;
+                                //Спим, чтобы сайт особо не бузил
+                                Thread.Sleep(rootPageLoadDelay);
+                                //Переходим к id новой страницы
+                                pageId++;
+                                //Формируем путь к новой странице
+                                pageUrl = loader.compileUrlWithId(info.url, pageId);
+                                //Загружаем страницу 
+                                code = loader.loadHtmlPage(pageUrl);
+                                //Если ошибка загрузки страницы
+                                if (code.Length == 0)
+                                {
+                                    //ОШибка - во время загрузки списка страниц манги
+                                    info.status = MangaStatus.status.Ошибка_загрузки_страниц;
+                                    //То выходим из цикла
+                                    break;
+                                }
+                                //Инициализируем парсер 
+                                hp = new htmlGeHentaiParcer(code);
                             }
-                            //Инициализируем парсер 
-                            hp = new htmlGeHentaiParcer(code);
-                        }
-                        //Если нужно ещё допарсить картинок
-                    } while (complete);
+                            //Если нужно ещё допарсить картинок
+                        } while (complete);
 
-                    //Манга загружена корректно
-                    info.status = MangaStatus.status.Информация_загружена;
+                        //Манга загружена корректно
+                        info.status = MangaStatus.status.Информация_загружена;
 
-                    //Получаем время завершения загрузки
-                    finTime = timeMicro();
-                    //Пересчитываем среднее время загрузки
-                    averageLoadInfoTime = (averageLoadInfoTime + (finTime - startTime)) / 2;
+                        //Получаем время завершения загрузки
+                        finTime = timeMicro() - startTime + mangaInfoLoadDelay / 1000;
+                        //Пересчитываем среднее время загрузки
+                        averageLoadInfoTime = (averageLoadInfoTime + finTime) / 2;
+
+                        //Указываем, что загрузка была
+                        ex = true;
+                    }
+                    else
+                        //Ошибка - корневая страница не была загружена
+                        info.status = MangaStatus.status.Ошибка_загрузки_информации;
                 }
-                else
-                    //Ошибка - корневая страница не была загружена
-                    info.status = MangaStatus.status.Ошибка_загрузки_информации;
             }
             catch
             {
                 info.status = MangaStatus.status.Общая_ошибка_загрузки;
             }
 
-            return info;
+            return ex;
         }
 
         /// <summary>
@@ -258,17 +268,26 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
         /// <param name="info">Информация о манге</param>
         private void loadManga(ref List<manga> info)
         {
+            bool loadFlag;
+            manga buff;
+
             try
             {
                 //Проходимся по списку манги
                 for (int i = 0; i < info.Count; i++)
                 {
+                    //Получаем инфу о манге
+                    buff = info[i];
                     //Загружаем информацию о манге
-                    info[i] = loadMangaInfo(info[i]);
+                    loadFlag = loadMangaInfo(ref buff);
+                    //Сохраняем инфу обратно
+                    info[i] = buff;
                     //Обновляем инфу на форме
                     updateDownloadExec();
-                    //Спим, чтобы сайт особо не бузил
-                    Thread.Sleep(mangaInfoLoadDelay);
+                    //Если загрузка была произведена
+                    if (loadFlag)
+                        //Спим, чтобы сайт особо не бузил
+                        Thread.Sleep(mangaInfoLoadDelay);                    
                 }
             }
             catch { }
@@ -313,10 +332,10 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
                         ex = loader.downloadFile(imageUrl, imagePath);
 
 
-                        //Получаем время завершения загрузки
-                        finTime = timeMicro();
+                        //Получаем время завершения загрузки, со временем ожидания
+                        finTime = timeMicro() - startTime + downloadMangaPageDelay / 1000;
                         //Пересчитываем среднее время загрузки
-                        averageLoadTime = (averageLoadTime + (finTime - startTime)) / 2;
+                        averageLoadTime = (averageLoadTime + finTime) / 2;
                     }
                     else
                         //Ошибка - адрес картинки не был найден
@@ -349,51 +368,64 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
                 //и её статус - корректен
                 if (info[i].status == MangaStatus.status.Информация_загружена)
                 {
-                    //Ставим статус загрузки страниц
-                    info[i].status = MangaStatus.status.Загрузка_страниц;
-
-                    //Получаем список файлов
-                    files = getDirectoryFileNames(info[i].rootPath);
-                    //Проходимся по страницам манги
-                    for (int j = 0; j < info[i].pages.Count; j++)
+                    //Если страницы ещё не были загружены
+                    if (!info[i].checkLoad())
                     {
-                        //Грузим, если данная страница ещё не была загружена
-                        if (!info[i].pages[j].loaded)
-                        {
-                            //Получаем имя файла
-                            fileName = j.ToString();
 
-                            //Если файл не найден в папке
-                            if (files.Count(fi => (fi.Equals(fileName))) == 0)
+                        //Ставим статус загрузки страниц
+                        info[i].status = MangaStatus.status.Загрузка_страниц;
+
+                        //Получаем список файлов
+                        files = getDirectoryFileNames(info[i].rootPath);
+                        //Проходимся по страницам манги
+                        for (int j = 0; j < info[i].pages.Count; j++)
+                        {
+                            //Грузим, если данная страница ещё не была загружена
+                            if (!info[i].pages[j].loaded)
                             {
-                                //Грузим страницу, и получаем результат
-                                result = downloadPage(info[i].pages[j].url, info[i].rootPath, j);
-                                //Возвращаем результат загрузки
-                                info[i].pages[j].loaded = (result == 0);
-                                //Спим, чтобы сайт особо не бузил
-                                Thread.Sleep(downloadMangaPageDelay);
+                                //Получаем имя файла
+                                fileName = j.ToString();
+
+                                //Если файл не найден в папке
+                                if (files.Count(fi => (fi.Equals(fileName))) == 0)
+                                {
+                                    //Грузим страницу, и получаем результат
+                                    result = downloadPage(info[i].pages[j].url, info[i].rootPath, j);
+                                    //Возвращаем результат загрузки
+                                    info[i].pages[j].loaded = (result == 0);
+                                    //Спим, чтобы сайт особо не бузил
+                                    Thread.Sleep(downloadMangaPageDelay);
+                                }
+                                //Если файл в папке таки есть
+                                else
+                                    //Проставляем что он всё-таки есть!
+                                    info[i].pages[j].loaded = true;
                             }
-                            //Если файл в папке таки есть
-                            else
-                                //Проставляем что он всё-таки есть!
-                                info[i].pages[j].loaded = true;
 
                             //Обновляем инфу на форме
                             updateDownloadExec();
                         }
+
+                        //Если манга была загружена 
+                        if (info[i].checkLoad())
+                            //Если количество страниц совпадает - то всё ок
+                            //Иначе - ставим статус о несовпадении
+                            info[i].status = (info[i].checkCount()) ? MangaStatus.status.Страницы_загружены
+                                : MangaStatus.status.Ошибка_количества_страниц;
+
+                        //Обновляем инфу на форме
+                        updateDownloadExec();
+                        //Спим, чтобы сайт особо не бузил
+                        Thread.Sleep(downloadMangaDelay);
                     }
-
-                    //Если манга была загружена 
-                    if (info[i].checkLoad())
-                        //Если количество страниц совпадает - то всё ок
-                        //Иначе - ставим статус о несовпадении
-                        info[i].status = (info[i].checkCount()) ? MangaStatus.status.Страницы_загружены 
-                            : MangaStatus.status.Ошибка_количества_страниц;
-
-                    //Обновляем инфу на форме
-                    updateDownloadExec();
-                    //Спим, чтобы сайт особо не бузил
-                    Thread.Sleep(downloadMangaDelay);
+                    //Если страницы уже загружены
+                    else
+                    {
+                        //Ставим новый статус
+                        info[i].status = MangaStatus.status.Страницы_загружены;
+                        //Обновляем инфу на форме
+                        updateDownloadExec();
+                    }
                 }
             }
         }
@@ -429,7 +461,8 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
         /// <summary>
         /// Вызываем обновление списков загрузки
         /// </summary>
-        public void updateDownloadExec()
+        /// <param name="finalWork">Флаг завершения работы</param>
+        public void updateDownloadExec(bool finalWork = false)
         {
             //Инициализируем переменные
             DownloadProgressInfo info = new DownloadProgressInfo();
@@ -508,7 +541,34 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
             }
 
             //Вызываем событие обновления
-            onUpdateDownload?.Invoke(info, mangaTable);
+            onUpdateDownload?.Invoke(info, mangaTable, finalWork);
+        }
+
+
+        /// <summary>
+        /// Проверяет корневой адрес страницы
+        /// </summary>
+        /// <param name="url">Адрес страницы</param>
+        /// <returns>Проверенный адрес страницы</returns>
+        private string verificateUrl(string url)
+        {
+            string ex = "";
+
+            try
+            {
+                //Если адрес имеет длинну
+                if (url.Length > 10)
+                {
+                    //Формируем URI по адресу
+                    Uri uu = new Uri(url);
+                    //Формируем путь без лишних частей
+                    ex = $"{uu.Scheme}://{uu.Authority}{uu.AbsolutePath}";
+                }
+            }
+            catch { ex = ""; }
+
+            return ex;
+
         }
 
         /// <summary>
@@ -518,9 +578,11 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
         public void addMangaToList(string url)
         {
             //Чистим адрес от лишних частей
-            url = loader.verificateUrl(url);
+            url = verificateUrl(url);
             //Добавляем информацию о манге
             downloadList.Add(new manga(url));
+            //Сохраняем изменения
+            saveManga();
             //Обновляем инфу на форме
             updateDownloadExec();
         }
@@ -573,8 +635,8 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
 
             //Возвращаемся к сбору ссылок
             workStep = DownloadStep.Steps.Сбор_ссылок;
-            //Обновляем инфу на форме
-            updateDownloadExec();
+            //Обновляем инфу на форме, указав что работа была завершена
+            updateDownloadExec(true);
         }
 
         /// <summary>
@@ -637,7 +699,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
                         //Выполняем сохранение списка манги
                         ex = xw.saveManga(downloadList, path);
                     else
-                        //Список загрузки ещё не было проинициализирован
+                        //Список загрузки ещё не было проинициализирован 
                         ex = 3;
                 }
                 else

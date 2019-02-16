@@ -117,4 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="cancelSettingsButton" xml:space="preserve">
+    <value>Сброс параметров</value>
+  </data>
+  <data name="customTopBarHeader" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="downloadPathLabel" xml:space="preserve">
+    <value>Путь загрузки:</value>
+  </data>
+  <data name="memberIdLabel" xml:space="preserve">
+    <value>Значение "ipb_member_id" из куков:</value>
+  </data>
+  <data name="passHashLabel" xml:space="preserve">
+    <value>Значение "ipb_pass_hash" из куков:</value>
+  </data>
+  <data name="saveSettingsButton" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
 </root>

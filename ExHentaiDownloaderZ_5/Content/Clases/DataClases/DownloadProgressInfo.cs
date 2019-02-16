@@ -1,8 +1,11 @@
-﻿using System;
+﻿using ExHentaiDownloaderZ_5.Content.Clases.WorkClases;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Resources;
+
 
 namespace ExHentaiDownloaderZ_5.Content.Clases.DataClases
 {
@@ -59,6 +62,14 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.DataClases
             step = DownloadStep.Steps.Сбор_ссылок;
         }
 
+
+        /// <summary>
+        /// Получаем строку с названием шага
+        /// </summary>
+        /// <returns>Строка статуса</returns>
+        private string getStatusString() =>
+            ResourceLoader.loadStatusText("DownloadStep_" + ((int)step).ToString());
+
         /// <summary>
         /// Возвращает строку со временем
         /// </summary>
@@ -67,7 +78,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.DataClases
         private string getTime(int time)
         {
             //Чисто по фану - дефолтное значение
-            string ex = "бесконечно много времени";
+            string ex = StatisticText.TimeInfinity;
 
             try
             {
@@ -76,7 +87,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.DataClases
                 {
                     //Если меньше минуты
                     if (time < 60)
-                        ex = "меньше минуты";
+                        ex = StatisticText.TimeLessMinute;
                     //Больше 1 минуты - идём в минуты
                     else
                     {
@@ -84,7 +95,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.DataClases
                         time /= 60;
                         //Если меньше часа
                         if (time < 60)
-                            ex = time.ToString() + " минут";
+                            ex = $"{time.ToString()} {StatisticText.TimeMinutes}";
                         //Больше 1 часа - идём в часы
                         else
                         {
@@ -92,13 +103,13 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.DataClases
                             time /= 60;
                             //Если меньше суток
                             if (time < 24)
-                                ex = time.ToString() + " часов";
+                                ex = $"{time.ToString()} {StatisticText.TimeHours} ";
                             //Если больше 1 дня, то считаем в днях
                             else
                             {
                                 //Получаем дни
                                 time /= 24;
-                                ex = time.ToString() + " дней";
+                                ex = $"{time.ToString()} {StatisticText.TimeDays} ";
                             }
                         }
                     }
@@ -120,7 +131,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.DataClases
             //Получаем время загрузки в секундах
             int loadTime = (int)(approximateLoadTime * countPages);
             //Выводим в красивом формате
-            return $"Осталось {getTime(loadTime)}";
+            return $"{StatisticText.TimeLeft} {getTime(loadTime)}";
         }
         
         /// <summary>
@@ -128,20 +139,21 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.DataClases
         /// </summary>
         /// <returns>Текст общей строки</returns>
         public string getFullStatus() =>
-            $"Статус загрузки: {currentFull} / {maxFull}";
+            $"{StatisticText.DownloadStatus} {currentFull} / {maxFull}";
 
         /// <summary>
         /// Возврат текущей строки статуса 
         /// </summary>
         /// <returns>Текст текущей строки</returns>
         public string getCurrentStatus() =>
-            $"Статус загрузки: {currentCurr} / {maxCurr}";
+            $"{StatisticText.DownloadStatusCurrent} {currentCurr} / {maxCurr}";
+
 
         /// <summary>
         /// Возвращаем текущий шаг загрузки
         /// </summary>
         /// <returns>Строка с описанием шага</returns>
         public string getStep() =>
-            $"Текущий шаг: {step.ToString().Replace("_", " ")}";
+            $"{StatisticText.CurrentStep} { getStatusString() }";
     }
 }

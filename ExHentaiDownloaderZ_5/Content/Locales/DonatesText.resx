@@ -117,10 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Done" xml:space="preserve">
-    <value>Операция успешно завершена</value>
+  <data name="closeButton" xml:space="preserve">
+    <value>Закрыть</value>
   </data>
-  <data name="Error" xml:space="preserve">
-    <value>Ошибка</value>
+  <data name="headerLabel" xml:space="preserve">
+    <value>ExHentaiDownloaderZ_5</value>
+  </data>
+  <data name="messageLabel" xml:space="preserve">
+    <value>Автор программы будет вам очень благодарен, если вы закините ему немного мелочи на пиво. Это определённо простимулирует его на улучшение программы, сверх текущего уровня. В планах есть добавление встроенного браузера и ещё много чего.</value>
   </data>
 </root>

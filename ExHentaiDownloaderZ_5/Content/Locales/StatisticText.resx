@@ -117,4 +117,64 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CurrentStep" xml:space="preserve">
+    <value>Текущий шаг:</value>
+  </data>
+  <data name="DownloadStatus" xml:space="preserve">
+    <value>Статус загрузки:</value>
+  </data>
+  <data name="DownloadStatusCurrent" xml:space="preserve">
+    <value>Статус загрузки:</value>
+  </data>
+  <data name="DownloadStatus_0" xml:space="preserve">
+    <value>Манга добавлена</value>
+  </data>
+  <data name="DownloadStatus_1" xml:space="preserve">
+    <value>Общая ошибка загрузки</value>
+  </data>
+  <data name="DownloadStatus_2" xml:space="preserve">
+    <value>Ошибка загрузки информации</value>
+  </data>
+  <data name="DownloadStatus_3" xml:space="preserve">
+    <value>Ошибка загрузки страниц</value>
+  </data>
+  <data name="DownloadStatus_4" xml:space="preserve">
+    <value>Информация загружена</value>
+  </data>
+  <data name="DownloadStatus_5" xml:space="preserve">
+    <value>Страницы загружены</value>
+  </data>
+  <data name="DownloadStatus_6" xml:space="preserve">
+    <value>Ошибка количества страниц</value>
+  </data>
+  <data name="DownloadStatus_7" xml:space="preserve">
+    <value>Загрузка страниц</value>
+  </data>
+  <data name="DownloadStep_0" xml:space="preserve">
+    <value>Сбор ссылок</value>
+  </data>
+  <data name="DownloadStep_1" xml:space="preserve">
+    <value>Загрузка информации о манге</value>
+  </data>
+  <data name="DownloadStep_2" xml:space="preserve">
+    <value>Загрузка страниц манги</value>
+  </data>
+  <data name="TimeDays" xml:space="preserve">
+    <value>дней</value>
+  </data>
+  <data name="TimeHours" xml:space="preserve">
+    <value>часов</value>
+  </data>
+  <data name="TimeInfinity" xml:space="preserve">
+    <value>бесконечно много времени</value>
+  </data>
+  <data name="TimeLeft" xml:space="preserve">
+    <value>Осталось</value>
+  </data>
+  <data name="TimeLessMinute" xml:space="preserve">
+    <value>меньше минуты</value>
+  </data>
+  <data name="TimeMinutes" xml:space="preserve">
+    <value>минут</value>
+  </data>
 </root>

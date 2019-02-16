@@ -22,14 +22,14 @@ namespace Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ButtonsText {
+    public class MainText {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ButtonsText() {
+        internal MainText() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ExHentaiDownloaderZ_5.Content.Locales.ButtonsText", typeof(ButtonsText).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ExHentaiDownloaderZ_5.Content.Locales.MainText", typeof(MainText).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,65 +61,101 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Прервать.
+        ///   Ищет локализованную строку, похожую на Очистить список.
         /// </summary>
-        public static string Abort {
+        public static string clearButton {
             get {
-                return ResourceManager.GetString("Abort", resourceCulture);
+                return ResourceManager.GetString("clearButton", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Отмена.
+        ///   Ищет локализованную строку, похожую на ExHentaiDownloaderZ_5.
         /// </summary>
-        public static string Cancel {
+        public static string customTopBarHeader {
             get {
-                return ResourceManager.GetString("Cancel", resourceCulture);
+                return ResourceManager.GetString("customTopBarHeader", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Игнорировать.
+        ///   Ищет локализованную строку, похожую на Запуск загрузки.
         /// </summary>
-        public static string Ignore {
+        public static string downloadButton {
             get {
-                return ResourceManager.GetString("Ignore", resourceCulture);
+                return ResourceManager.GetString("downloadButton", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Нет.
+        ///   Ищет локализованную строку, похожую на Загрузить список.
         /// </summary>
-        public static string No {
+        public static string loadButton {
             get {
-                return ResourceManager.GetString("No", resourceCulture);
+                return ResourceManager.GetString("loadButton", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Окей.
+        ///   Ищет локализованную строку, похожую на Название.
         /// </summary>
-        public static string Ok {
+        public static string nameColumnHeader {
             get {
-                return ResourceManager.GetString("Ok", resourceCulture);
+                return ResourceManager.GetString("nameColumnHeader", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Продолжить.
+        ///   Ищет локализованную строку, похожую на Страницы.
         /// </summary>
-        public static string Retry {
+        public static string pagesColumnHeader {
             get {
-                return ResourceManager.GetString("Retry", resourceCulture);
+                return ResourceManager.GetString("pagesColumnHeader", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Да.
+        ///   Ищет локализованную строку, похожую на Удалить из списка.
         /// </summary>
-        public static string Yes {
+        public static string removeButton {
             get {
-                return ResourceManager.GetString("Yes", resourceCulture);
+                return ResourceManager.GetString("removeButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Сохранить список.
+        /// </summary>
+        public static string saveButton {
+            get {
+                return ResourceManager.GetString("saveButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Настройки.
+        /// </summary>
+        public static string settingsButton {
+            get {
+                return ResourceManager.GetString("settingsButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Статус.
+        /// </summary>
+        public static string statusColumnHeader {
+            get {
+                return ResourceManager.GetString("statusColumnHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на URL.
+        /// </summary>
+        public static string urlColumnHeader {
+            get {
+                return ResourceManager.GetString("urlColumnHeader", resourceCulture);
             }
         }
     }

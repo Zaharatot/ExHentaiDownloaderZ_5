@@ -138,31 +138,6 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases.Parcer
         }
 
 
-        /// <summary>
-        /// Проверяет корневой адрес страницы
-        /// </summary>
-        /// <param name="url">Адрес страницы</param>
-        /// <returns>Проверенный адрес страницы</returns>
-        public string verificateUrl(string url)
-        {
-            string ex = "";
-
-            try
-            {
-                //Если адрес имеет длинну
-                if (url.Length > 10)
-                {
-                    //Формируем URI по адресу
-                    Uri uu = new Uri(url);
-                    //Формируем путь без лишних частей
-                    ex = $"{uu.Scheme}://{uu.Authority}{uu.AbsolutePath}";
-                }
-            }
-            catch { ex = ""; }
-
-            return ex;
-
-        }
 
         /// <summary>
         /// Добавляем id страницы в путь

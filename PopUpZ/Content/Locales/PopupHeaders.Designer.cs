@@ -22,14 +22,14 @@ namespace Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class PopupMessages {
+    public class PopupHeaders {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal PopupMessages() {
+        internal PopupHeaders() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ExHentaiDownloaderZ_5.Content.Locales.PopupMessages", typeof(PopupMessages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PopUpZ.Content.Locales.PopupHeaders", typeof(PopupHeaders).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,47 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Загрузка списка манги была успешно завершена!.
+        ///   Ищет локализованную строку, похожую на Запрос сброса настроек.
         /// </summary>
-        public static string DownloadComplete {
+        public static string CanselSettingsQuestion {
             get {
-                return ResourceManager.GetString("DownloadComplete", resourceCulture);
+                return ResourceManager.GetString("CanselSettingsQuestion", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Ошибка формирования сообщения об ошибке =)..
+        ///   Ищет локализованную строку, похожую на Запрос очистки списка загрузки.
         /// </summary>
-        public static string MessageError {
+        public static string ClearQuestion {
             get {
-                return ResourceManager.GetString("MessageError", resourceCulture);
+                return ResourceManager.GetString("ClearQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Запрос завершения работы.
+        /// </summary>
+        public static string CloseQuestion {
+            get {
+                return ResourceManager.GetString("CloseQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Операция успешно завершена.
+        /// </summary>
+        public static string Done {
+            get {
+                return ResourceManager.GetString("Done", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ошибка.
+        /// </summary>
+        public static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
             }
         }
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ExHentaiDownloaderZ_5.Content.Clases.WorkClases;
 
 namespace ExHentaiDownloaderZ_5.Content.Clases.DataClases
 {
@@ -48,7 +49,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.DataClases
         /// </summary>
         /// <returns>Строка статуса</returns>
         private string getStatusString() =>
-            status.ToString().Replace("_", " ");
+            ResourceLoader.loadStatusText("DownloadStatus_" + ((int)status).ToString());
 
         /// <summary>
         /// Возвращаем строку для таблицы

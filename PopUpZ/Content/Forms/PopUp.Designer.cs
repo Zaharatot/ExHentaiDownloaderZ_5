@@ -1,4 +1,4 @@
-﻿namespace ExHentaiDownloaderZ_5
+﻿namespace PopUpZ.Content.Forms
 {
     partial class PopUp
     {
@@ -46,7 +46,7 @@
             this.customTopBar1.Dock = System.Windows.Forms.DockStyle.Top;
             this.customTopBar1.headerColor = System.Drawing.Color.MediumSlateBlue;
             this.customTopBar1.headerText = "PopUpMessage";
-            this.customTopBar1.icon = global::ExHentaiDownloaderZ_5.Properties.Resources.icon_256;
+            this.customTopBar1.icon = global::PopUpZ.Properties.Resources.icon_2561;
             this.customTopBar1.iconVisible = false;
             this.customTopBar1.Location = new System.Drawing.Point(3, 3);
             this.customTopBar1.maximizeVisible = false;

@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ExHentaiDownloaderZ_5.Content.Clases.DataClases;
 using ExHentaiDownloaderZ_5.Content.Clases.WorkClases;
+using PopUpZ.Content.Clases;
+using Resources;
 
 
 namespace ExHentaiDownloaderZ_5
@@ -22,6 +24,10 @@ namespace ExHentaiDownloaderZ_5
         /// Главный рабочий класс программы
         /// </summary>
         private mainWorker mw;
+        /// <summary>
+        /// Класс попапов
+        /// </summary>
+        private PopupLoader pl;
 
         /// <summary>
         /// Форма настроек приложения
@@ -48,20 +54,49 @@ namespace ExHentaiDownloaderZ_5
         /// </summary>
         private void init()
         {
+            //Инициализируем основной рабочий класс
+            mw = new mainWorker();
+            //Инициализхируем класс всплывающих сообщений
+            pl = new PopupLoader();
+
             //Инициализируем форму настроек
-            sf = new settings();
+            sf = new settings(pl);
             //Инициализируем форму предзагрузчика
             df = new donates();
 
-            //Инициализируем основной рабочий класс
-            mw = new mainWorker();
-            
+            //Загружаем текст в контроллы
+            loadTextFromResources();
+
             //Добавляем номер версии в заголовок окна
             customTopBar1.headerText += $" (ver. {Application.ProductVersion})";
 
             //Инициализируем события
             initEvents();
         }
+
+
+        /// <summary>
+        /// Загружаем текст из ресурсов в элементы
+        /// </summary>
+        private void loadTextFromResources()
+        {
+            //Заголовок
+            customTopBar1.headerText = MainText.customTopBarHeader;
+            //Кнопки
+            removeButton.Text = MainText.removeButton;
+            clearButton.Text = MainText.clearButton;
+            saveButton.Text = MainText.saveButton;
+            loadButton.Text = MainText.loadButton;
+            downloadButton.Text = MainText.downloadButton;
+            settingsButton.Text = MainText.settingsButton;
+            //Заголовки столбцов
+            downloadTable.Columns["url"].HeaderText = MainText.urlColumnHeader;
+            downloadTable.Columns["name"].HeaderText = MainText.nameColumnHeader;
+            downloadTable.Columns["pages"].HeaderText = MainText.pagesColumnHeader;
+            downloadTable.Columns["status"].HeaderText = MainText.statusColumnHeader;
+        }
+
+
 
         /// <summary>
         /// Инициализируем события
@@ -98,7 +133,8 @@ namespace ExHentaiDownloaderZ_5
         /// </summary>
         /// <param name="downloadInfo">Информация о процессе загрузки</param>
         /// <param name="mangaTable">Список манги, для таблицы</param>
-        private void Mw_onUpdateDownload(DownloadProgressInfo downloadInfo, List<TableMangaInfo> mangaTable)
+        /// <param name="finalWork">Флаг завершения работы</param>
+        private void Mw_onUpdateDownload(DownloadProgressInfo downloadInfo, List<TableMangaInfo> mangaTable, bool finalWork)
         {
             //Выполняем действия в основном потоке
             this.BeginInvoke(new Action(()=> {
@@ -106,6 +142,11 @@ namespace ExHentaiDownloaderZ_5
                 updateTable(mangaTable);
                 //Обновляем значения контроллов
                 updateElems(downloadInfo);
+
+                //Если работа была завершена
+                if(finalWork)
+                    //Вызываем сообщение о завершении загрузки
+                    pl.showMessage(0);
             }));
         }
 
@@ -150,6 +191,11 @@ namespace ExHentaiDownloaderZ_5
         /// <param name="mangaTable">Список манги, для таблицы</param>
         private void updateTable(List<TableMangaInfo> mangaTable)
         {
+            //Получаем id выделенной строки
+            int selId = getSelectedRowId();
+            //Получаем id первой видимой в элементе строки
+            int scrollId = downloadTable.FirstDisplayedScrollingRowIndex;            
+
             //Очищаем список строк
             downloadTable.Rows.Clear();
 
@@ -158,10 +204,85 @@ namespace ExHentaiDownloaderZ_5
                 //Добавляем строку
                 downloadTable.Rows.Add(row.getRow());
 
+
+            //Проставляем выделение строке
+            setSelectedRow(selId);
+            //Проставляем скролл
+            setFirstDisplayedRow(scrollId);
+
             /*
              Этот метод самый примитивный, и имеет много минусов.
              Но, на первое время сойдёт.
              */
+        }
+
+
+        /// <summary>
+        /// Проставляем скролл
+        /// </summary>
+        /// <param name="id">id первой отображаемой строки</param>
+        private void setFirstDisplayedRow(int id)
+        {
+            try
+            {
+                //Если старое выделение находится за пределами списка
+                if (id >= downloadTable.Rows.Count)
+                    //Проставляем выделенным крайний элемент
+                    id = downloadTable.Rows.Count - 1;
+                //Если старое выделение находится за пределами ноля
+                else if (id < 0)
+                    //Возвращаем 0
+                    id = 0;
+
+                //Указываем первую видимую строку
+                downloadTable.FirstDisplayedScrollingRowIndex = id;
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// Проставляем выделение строке
+        /// </summary>
+        /// <param name="id">id выделенной строки</param>
+        private void setSelectedRow(int id)
+        {
+            try
+            {
+                //Если старое выделение находится за пределами списка
+                if (id >= downloadTable.Rows.Count)
+                    //Проставляем выделенным крайний элемент
+                    id = downloadTable.Rows.Count - 1;
+                //Если старое выделение находится за пределами ноля
+                else if (id < 0)
+                    //Возвращаем 0
+                    id = 0;
+
+                //Ставим выделение на элемент
+                downloadTable.Rows[id].Selected = true;
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// Возвращает id выделенной строки
+        /// </summary>
+        /// <returns>Id выделенной строки</returns>
+        private int getSelectedRowId()
+        {
+            int ex = 0;
+
+            try
+            {
+                //Получаем список выделенных строк
+                var rows = downloadTable.SelectedRows;
+                //Если выделена хоть одна строка
+                if (rows.Count > 0)
+                    //Получаем её id
+                    ex = rows[0].Index;
+            }
+            catch { ex = 0; }
+
+            return ex;
         }
 
         /// <summary>
@@ -170,7 +291,7 @@ namespace ExHentaiDownloaderZ_5
         private void load()
         {
             //Если файл был открыт
-            if(loadDialog.ShowDialog() == DialogResult.OK)
+            if (loadDialog.ShowDialog() == DialogResult.OK)
             {
                 //Загружаем список манги
                 byte result = mw.loadManga(loadDialog.FileName);
@@ -178,6 +299,9 @@ namespace ExHentaiDownloaderZ_5
                 if (result == 0)
                     //Обновляем инфу на форме
                     mw.updateDownloadExec();
+                
+                //Результат загрузки манги
+                pl.showMessage(1, result);
             }
         }
 
@@ -191,6 +315,8 @@ namespace ExHentaiDownloaderZ_5
             {
                 //Загружаем список манги
                 byte result = mw.saveManga(saveDialog.FileName);
+                //Результат сохранения манги
+                pl.showMessage(2, result);
             }
         }
 
@@ -209,6 +335,10 @@ namespace ExHentaiDownloaderZ_5
                 //Удаляем мангу из списка
                 mw.removeMangaReomList(id);
             }
+            //В противном случае
+            else
+                //ОШибка - не было выбрано ни одной строки
+                pl.showMessage(3);
         }
 
         /// <summary>
@@ -216,8 +346,10 @@ namespace ExHentaiDownloaderZ_5
         /// </summary>
         private void clear()
         {
-            //Очищаем список манги
-            mw.clearMangaList();
+            //Запрос очистки списка загрузки манги
+            if(pl.showMessage(4) == DialogResult.Yes)
+                //Очищаем список манги
+                mw.clearMangaList();
         }
 
 
@@ -355,10 +487,23 @@ namespace ExHentaiDownloaderZ_5
         /// </summary>
         private void exit()
         {
-            //Останавливаем все рабочие потоки приложения
-            mw.stop();
-            //Закрываем форму
-            this.Close();
+            bool ex = true;
+
+            //В случае, если идёт загрузка манги
+            if (mw.workStep != DownloadStep.Steps.Сбор_ссылок)
+                //Запрашиваем подтверждение выхода
+                ex = (pl.showMessage(5) == DialogResult.Yes);
+
+            //Если мы всё-таки выходим
+            if (ex)
+            {
+                //Останавливаем все рабочие потоки приложения
+                mw.stop();
+                //Выполняем автосохранение
+                mw.saveManga();
+                //Закрываем форму
+                this.Close();
+            }
         }
 
         /// <summary>

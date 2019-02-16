@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Resources;
 
 namespace ExHentaiDownloaderZ_5
 {
@@ -30,8 +31,22 @@ namespace ExHentaiDownloaderZ_5
         {
             //Событие перерисовки формы
             this.Paint += Preloader_Paint;
+            //Загружаем текст в контроллы
+            loadTextFromResources();
             //Добавляем номер версии в заголовок окна
             headerLabel.Text += $" (ver. {Application.ProductVersion})";
+        }
+
+        /// <summary>
+        /// Загружаем текст из ресурсов в элементы
+        /// </summary>
+        private void loadTextFromResources()
+        {
+            //Подписи
+            headerLabel.Text = DonatesText.headerLabel;
+            messageLabel.Text = DonatesText.messageLabel;
+            //Кнопки
+            closeButton.Text = DonatesText.closeButton;
         }
 
 

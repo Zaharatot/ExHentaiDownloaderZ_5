@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ExHentaiDownloaderZ_5.Content.Clases.DataClases
+namespace PopUpZ.Content.Clases
 {
     /// <summary>
     /// Класс информации о всплывающем сообщении

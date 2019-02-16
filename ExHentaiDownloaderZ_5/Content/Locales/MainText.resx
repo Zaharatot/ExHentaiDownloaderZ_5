@@ -117,4 +117,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="clearButton" xml:space="preserve">
+    <value>Очистить список</value>
+  </data>
+  <data name="customTopBarHeader" xml:space="preserve">
+    <value>ExHentaiDownloaderZ_5</value>
+  </data>
+  <data name="downloadButton" xml:space="preserve">
+    <value>Запуск загрузки</value>
+  </data>
+  <data name="loadButton" xml:space="preserve">
+    <value>Загрузить список</value>
+  </data>
+  <data name="nameColumnHeader" xml:space="preserve">
+    <value>Название</value>
+  </data>
+  <data name="pagesColumnHeader" xml:space="preserve">
+    <value>Страницы</value>
+  </data>
+  <data name="removeButton" xml:space="preserve">
+    <value>Удалить из списка</value>
+  </data>
+  <data name="saveButton" xml:space="preserve">
+    <value>Сохранить список</value>
+  </data>
+  <data name="settingsButton" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="statusColumnHeader" xml:space="preserve">
+    <value>Статус</value>
+  </data>
+  <data name="urlColumnHeader" xml:space="preserve">
+    <value>URL</value>
+  </data>
 </root>

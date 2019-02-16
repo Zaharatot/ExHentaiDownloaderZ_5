@@ -22,14 +22,14 @@ namespace Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class PopupHeaders {
+    public class DonatesText {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal PopupHeaders() {
+        internal DonatesText() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ExHentaiDownloaderZ_5.Content.Locales.PopupHeaders", typeof(PopupHeaders).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ExHentaiDownloaderZ_5.Content.Locales.DonatesText", typeof(DonatesText).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,29 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Операция успешно завершена.
+        ///   Ищет локализованную строку, похожую на Закрыть.
         /// </summary>
-        public static string Done {
+        public static string closeButton {
             get {
-                return ResourceManager.GetString("Done", resourceCulture);
+                return ResourceManager.GetString("closeButton", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Ошибка.
+        ///   Ищет локализованную строку, похожую на ExHentaiDownloaderZ_5.
         /// </summary>
-        public static string Error {
+        public static string headerLabel {
             get {
-                return ResourceManager.GetString("Error", resourceCulture);
+                return ResourceManager.GetString("headerLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Автор программы будет вам очень благодарен, если вы закините ему немного мелочи на пиво. Это определённо простимулирует его на улучшение программы, сверх текущего уровня. В планах есть добавление встроенного браузера и ещё много чего..
+        /// </summary>
+        public static string messageLabel {
+            get {
+                return ResourceManager.GetString("messageLabel", resourceCulture);
             }
         }
     }

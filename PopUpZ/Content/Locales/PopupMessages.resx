@@ -117,4 +117,58 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CanselSettingsQuestion" xml:space="preserve">
+    <value>Вы действительно хотите сбросить настройки до значений по умолчанию? Внимание, выполнив данную операцию вы потеряете все установленные настройки!</value>
+  </data>
+  <data name="ClearQuestion" xml:space="preserve">
+    <value>Вы действительно хотите очистить список загрузок? Внимание,это приведёт к полной потере текущего списка загрузок!</value>
+  </data>
+  <data name="CloseQuestion" xml:space="preserve">
+    <value>Вы действительно хотите прервать процесс загрузки и завершить работу программы?</value>
+  </data>
+  <data name="DownloadComplete" xml:space="preserve">
+    <value>Загрузка списка манги была успешно завершена!</value>
+  </data>
+  <data name="loadComplete_0" xml:space="preserve">
+    <value>Чтение списка загрузки было успешно завершено!</value>
+  </data>
+  <data name="loadComplete_1" xml:space="preserve">
+    <value>Ошибка, во время чтения списка загрузки. Список не был прочитан корректно.</value>
+  </data>
+  <data name="loadComplete_2" xml:space="preserve">
+    <value>Список загрузки не был проинициализирован. Пожалуйста перезапустите программу и попробуйте снова.</value>
+  </data>
+  <data name="loadComplete_3" xml:space="preserve">
+    <value>Во время сериализации списка загрузки произошла ошибка. Список не был прочитан корректно.</value>
+  </data>
+  <data name="loadComplete_4" xml:space="preserve">
+    <value>Путь к записываемому файлу некорректен. Пожалуйста перепроверьте путь считывания и повторите попытку.</value>
+  </data>
+  <data name="MessageError" xml:space="preserve">
+    <value>Ошибка формирования сообщения об ошибке =).</value>
+  </data>
+  <data name="RemoveError" xml:space="preserve">
+    <value>Не было выбрано ни одной строки для удаления!</value>
+  </data>
+  <data name="saveComplete_0" xml:space="preserve">
+    <value>Запись списка загрузки была успешно завершена!</value>
+  </data>
+  <data name="saveComplete_1" xml:space="preserve">
+    <value>Ошибка, во время записи списка загрузки. Список не был записан корректно.</value>
+  </data>
+  <data name="saveComplete_2" xml:space="preserve">
+    <value>Ошибка, во время сериализации списка загрузки. Список не был записан корректно.</value>
+  </data>
+  <data name="saveComplete_3" xml:space="preserve">
+    <value>Список загрузки не был проинициализирован. Пожалуйста перезапустите программу и попробуйте снова.</value>
+  </data>
+  <data name="saveComplete_4" xml:space="preserve">
+    <value>Путь для записи некорректен. Пожалуйста перепроверьте путь записи и повторите попытку.</value>
+  </data>
+  <data name="SaveSettings_0" xml:space="preserve">
+    <value>Настройки были успешно применены!</value>
+  </data>
+  <data name="SaveSettings_1" xml:space="preserve">
+    <value>Ошибка, во время применения настроек. Пожалуйста перезапустите программу, и попробуйте ещё раз.</value>
+  </data>
 </root>

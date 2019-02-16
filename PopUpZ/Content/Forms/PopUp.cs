@@ -1,4 +1,4 @@
-﻿using ExHentaiDownloaderZ_5.Content.Clases.DataClases;
+﻿using PopUpZ.Content.Clases;
 using Resources;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ExHentaiDownloaderZ_5
+namespace PopUpZ.Content.Forms
 {
     /// <summary>
     /// Класс форма всплывающего сообщения

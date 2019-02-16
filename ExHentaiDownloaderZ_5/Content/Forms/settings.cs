@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PopUpZ.Content.Clases;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Resources;
 
 namespace ExHentaiDownloaderZ_5
 {
@@ -15,15 +17,23 @@ namespace ExHentaiDownloaderZ_5
     /// </summary>
     public partial class settings : Form
     {
+        /// <summary>
+        /// Класс попапов
+        /// </summary>
+        private PopupLoader pl;
+
 
 
         /// <summary>
         /// Конструктор формы
         /// </summary>
-        public settings()
+        /// <param name="pl">Класс попапов</param>
+        public settings(PopupLoader pl)
         {
             //Инициализируем компоненты
             InitializeComponent();
+            //Сохраняем класс попапов, переданный из главной формы
+            this.pl = pl; 
             //Инициализируем форму
             init();
         }
@@ -33,10 +43,29 @@ namespace ExHentaiDownloaderZ_5
         /// </summary>
         public void init()
         {
+            //Загружаем текст в контроллы
+            loadTextFromResources();
             //Проверяем наличие настроек приложения
             checkEmptySettings();
             //Инициализируем события
             initEvents();
+        }
+
+
+        /// <summary>
+        /// Загружаем текст из ресурсов в элементы
+        /// </summary>
+        private void loadTextFromResources()
+        {
+            //Заголовок
+            customTopBar1.headerText = SettingsText.customTopBarHeader;
+            //Подписи
+            downloadPathLabel.Text = SettingsText.downloadPathLabel;
+            memberIdLabel.Text = SettingsText.memberIdLabel;
+            passHashLabel.Text = SettingsText.passHashLabel;
+            //Кнопки
+            saveSettingsButton.Text = SettingsText.saveSettingsButton;
+            cancelSettingsButton.Text = SettingsText.cancelSettingsButton;
         }
 
         /// <summary>
@@ -117,15 +146,27 @@ namespace ExHentaiDownloaderZ_5
         /// <summary>
         /// Сохранение настроек настроек в файл параметров
         /// </summary>
-        private void saveSettings()
+        /// <returns>0 - всё ок, иначе - код ошибки</returns>
+        private byte saveSettings()
         {
-            //Прописываем новые параметры
-            Properties.Settings.Default.downloadPath = downloadPathTextBox.Text;
-            Properties.Settings.Default.ipb_member_id = memberIdTextBox.Text;
-            Properties.Settings.Default.ipb_pass_hash = passHashTextBox.Text;
+            byte ex = 1;
 
-            //Сохраняем изменения настроек
-            Properties.Settings.Default.Save();
+            try
+            {
+                //Прописываем новые параметры
+                Properties.Settings.Default.downloadPath = downloadPathTextBox.Text;
+                Properties.Settings.Default.ipb_member_id = memberIdTextBox.Text;
+                Properties.Settings.Default.ipb_pass_hash = passHashTextBox.Text;
+
+                //Сохраняем изменения настроек
+                Properties.Settings.Default.Save();
+
+                //Всё ок
+                ex = 0;
+            }
+            catch { ex = 1; }
+
+            return ex;
         }
 
         /// <summary>
@@ -133,8 +174,10 @@ namespace ExHentaiDownloaderZ_5
         /// </summary>
         private void cancelSettingsButton_Click(object sender, EventArgs e)
         {
-            //Прописываем дефолтные настройки
-            setSettingsAsDefault();
+            //Запрос сброса настроек на дефолтные
+            if(pl.showMessage(6) == DialogResult.Yes)
+                //Прописываем дефолтные настройки
+                setSettingsAsDefault();
         }
 
         /// <summary>
@@ -143,7 +186,9 @@ namespace ExHentaiDownloaderZ_5
         private void saveSettingsButton_Click(object sender, EventArgs e)
         {
             //Сохраняем текущие параметры
-            saveSettings();
+            byte result = saveSettings();
+            //Результат сохранения настроек
+            pl.showMessage(7, result);
         }
     }
 }
