@@ -108,7 +108,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases.Parcer
                 //Формируем паттерн строки, и получаем первое вхождение
                 string url = getFirstEntrance("<img id=\"img\" src=\"(.*?)\" style=\"");
                 //Удаляем лишние вхождения
-                ex = clearString(url, new string[] { "<img id=\"img\" src=\"", "\" style=\"width:", "amp;", " " }, false);
+                ex = clearString(url, new string[] { "<img id=\"img\" src=\"", "\" style=\"", "width:", "amp;", " " }, false);
             }
             catch { ex = ""; }
 

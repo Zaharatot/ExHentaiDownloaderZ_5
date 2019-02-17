@@ -45,8 +45,8 @@ namespace ExHentaiDownloaderZ_5
         {
             //Загружаем текст в контроллы
             loadTextFromResources();
-            //Проверяем наличие настроек приложения
-            checkEmptySettings();
+            //Выводим все параметры на экран
+            loadSettings();
             //Инициализируем события
             initEvents();
         }
@@ -99,33 +99,17 @@ namespace ExHentaiDownloaderZ_5
             e.Graphics.DrawRectangle(Pens.Purple, new Rectangle(1, 1, this.Width - 2, this.Height - 2));
         }
 
-        /// <summary>
-        /// Проверка пустых настроек
-        /// </summary>
-        private void checkEmptySettings()
-        {
-            //Если у нас нету пути сохранения
-            if ((Properties.Settings.Default.downloadPath == null)
-                || (Properties.Settings.Default.downloadPath.Length == 0))
-                //Прописываем дефолтные настройки
-                setSettingsAsDefault();
-            else
-                //Выводим настройки
-                loadSettings();
-        }
 
         /// <summary>
         /// Установка всех значений в дефолтные
         /// </summary>
         private void setSettingsAsDefault()
         {
-            //Прописываем параметры
-            Properties.Settings.Default.downloadPath = Application.StartupPath + @"\Files\";
-            Properties.Settings.Default.ipb_member_id = "";
-            Properties.Settings.Default.ipb_pass_hash = "";
+            //Инициализируем все параметры дефолтными значениями
+            Program.settingsStorage = new SettingsStorageZ.Clases.Settings();
 
             //Сохраняем изменения настроек
-            Properties.Settings.Default.Save();
+            Program.settingsStorage.saveSettings();
 
             //Подгружаем изменённые значения настроек на форму
             loadSettings();
@@ -137,9 +121,9 @@ namespace ExHentaiDownloaderZ_5
         private void loadSettings()
         {
             //Выводим параметры в текстовые поля
-            downloadPathTextBox.Text = Properties.Settings.Default.downloadPath;
-            memberIdTextBox.Text = Properties.Settings.Default.ipb_member_id;
-            passHashTextBox.Text = Properties.Settings.Default.ipb_pass_hash;
+            downloadPathTextBox.Text = Program.settingsStorage.settings.downloadPath;
+            memberIdTextBox.Text = Program.settingsStorage.settings.ipb_member_id;
+            passHashTextBox.Text = Program.settingsStorage.settings.ipb_pass_hash;
         }
 
 
@@ -154,12 +138,15 @@ namespace ExHentaiDownloaderZ_5
             try
             {
                 //Прописываем новые параметры
-                Properties.Settings.Default.downloadPath = downloadPathTextBox.Text;
-                Properties.Settings.Default.ipb_member_id = memberIdTextBox.Text;
-                Properties.Settings.Default.ipb_pass_hash = passHashTextBox.Text;
+                Program.settingsStorage.settings.downloadPath = downloadPathTextBox.Text;
+                Program.settingsStorage.settings.ipb_member_id = memberIdTextBox.Text;
+                Program.settingsStorage.settings.ipb_pass_hash = passHashTextBox.Text;
 
                 //Сохраняем изменения настроек
-                Properties.Settings.Default.Save();
+                Program.settingsStorage.saveSettings();
+
+                //Загружаем параметры, на случай если при сохранении были правки
+                loadSettings();
 
                 //Всё ок
                 ex = 0;

@@ -20,6 +20,10 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.DataClases
         /// </summary>
         public string url { get; set; }
         /// <summary>
+        /// Имя загруженного файла
+        /// </summary>
+        public string filename { get; set; }
+        /// <summary>
         /// Флаг загрузки
         /// </summary>
         public PageLoadStatus.status loaded { get; set; }
@@ -31,6 +35,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.DataClases
         {
             //Ставим дефолтные значения
             loaded = PageLoadStatus.status.Загрузка_ещё_не_произошла;
+            filename = url = null;
         }
 
     }

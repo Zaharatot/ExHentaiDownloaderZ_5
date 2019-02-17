@@ -181,6 +181,10 @@
       <Project>{12fb1ed2-922d-4321-b9dd-4b78aa6760e7}</Project>
       <Name>PopUpZ</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Settings\SettingsStorageZ.csproj">
+      <Project>{457a4af0-b85a-4e72-a259-df048ed88da8}</Project>
+      <Name>SettingsStorageZ</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

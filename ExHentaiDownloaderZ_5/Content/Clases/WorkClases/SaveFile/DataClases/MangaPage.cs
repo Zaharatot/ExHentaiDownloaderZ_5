@@ -23,6 +23,10 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases.SaveFile.DataClases
         /// </summary>
         public string url { get; set; }
         /// <summary>
+        /// Имя загруженного файла
+        /// </summary>
+        public string filename { get; set; }
+        /// <summary>
         /// Флаг загрузки
         /// </summary>
         public PageLoadStatus.status loaded { get; set; }
@@ -35,7 +39,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases.SaveFile.DataClases
             //Инициализируем дефолтные значения.
             //Всё что будет в NULL в итоговый XML-файл не войдёт.
             id = 0;
-            url = null;
+            filename = url = null;
             loaded = PageLoadStatus.status.Загрузка_ещё_не_произошла;
         }
 
@@ -54,6 +58,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases.SaveFile.DataClases
                 id = pg.id;
                 url = pg.url;
                 loaded = pg.loaded;
+                filename = pg.filename;
 
                 //Всё ок
                 ex = 0;
@@ -80,6 +85,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases.SaveFile.DataClases
                 ex.id = id;
                 ex.url = url;
                 ex.loaded = loaded;
+                ex.filename = filename;
             }
             catch { ex = null; }
 

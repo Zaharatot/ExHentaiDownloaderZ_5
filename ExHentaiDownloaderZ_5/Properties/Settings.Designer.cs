@@ -22,41 +22,5 @@ namespace ExHentaiDownloaderZ_5.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string downloadPath {
-            get {
-                return ((string)(this["downloadPath"]));
-            }
-            set {
-                this["downloadPath"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string ipb_pass_hash {
-            get {
-                return ((string)(this["ipb_pass_hash"]));
-            }
-            set {
-                this["ipb_pass_hash"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string ipb_member_id {
-            get {
-                return ((string)(this["ipb_member_id"]));
-            }
-            set {
-                this["ipb_member_id"] = value;
-            }
-        }
     }
 }

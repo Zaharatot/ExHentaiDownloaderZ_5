@@ -159,6 +159,9 @@
   <data name="DownloadStep_2" xml:space="preserve">
     <value>Загрузка страниц манги</value>
   </data>
+  <data name="DownloadStep_3" xml:space="preserve">
+    <value>Проверка статусов загрузки</value>
+  </data>
   <data name="TimeDays" xml:space="preserve">
     <value>дней</value>
   </data>

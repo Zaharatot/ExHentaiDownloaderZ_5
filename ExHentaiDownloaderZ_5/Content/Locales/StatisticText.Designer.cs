@@ -187,6 +187,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Проверка статусов загрузки.
+        /// </summary>
+        public static string DownloadStep_3 {
+            get {
+                return ResourceManager.GetString("DownloadStep_3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на дней.
         /// </summary>
         public static string TimeDays {
