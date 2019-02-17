@@ -11,8 +11,13 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases.SaveFile.DataClases
     /// Класс, реализующий список загружаемой манги, для сохранения в xml
     /// </summary>
     [Serializable]
-    public class DownloadList
+    public class DownloadListXml
     {
+        /// <summary>
+        /// ПУть загрузки
+        /// </summary>
+        public string downloadPath { get; set; }
+
         /// <summary>
         /// Список манги, для загрузки
         /// </summary>
@@ -21,7 +26,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases.SaveFile.DataClases
         /// <summary>
         /// Конструктор класса
         /// </summary>
-        public DownloadList()
+        public DownloadListXml()
         {
             //Инициализируем дефолтные значения.
             //Всё что будет в NULL в итоговый XML-файл не войдёт.
@@ -31,9 +36,9 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases.SaveFile.DataClases
         /// <summary>
         /// Загружаем мангу из основного списка
         /// </summary>
-        /// <param name="mangas">Список манги, для загрузки</param>
+        /// <param name="dList">Список загрузки</param>
         /// <returns>0 - если всё ок, иначе - код ошибки.</returns>
-        public byte loadFromMangaList(List<manga> mangas)
+        public byte loadFromMangaList(DownloadList dList)
         {
             byte ex = 1;
             Manga buff;
@@ -41,10 +46,13 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases.SaveFile.DataClases
 
             try
             {
+                //Поулчаем путь сохранения
+                downloadPath = dList.downloadPath;
                 //Инициализируем список
                 downloadList = new List<Manga>();
+
                 //Проходимся по списку манги
-                foreach (var mn in mangas)
+                foreach (var mn in dList.downloadList)
                 {
                     //Инициализируем новую мангу
                     buff = new Manga();
@@ -77,15 +85,18 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases.SaveFile.DataClases
         /// Загружаем мангу из основного списка
         /// </summary>
         /// <returns>Список манги, или null в случае ошибки</returns>
-        public List<manga> loadToMangaList()
+        public DownloadList loadToMangaList()
         {
-            List<manga> ex = null;
+            DownloadList ex = null;
             manga buff;
 
             try
             {
                 //Инициализируем список
-                ex = new List<manga>();
+                ex = new DownloadList();
+                //Записываем путь загрузки
+                ex.downloadPath = downloadPath;
+
                 //Проходимся по списку манги
                 foreach (var mn in downloadList)
                 {
@@ -94,7 +105,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases.SaveFile.DataClases
                     //Если всё ок
                     if (buff != null)
                         //Добавляем мангу в список загрузки
-                        ex.Add(buff);
+                        ex.downloadList.Add(buff);
                     else
                     {
                         //Добавляем ошибку загрузки

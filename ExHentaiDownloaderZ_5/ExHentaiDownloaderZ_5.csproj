@@ -49,11 +49,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Content\Clases\DataClases\DownloadList.cs" />
     <Compile Include="Content\Clases\DataClases\DownloadProgressInfo.cs" />
     <Compile Include="Content\Clases\DataClases\DownloadStep.cs" />
     <Compile Include="Content\Clases\DataClases\manga.cs" />
     <Compile Include="Content\Clases\DataClases\MangaStatus.cs" />
     <Compile Include="Content\Clases\DataClases\page.cs" />
+    <Compile Include="Content\Clases\DataClases\PageLoadStatus.cs" />
     <Compile Include="Content\Clases\DataClases\TableMangaInfo.cs" />
     <Compile Include="Content\Clases\WorkClases\ClipboardScanner.cs" />
     <Compile Include="Content\Clases\WorkClases\Parcer\geHentaiLoader.cs" />
@@ -61,7 +63,7 @@
     <Compile Include="Content\Clases\WorkClases\mainWorker.cs" />
     <Compile Include="Content\Clases\WorkClases\otherFuncs.cs" />
     <Compile Include="Content\Clases\WorkClases\ResourceLoader.cs" />
-    <Compile Include="Content\Clases\WorkClases\SaveFile\DataClases\DownloadList.cs" />
+    <Compile Include="Content\Clases\WorkClases\SaveFile\DataClases\DownloadListXml.cs" />
     <Compile Include="Content\Clases\WorkClases\SaveFile\DataClases\Manga.cs" />
     <Compile Include="Content\Clases\WorkClases\SaveFile\DataClases\MangaPage.cs" />
     <Compile Include="Content\Clases\WorkClases\SaveFile\XmlWorker.cs" />

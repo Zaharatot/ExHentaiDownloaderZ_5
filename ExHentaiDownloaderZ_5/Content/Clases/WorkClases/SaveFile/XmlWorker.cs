@@ -38,9 +38,9 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases.SaveFile
         /// Сохраняем информацию о манге
         /// </summary>
         /// <param name="path">Путь сохранения. При дефолтном значении, будет использован путь автосохранения.</param>
-        /// <param name="mangas">Список манги, дял сохранения</param>
+        /// <param name="dList">Список загрузки</param>
         /// <returns>0 - всё ок, иначе - код ошибки</returns>
-        public byte saveManga(List<manga> mangas, string path = null)
+        public byte saveManga(DownloadList dList, string path = null)
         {
             byte ex = 1;
             byte result;
@@ -48,11 +48,11 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases.SaveFile
             try
             {
                 //Инициализируем сериализатор XML
-                XmlSerializer xs = new XmlSerializer(typeof(DownloadList));
+                XmlSerializer xs = new XmlSerializer(typeof(DownloadListXml));
                 //Инициализируем класс списка загрузок
-                DownloadList list = new DownloadList();
+                DownloadListXml list = new DownloadListXml();
                 //Загружаем информацию о манге в список загрузок
-                result = list.loadFromMangaList(mangas);
+                result = list.loadFromMangaList(dList);
                 //Если всё ок
                 if (result == 0)
                 {
@@ -87,17 +87,17 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases.SaveFile
         /// <param name="mangas">Список манги, который будет загружен</param>
         /// <param name="path">Путь загрузки. При дефолтном значении, будет использован путь автосохранения.</param>
         /// <returns>0 - всё ок, иначе - код ошибки</returns>
-        public List<manga> loadManga(string path = null)
+        public DownloadList loadManga(string path = null)
         {
-            List<manga> ex = null;
-            DownloadList buff;
+            DownloadList ex = null;
+            DownloadListXml buff;
 
             try
             {
                 //Инициализируем сериализатор XML
-                XmlSerializer xs = new XmlSerializer(typeof(DownloadList));
+                XmlSerializer xs = new XmlSerializer(typeof(DownloadListXml));
                 //Инициализируем класс списка загрузок
-                ex = new List<manga>();
+                ex = new DownloadList();
                 //Если не был указан путь загрузки
                 if (path == null)
                     //Указываем путь автозагрузки
@@ -110,7 +110,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases.SaveFile
                     using (StreamReader sr = new StreamReader(path))
                     {
                         //Десериализуем наш класс из файла
-                        buff = (DownloadList)xs.Deserialize(sr);
+                        buff = (DownloadListXml)xs.Deserialize(sr);
                         //Закрываем поток
                         sr.Dispose();
                     }

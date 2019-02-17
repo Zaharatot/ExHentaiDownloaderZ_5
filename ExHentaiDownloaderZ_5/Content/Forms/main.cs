@@ -54,10 +54,10 @@ namespace ExHentaiDownloaderZ_5
         /// </summary>
         private void init()
         {
-            //Инициализируем основной рабочий класс
-            mw = new mainWorker();
             //Инициализхируем класс всплывающих сообщений
             pl = new PopupLoader();
+            //Инициализируем основной рабочий класс
+            mw = new mainWorker(pl);
 
             //Инициализируем форму настроек
             sf = new settings(pl);

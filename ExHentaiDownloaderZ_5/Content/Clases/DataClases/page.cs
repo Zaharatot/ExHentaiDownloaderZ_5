@@ -22,7 +22,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.DataClases
         /// <summary>
         /// Флаг загрузки
         /// </summary>
-        public bool loaded { get; set; }
+        public PageLoadStatus.status loaded { get; set; }
 
         /// <summary>
         /// Конструктор класса
@@ -30,7 +30,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.DataClases
         public page()
         {
             //Ставим дефолтные значения
-            loaded = false;
+            loaded = PageLoadStatus.status.Загрузка_ещё_не_произошла;
         }
 
     }

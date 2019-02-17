@@ -25,7 +25,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases.SaveFile.DataClases
         /// <summary>
         /// Флаг загрузки
         /// </summary>
-        public bool loaded { get; set; }
+        public PageLoadStatus.status loaded { get; set; }
 
         /// <summary>
         /// Конструктор класса
@@ -36,7 +36,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases.SaveFile.DataClases
             //Всё что будет в NULL в итоговый XML-файл не войдёт.
             id = 0;
             url = null;
-            loaded = false;
+            loaded = PageLoadStatus.status.Загрузка_ещё_не_произошла;
         }
 
         /// <summary>

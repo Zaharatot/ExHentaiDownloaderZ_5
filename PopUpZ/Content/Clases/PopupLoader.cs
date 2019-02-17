@@ -51,6 +51,8 @@ namespace PopUpZ.Content.Clases
             4 - Запрос на очистку списка манги.
             5 - Запрос подтверждения выхода из программы, в случае, если идёт загрузка.
             6 - Запрос сброса настроек на дефолтные.
+            7 - Сообщение о завершении загрузки
+            8 - Запрашиваем обновление пути
         */
 
         /// <summary>
@@ -160,6 +162,17 @@ namespace PopUpZ.Content.Clases
                                 message = ResourceLoader.loadMessageText("SaveSettings_" + result.ToString()),
                                 header = getHeaderByCode(result),
                                 buttons = MessageBoxButtons.OK
+                            };
+                            break;
+                        }
+                    case 8:
+                        {
+                            // Запрашиваем обновление пути
+                            info = new PopupMessageInfo()
+                            {
+                                message = PopupMessages.ResetPathQuestion,
+                                header = PopupHeaders.ResetPathQuestion,
+                                buttons = MessageBoxButtons.YesNo
                             };
                             break;
                         }

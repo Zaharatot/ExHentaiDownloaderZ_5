@@ -160,6 +160,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на В списке загрузки обнаружен существующий путь сохранения загруженных файлов. Вы хотите установить новый путь загрузки? Внимание! При выборе этого варианта, загрузка манги начнётся заного,без учёта уже загруженных в другую директорию файлов..
+        /// </summary>
+        public static string ResetPathQuestion {
+            get {
+                return ResourceManager.GetString("ResetPathQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Запись списка загрузки была успешно завершена!.
         /// </summary>
         public static string saveComplete_0 {

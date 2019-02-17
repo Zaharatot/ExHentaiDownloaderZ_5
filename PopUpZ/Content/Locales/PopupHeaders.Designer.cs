@@ -104,5 +104,14 @@ namespace Resources {
                 return ResourceManager.GetString("Error", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Запрос изменения пути.
+        /// </summary>
+        public static string ResetPathQuestion {
+            get {
+                return ResourceManager.GetString("ResetPathQuestion", resourceCulture);
+            }
+        }
     }
 }

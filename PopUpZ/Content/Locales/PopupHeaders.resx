@@ -132,4 +132,7 @@
   <data name="Error" xml:space="preserve">
     <value>Ошибка</value>
   </data>
+  <data name="ResetPathQuestion" xml:space="preserve">
+    <value>Запрос изменения пути</value>
+  </data>
 </root>

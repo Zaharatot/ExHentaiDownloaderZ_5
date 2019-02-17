@@ -31,10 +31,6 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases.SaveFile.DataClases
         /// Адрес корневой страницы манги
         /// </summary>
         public string url { get; set; }
-        /// <summary>
-        /// Путь к папке, куда качаем
-        /// </summary>
-        public string rootPath { get; set; }
 
         /// <summary>
         /// Статус загрузки манги
@@ -50,7 +46,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases.SaveFile.DataClases
             //Инициализируем дефолтные значения.
             //Всё что будет в NULL в итоговый XML-файл не войдёт.
             pages = null;
-            name = url = rootPath = null;
+            name = url = null;
             countPages = 0;
             status = 0;
         }
@@ -72,7 +68,6 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases.SaveFile.DataClases
                 name = manga.name;
                 countPages = manga.countPages;
                 url = manga.url;
-                rootPath = manga.rootPath;
                 status = (byte)manga.status;
 
                 //Инициализируем список страниц
@@ -121,7 +116,6 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases.SaveFile.DataClases
                 //Проставляем значения
                 ex.name = name;
                 ex.countPages = countPages;
-                ex.rootPath = rootPath;
                 ex.status = (MangaStatus.status)status;
 
                 //Проходимся по списку страниц

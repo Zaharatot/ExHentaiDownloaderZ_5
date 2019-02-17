@@ -29,10 +29,6 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.DataClases
         /// Адрес корневой страницы манги
         /// </summary>
         public string url { get; set; }
-        /// <summary>
-        /// Путь к папке, куда качаем
-        /// </summary>
-        public string rootPath { get; set; }
 
         /// <summary>
         /// Статус загрузки манги
@@ -55,16 +51,6 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.DataClases
         }
 
         /// <summary>
-        /// Устанавливаем корневой путь
-        /// </summary>
-        /// <param name="downloadPath">Путь к папке загрузки, без слеша</param>
-        public void setRootPath(string downloadPath)
-        {
-            //Формируем путь
-            rootPath = $@"{downloadPath}\{name}\";
-        }
-
-        /// <summary>
         /// Добавляем страницу манги
         /// </summary>
         /// <param name="url">Путь загрузки</param>
@@ -83,7 +69,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.DataClases
         /// <returns>True - загружена</returns>
         public bool checkLoad() =>
             //Если количество страниц совпадает с загруженным количеством страниц
-            (pages.Count == (pages.Count(pg => (pg.loaded))));
+            (pages.Count == (pages.Count(pg => (pg.loaded == PageLoadStatus.status.Загрузка_успешна))));
 
         /// <summary>
         /// Проверка того, что фактическое загруженное количество 
@@ -98,7 +84,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.DataClases
         /// </summary>
         /// <returns>Количество загруженных страниц</returns>
         public int downloadPages() =>
-            (pages.Count(pg => (pg.loaded)));
+            (pages.Count(pg => (pg.loaded == PageLoadStatus.status.Загрузка_успешна)));
         
     }
 }
