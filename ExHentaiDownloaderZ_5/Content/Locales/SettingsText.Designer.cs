@@ -61,11 +61,47 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Автосохранение при изменении списка загрузок.
+        /// </summary>
+        public static string addElementAutosaveFlag {
+            get {
+                return ResourceManager.GetString("addElementAutosaveFlag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Создание бекапов файла автосохранения.
+        /// </summary>
+        public static string autosaveBackupFlag {
+            get {
+                return ResourceManager.GetString("autosaveBackupFlag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Сброс параметров.
         /// </summary>
         public static string cancelSettingsButton {
             get {
                 return ResourceManager.GetString("cancelSettingsButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Автосохранение перед проверкой статусов.
+        /// </summary>
+        public static string checkStatusesAutosaveFlag {
+            get {
+                return ResourceManager.GetString("checkStatusesAutosaveFlag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Загрузка в номерные дочерние папки.
+        /// </summary>
+        public static string createChildFolderFlag {
+            get {
+                return ResourceManager.GetString("createChildFolderFlag", resourceCulture);
             }
         }
         
@@ -79,11 +115,83 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Задержка между загрузкой страниц разных манг:.
+        /// </summary>
+        public static string downloadMangaDelayLabel {
+            get {
+                return ResourceManager.GetString("downloadMangaDelayLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Задержка между загрузкой страниц манги:.
+        /// </summary>
+        public static string downloadMangaPageDelayLabel {
+            get {
+                return ResourceManager.GetString("downloadMangaPageDelayLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Путь загрузки:.
         /// </summary>
         public static string downloadPathLabel {
             get {
                 return ResourceManager.GetString("downloadPathLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Параметры загрузки.
+        /// </summary>
+        public static string downloadSettingsGroupBox {
+            get {
+                return ResourceManager.GetString("downloadSettingsGroupBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Параметры подключения к exhentai.
+        /// </summary>
+        public static string exhentaiSettingsGroupBox {
+            get {
+                return ResourceManager.GetString("exhentaiSettingsGroupBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Автосохранение при выходе из программы.
+        /// </summary>
+        public static string exitAutosaveFlag {
+            get {
+                return ResourceManager.GetString("exitAutosaveFlag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Автосохранение перед загрузкой информации о манге.
+        /// </summary>
+        public static string loadInfoAutosaveFlag {
+            get {
+                return ResourceManager.GetString("loadInfoAutosaveFlag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Автосохранение перед загрузкой страниц.
+        /// </summary>
+        public static string loadPagesAutosaveFlag {
+            get {
+                return ResourceManager.GetString("loadPagesAutosaveFlag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Задержка между загрузкой информации о разных мангах:.
+        /// </summary>
+        public static string mangaInfoLoadDelayLabel {
+            get {
+                return ResourceManager.GetString("mangaInfoLoadDelayLabel", resourceCulture);
             }
         }
         
@@ -97,6 +205,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Запрос нового пути загрузки при запуске (если убрать флаг всегда будет новый путь загрузки).
+        /// </summary>
+        public static string newFolderRequestFlag {
+            get {
+                return ResourceManager.GetString("newFolderRequestFlag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Открытие папки загрузки после завершения.
+        /// </summary>
+        public static string openDownloadFolderFlag {
+            get {
+                return ResourceManager.GetString("openDownloadFolderFlag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Значение &quot;ipb_pass_hash&quot; из куков:.
         /// </summary>
         public static string passHashLabel {
@@ -106,11 +232,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Задержка между подгрузками списков страниц:.
+        /// </summary>
+        public static string rootPageLoadDelayLabel {
+            get {
+                return ResourceManager.GetString("rootPageLoadDelayLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Сохранить.
         /// </summary>
         public static string saveSettingsButton {
             get {
                 return ResourceManager.GetString("saveSettingsButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Параметры сохранения.
+        /// </summary>
+        public static string saveSettingsGroupBox {
+            get {
+                return ResourceManager.GetString("saveSettingsGroupBox", resourceCulture);
             }
         }
     }

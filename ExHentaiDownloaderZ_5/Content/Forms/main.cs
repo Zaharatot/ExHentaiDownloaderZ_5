@@ -499,8 +499,10 @@ namespace ExHentaiDownloaderZ_5
             {
                 //Останавливаем все рабочие потоки приложения
                 mw.stop();
-                //Выполняем автосохранение
-                mw.saveManga();
+                //Если нужно проводить автосохранение при выходе из программы
+                if (Program.settingsStorage.settings.exitAutosave)
+                   //Выполняем автосохранение
+                   mw.saveManga();
                 //Закрываем форму
                 this.Close();
             }

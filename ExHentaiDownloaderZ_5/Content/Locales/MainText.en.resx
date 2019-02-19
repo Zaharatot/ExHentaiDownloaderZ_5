@@ -117,70 +117,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="addElementAutosaveFlag" xml:space="preserve">
-    <value>Автосохранение при изменении списка загрузок</value>
-  </data>
-  <data name="autosaveBackupFlag" xml:space="preserve">
-    <value>Создание бекапов файла автосохранения</value>
-  </data>
-  <data name="cancelSettingsButton" xml:space="preserve">
-    <value>Сброс параметров</value>
-  </data>
-  <data name="checkStatusesAutosaveFlag" xml:space="preserve">
-    <value>Автосохранение перед проверкой статусов</value>
-  </data>
-  <data name="createChildFolderFlag" xml:space="preserve">
-    <value>Загрузка в номерные дочерние папки</value>
+  <data name="clearButton" xml:space="preserve">
+    <value>Очистить список</value>
   </data>
   <data name="customTopBarHeader" xml:space="preserve">
+    <value>ExHentaiDownloaderZ_5</value>
+  </data>
+  <data name="downloadButton" xml:space="preserve">
+    <value>Запуск загрузки</value>
+  </data>
+  <data name="loadButton" xml:space="preserve">
+    <value>Загрузить список</value>
+  </data>
+  <data name="nameColumnHeader" xml:space="preserve">
+    <value>Название</value>
+  </data>
+  <data name="pagesColumnHeader" xml:space="preserve">
+    <value>Страницы</value>
+  </data>
+  <data name="removeButton" xml:space="preserve">
+    <value>Удалить из списка</value>
+  </data>
+  <data name="saveButton" xml:space="preserve">
+    <value>Сохранить список</value>
+  </data>
+  <data name="settingsButton" xml:space="preserve">
     <value>Настройки</value>
   </data>
-  <data name="downloadMangaDelayLabel" xml:space="preserve">
-    <value>Задержка между загрузкой страниц разных манг:</value>
+  <data name="statusColumnHeader" xml:space="preserve">
+    <value>Статус</value>
   </data>
-  <data name="downloadMangaPageDelayLabel" xml:space="preserve">
-    <value>Задержка между загрузкой страниц манги:</value>
-  </data>
-  <data name="downloadPathLabel" xml:space="preserve">
-    <value>Путь загрузки:</value>
-  </data>
-  <data name="downloadSettingsGroupBox" xml:space="preserve">
-    <value>Параметры загрузки</value>
-  </data>
-  <data name="exhentaiSettingsGroupBox" xml:space="preserve">
-    <value>Параметры подключения к exhentai</value>
-  </data>
-  <data name="exitAutosaveFlag" xml:space="preserve">
-    <value>Автосохранение при выходе из программы</value>
-  </data>
-  <data name="loadInfoAutosaveFlag" xml:space="preserve">
-    <value>Автосохранение перед загрузкой информации о манге</value>
-  </data>
-  <data name="loadPagesAutosaveFlag" xml:space="preserve">
-    <value>Автосохранение перед загрузкой страниц</value>
-  </data>
-  <data name="mangaInfoLoadDelayLabel" xml:space="preserve">
-    <value>Задержка между загрузкой информации о разных мангах:</value>
-  </data>
-  <data name="memberIdLabel" xml:space="preserve">
-    <value>Значение "ipb_member_id" из куков:</value>
-  </data>
-  <data name="newFolderRequestFlag" xml:space="preserve">
-    <value>Запрос нового пути загрузки при запуске (если убрать флаг всегда будет новый путь загрузки)</value>
-  </data>
-  <data name="openDownloadFolderFlag" xml:space="preserve">
-    <value>Открытие папки загрузки после завершения</value>
-  </data>
-  <data name="passHashLabel" xml:space="preserve">
-    <value>Значение "ipb_pass_hash" из куков:</value>
-  </data>
-  <data name="rootPageLoadDelayLabel" xml:space="preserve">
-    <value>Задержка между подгрузками списков страниц:</value>
-  </data>
-  <data name="saveSettingsButton" xml:space="preserve">
-    <value>Сохранить</value>
-  </data>
-  <data name="saveSettingsGroupBox" xml:space="preserve">
-    <value>Параметры сохранения</value>
+  <data name="urlColumnHeader" xml:space="preserve">
+    <value>URL</value>
   </data>
 </root>

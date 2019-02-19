@@ -85,8 +85,28 @@
     <Compile Include="Content\Forms\settings.Designer.cs">
       <DependentUpon>settings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Content\Locales\DonatesText.en.Designer.cs">
+      <DependentUpon>DonatesText.en.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Content\Locales\DonatesText.Designer.cs">
       <DependentUpon>DonatesText.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Content\Locales\MainText.en.Designer.cs">
+      <DependentUpon>MainText.en.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Content\Locales\SettingsText.en.Designer.cs">
+      <DependentUpon>SettingsText.en.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Content\Locales\StatisticText.en.Designer.cs">
+      <DependentUpon>StatisticText.en.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -116,9 +136,29 @@
     <EmbeddedResource Include="Content\Forms\settings.resx">
       <DependentUpon>settings.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Content\Locales\DonatesText.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DonatesText.en.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
     <EmbeddedResource Include="Content\Locales\DonatesText.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DonatesText.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\Locales\MainText.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MainText.en.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\Locales\SettingsText.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SettingsText.en.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\Locales\StatisticText.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>StatisticText.en.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Resources</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Content\Locales\StatisticText.resx">
@@ -172,6 +212,10 @@
     <ProjectReference Include="..\CustomProgressBar\customProgressBar.csproj">
       <Project>{5A87BDDC-ED2C-4537-9CDC-1039039292F7}</Project>
       <Name>customProgressBar</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CustomTabPage\CustomGroupBox.csproj">
+      <Project>{9089c863-455a-4aad-b43a-693f4689446b}</Project>
+      <Name>CustomGroupBox</Name>
     </ProjectReference>
     <ProjectReference Include="..\customTopBar\customTopBar.csproj">
       <Project>{53A1A6AE-2C5F-43B2-A065-FC82235A46E8}</Project>

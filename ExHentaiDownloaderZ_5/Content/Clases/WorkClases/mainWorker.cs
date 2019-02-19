@@ -128,7 +128,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
         /// Получаем время, со значением микросекунд
         /// </summary>
         /// <returns>Дабловое число секунд</returns>
-        public static decimal timeMicro()
+        private decimal timeMicro()
         {
             //Получаем время с долями секунды
             return (decimal)((DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalSeconds);
@@ -667,8 +667,12 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
             url = verificateUrl(url);
             //Добавляем информацию о манге
             dList.addManga(url);
-            //Сохраняем изменения
-            saveManga();
+
+            //Если нужно проводить автосохранение при изменении списка
+            if (Program.settingsStorage.settings.addElementAutosave)
+                //Сохраняем изменения
+                saveManga();
+
             //Обновляем инфу на форме
             updateDownloadExec();
         }
@@ -681,6 +685,12 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
         {
             //Удаляем элемент
             dList.removeManga(id);
+
+            //Если нужно проводить автосохранение при изменении списка
+            if (Program.settingsStorage.settings.addElementAutosave)
+                //Сохраняем изменения
+                saveManga();
+
             //Обновляем инфу на форме
             updateDownloadExec();
         }
@@ -692,6 +702,12 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
         {
             //Очищаем список загрузки
             dList.clearManga();
+
+            //Если нужно проводить автосохранение при изменении списка
+            if (Program.settingsStorage.settings.addElementAutosave)
+                //Сохраняем изменения
+                saveManga();
+
             //Обновляем инфу на форме
             updateDownloadExec();
         }
@@ -702,8 +718,10 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
         /// </summary>
         private void downloadManga()
         {
-            //Перед началом проверки, автоматом сохраняем список манги
-            saveManga();
+            //Если нужно проводить автосохранение перед проверкой статусов
+            if (Program.settingsStorage.settings.checkStatusesAutosave)
+                //Сохраняем изменения
+                saveManga();
             //Переходим к первому шагу загрузки
             workStep = DownloadStep.Steps.Проверка_статусов_загрузки;
             //Обновляем инфу на форме
@@ -712,8 +730,10 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
             checkDownloadStatuses();
 
 
-            //Перед началом загрузки, автоматом сохраняем список манги
-            saveManga();
+            //Если нужно проводить автосохранение перед загрузкой информации
+            if (Program.settingsStorage.settings.loadInfoAutosave)
+                //Сохраняем изменения
+                saveManga();
             //Переходим к первому шагу загрузки
             workStep = DownloadStep.Steps.Загрузка_информации_о_манге;
             //Обновляем инфу на форме
@@ -721,8 +741,10 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
             //Загружаем информацию о манге
             loadMangaInfo();
 
-            //После проверки страниц, автоматом сохраняем список манги
-            saveManga();
+            //Если нужно проводить автосохранение перед загрузкой страниц
+            if (Program.settingsStorage.settings.loadPagesAutosave)
+                //Сохраняем изменения
+                saveManga();
             //Переходим ко второму шагу загрузки
             workStep = DownloadStep.Steps.Загрузка_страниц_манги;
             //Обновляем инфу на форме
@@ -735,8 +757,10 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
             //Обновляем инфу на форме, указав что работа была завершена
             updateDownloadExec(true);
 
-            //Открываем папку, куда всё это грузили
-            openDownloadDirectory();
+            //Если стоит флаг открытия папки загрузки
+            if (Program.settingsStorage.settings.openDownloadFolder)
+                //Открываем папку, куда всё это грузили
+                openDownloadDirectory();
         }
 
         /// <summary>
@@ -791,15 +815,20 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
         {
             bool newPath = true;
 
-            //Если в списке загрузки уже установлен путь
-            if ((dList.downloadPath != null) && (dList.downloadPath.Length != 0))
-                //Запрашиваем обновление пути
-                newPath = (pl.showMessage(8) == System.Windows.Forms.DialogResult.Yes);
+            //Если нужно спрашивать о том, оставить ли старый путь загрузки
+            if (Program.settingsStorage.settings.newFolderRequest)
+                //Если в списке загрузки уже установлен путь
+                if ((dList.downloadPath != null) && (dList.downloadPath.Length != 0))
+                    //Запрашиваем обновление пути
+                    newPath = (pl.showMessage(8) == System.Windows.Forms.DialogResult.Yes);
 
             //Если путь таки нужно обновить
             if(newPath)
-                //Проставляем новый
-                dList.downloadPath = getNewDownloadPath(path);
+                //Проставляем новый. Если нужно создавать дочерние папки - создаём.
+                //иначе - базовый путь загрузки.
+                dList.downloadPath = (Program.settingsStorage.settings.createChildFolder) ? 
+                    getNewDownloadPath(path) :
+                    path;
         }
 
         /// <summary>

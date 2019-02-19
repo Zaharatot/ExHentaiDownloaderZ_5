@@ -51,8 +51,18 @@
     <Compile Include="Content\Forms\PopUp.Designer.cs">
       <DependentUpon>PopUp.cs</DependentUpon>
     </Compile>
+    <Compile Include="Content\Locales\ButtonsText.en.Designer.cs">
+      <DependentUpon>ButtonsText.en.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Content\Locales\ButtonsText.Designer.cs">
       <DependentUpon>ButtonsText.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Content\Locales\PopupHeaders.en.Designer.cs">
+      <DependentUpon>PopupHeaders.en.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -62,6 +72,11 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Content\Clases\PopupMessageInfo.cs" />
+    <Compile Include="Content\Locales\PopupMessages.en.Designer.cs">
+      <DependentUpon>PopupMessages.en.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Content\Locales\PopupMessages.Designer.cs">
       <DependentUpon>PopupMessages.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -78,14 +93,29 @@
     <EmbeddedResource Include="Content\Forms\PopUp.resx">
       <DependentUpon>PopUp.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Content\Locales\ButtonsText.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ButtonsText.en.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
     <EmbeddedResource Include="Content\Locales\ButtonsText.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ButtonsText.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Resources</CustomToolNamespace>
     </EmbeddedResource>
+    <EmbeddedResource Include="Content\Locales\PopupHeaders.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PopupHeaders.en.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
     <EmbeddedResource Include="Content\Locales\PopupHeaders.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>PopupHeaders.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\Locales\PopupMessages.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PopupMessages.en.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Resources</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Content\Locales\PopupMessages.resx">

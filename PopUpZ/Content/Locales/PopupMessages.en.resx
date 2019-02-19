@@ -117,70 +117,61 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="addElementAutosaveFlag" xml:space="preserve">
-    <value>Автосохранение при изменении списка загрузок</value>
+  <data name="CanselSettingsQuestion" xml:space="preserve">
+    <value>Вы действительно хотите сбросить настройки до значений по умолчанию? Внимание, выполнив данную операцию вы потеряете все установленные настройки!</value>
   </data>
-  <data name="autosaveBackupFlag" xml:space="preserve">
-    <value>Создание бекапов файла автосохранения</value>
+  <data name="ClearQuestion" xml:space="preserve">
+    <value>Вы действительно хотите очистить список загрузок? Внимание,это приведёт к полной потере текущего списка загрузок!</value>
   </data>
-  <data name="cancelSettingsButton" xml:space="preserve">
-    <value>Сброс параметров</value>
+  <data name="CloseQuestion" xml:space="preserve">
+    <value>Вы действительно хотите прервать процесс загрузки и завершить работу программы?</value>
   </data>
-  <data name="checkStatusesAutosaveFlag" xml:space="preserve">
-    <value>Автосохранение перед проверкой статусов</value>
+  <data name="DownloadComplete" xml:space="preserve">
+    <value>Загрузка списка манги была успешно завершена!</value>
   </data>
-  <data name="createChildFolderFlag" xml:space="preserve">
-    <value>Загрузка в номерные дочерние папки</value>
+  <data name="loadComplete_0" xml:space="preserve">
+    <value>Чтение списка загрузки было успешно завершено!</value>
   </data>
-  <data name="customTopBarHeader" xml:space="preserve">
-    <value>Настройки</value>
+  <data name="loadComplete_1" xml:space="preserve">
+    <value>Ошибка, во время чтения списка загрузки. Список не был прочитан корректно.</value>
   </data>
-  <data name="downloadMangaDelayLabel" xml:space="preserve">
-    <value>Задержка между загрузкой страниц разных манг:</value>
+  <data name="loadComplete_2" xml:space="preserve">
+    <value>Список загрузки не был проинициализирован. Пожалуйста перезапустите программу и попробуйте снова.</value>
   </data>
-  <data name="downloadMangaPageDelayLabel" xml:space="preserve">
-    <value>Задержка между загрузкой страниц манги:</value>
+  <data name="loadComplete_3" xml:space="preserve">
+    <value>Во время сериализации списка загрузки произошла ошибка. Список не был прочитан корректно.</value>
   </data>
-  <data name="downloadPathLabel" xml:space="preserve">
-    <value>Путь загрузки:</value>
+  <data name="loadComplete_4" xml:space="preserve">
+    <value>Путь к записываемому файлу некорректен. Пожалуйста перепроверьте путь считывания и повторите попытку.</value>
   </data>
-  <data name="downloadSettingsGroupBox" xml:space="preserve">
-    <value>Параметры загрузки</value>
+  <data name="MessageError" xml:space="preserve">
+    <value>Ошибка формирования сообщения об ошибке =).</value>
   </data>
-  <data name="exhentaiSettingsGroupBox" xml:space="preserve">
-    <value>Параметры подключения к exhentai</value>
+  <data name="RemoveError" xml:space="preserve">
+    <value>Не было выбрано ни одной строки для удаления!</value>
   </data>
-  <data name="exitAutosaveFlag" xml:space="preserve">
-    <value>Автосохранение при выходе из программы</value>
+  <data name="saveComplete_0" xml:space="preserve">
+    <value>Запись списка загрузки была успешно завершена!</value>
   </data>
-  <data name="loadInfoAutosaveFlag" xml:space="preserve">
-    <value>Автосохранение перед загрузкой информации о манге</value>
+  <data name="saveComplete_1" xml:space="preserve">
+    <value>Ошибка, во время записи списка загрузки. Список не был записан корректно.</value>
   </data>
-  <data name="loadPagesAutosaveFlag" xml:space="preserve">
-    <value>Автосохранение перед загрузкой страниц</value>
+  <data name="saveComplete_2" xml:space="preserve">
+    <value>Ошибка, во время сериализации списка загрузки. Список не был записан корректно.</value>
   </data>
-  <data name="mangaInfoLoadDelayLabel" xml:space="preserve">
-    <value>Задержка между загрузкой информации о разных мангах:</value>
+  <data name="saveComplete_3" xml:space="preserve">
+    <value>Список загрузки не был проинициализирован. Пожалуйста перезапустите программу и попробуйте снова.</value>
   </data>
-  <data name="memberIdLabel" xml:space="preserve">
-    <value>Значение "ipb_member_id" из куков:</value>
+  <data name="saveComplete_4" xml:space="preserve">
+    <value>Путь для записи некорректен. Пожалуйста перепроверьте путь записи и повторите попытку.</value>
   </data>
-  <data name="newFolderRequestFlag" xml:space="preserve">
-    <value>Запрос нового пути загрузки при запуске (если убрать флаг всегда будет новый путь загрузки)</value>
+  <data name="SaveSettings_0" xml:space="preserve">
+    <value>Настройки были успешно применены!</value>
   </data>
-  <data name="openDownloadFolderFlag" xml:space="preserve">
-    <value>Открытие папки загрузки после завершения</value>
+  <data name="SaveSettings_1" xml:space="preserve">
+    <value>Ошибка, во время применения настроек. Пожалуйста перезапустите программу, и попробуйте ещё раз.</value>
   </data>
-  <data name="passHashLabel" xml:space="preserve">
-    <value>Значение "ipb_pass_hash" из куков:</value>
-  </data>
-  <data name="rootPageLoadDelayLabel" xml:space="preserve">
-    <value>Задержка между подгрузками списков страниц:</value>
-  </data>
-  <data name="saveSettingsButton" xml:space="preserve">
-    <value>Сохранить</value>
-  </data>
-  <data name="saveSettingsGroupBox" xml:space="preserve">
-    <value>Параметры сохранения</value>
+  <data name="ResetPathQuestion" xml:space="preserve">
+    <value>В списке загрузки обнаружен существующий путь сохранения загруженных файлов. Вы хотите установить новый путь загрузки? Внимание! При выборе этого варианта, загрузка манги начнётся заного,без учёта уже загруженных в другую директорию файлов.</value>
   </data>
 </root>
