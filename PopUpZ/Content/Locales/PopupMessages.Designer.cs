@@ -97,6 +97,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Был превышен лимит загрузок! Теперь необходимо ждать несколько часов, до тех пор, пока не будет снята временная блокировка..
+        /// </summary>
+        public static string LimitError {
+            get {
+                return ResourceManager.GetString("LimitError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Чтение списка загрузки было успешно завершено!.
         /// </summary>
         public static string loadComplete_0 {

@@ -53,6 +53,7 @@ namespace PopUpZ.Content.Clases
             6 - Запрос сброса настроек на дефолтные.
             7 - Сообщение о завершении загрузки
             8 - Запрашиваем обновление пути
+            9 - Ошибка - превышен лимит загрузок
         */
 
         /// <summary>
@@ -173,6 +174,17 @@ namespace PopUpZ.Content.Clases
                                 message = PopupMessages.ResetPathQuestion,
                                 header = PopupHeaders.ResetPathQuestion,
                                 buttons = MessageBoxButtons.YesNo
+                            };
+                            break;
+                        }
+                    case 9:
+                        {
+                            // Запрашиваем обновление пути
+                            info = new PopupMessageInfo()
+                            {
+                                message = PopupMessages.LimitError,
+                                header = PopupHeaders.Error,
+                                buttons = MessageBoxButtons.OK
                             };
                             break;
                         }

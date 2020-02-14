@@ -106,6 +106,8 @@ namespace ExHentaiDownloaderZ_5
         {
             //Событие обновления процесса загрузки
             mw.onUpdateDownload += Mw_onUpdateDownload;
+            //Событие ошибки по лимитам
+            mw.onLimiteError += Mw_onLimiteError;
 
             //Клики по кнопкам управления окном
             customTopBar1.onCloseButtonClick += CustomTopBar1_onCloseButtonClick;
@@ -118,6 +120,17 @@ namespace ExHentaiDownloaderZ_5
             this.Resize += Main_Resize;
             //Событие завершения загрузки формы
             this.Load += Main_Load;
+        }
+
+        /// <summary>
+        /// Обработчик события ошибки по лимитам
+        /// </summary>
+        private void Mw_onLimiteError(object sender, EventArgs e)
+        {
+            //Выводим сообщение об ошибке
+            pl.showMessage(9);
+            //Проставляем активность кнопкам
+            setButtonsEnableStatus(true);
         }
 
         /// <summary>

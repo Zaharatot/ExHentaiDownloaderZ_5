@@ -31,7 +31,18 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
         /// <summary>
         /// Событие обновления процесса загрузки манги
         /// </summary>
-        public event updateDownload onUpdateDownload;    
+        public event updateDownload onUpdateDownload;
+
+        /// <summary>
+        /// Событие ошибки лимитов
+        /// </summary>
+        public event EventHandler onLimiteError;
+
+
+        /// <summary>
+        /// Адрес страницы ошибки
+        /// </summary>
+        private const string failURL = "https://exhentai.org/img/509.gif";
 
         /// <summary>
         /// Дефолтная средняя скорость загрузки страницы манги
@@ -86,6 +97,11 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
         /// Счётчик повторных перезапусков
         /// </summary>
         private int twinWork;
+
+        /// <summary>
+        /// Флаг лимитов загрузки
+        /// </summary>
+        private bool limites;
 
         /// <summary>
         /// Конструктор класса
@@ -391,21 +407,28 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
                     //Если мы получили адрес картинки
                     if (imageUrl.Length > 0)
                     {
-                        //Получаем расишрение файла
-                        ext = loader.getExtWithUrl(imageUrl);
-                        //Формируем имя файла
-                        filename = $"{id}{ext}";
-                        //Формируем путь загрузки
-                        imagePath = $"{path}{filename}";
-                        //Грузим страницу, и получаем результат
-                        ex = loader.downloadFile(imageUrl, imagePath);
+                        //Если адрес не входит в список косячных
+                        if (imageUrl != failURL)
+                        {
+                            //Получаем расишрение файла
+                            ext = loader.getExtWithUrl(imageUrl);
+                            //Формируем имя файла
+                            filename = $"{id}{ext}";
+                            //Формируем путь загрузки
+                            imagePath = $"{path}{filename}";
+                            //Грузим страницу, и получаем результат
+                            ex = loader.downloadFile(imageUrl, imagePath);
 
 
-                        //Получаем время завершения загрузки, со временем ожидания
-                        finTime = timeMicro() - startTime + 
-                            Program.settingsStorage.settings.downloadMangaPageDelay / 1000;
-                        //Пересчитываем среднее время загрузки
-                        averageLoadTime = (averageLoadTime + finTime) / 2;
+                            //Получаем время завершения загрузки, со временем ожидания
+                            finTime = timeMicro() - startTime +
+                                Program.settingsStorage.settings.downloadMangaPageDelay / 1000;
+                            //Пересчитываем среднее время загрузки
+                            averageLoadTime = (averageLoadTime + finTime) / 2;
+                        }
+                        else
+                            //Ошибка - мы привысили лимиты
+                            ex = 255;
                     }
                     else
                         //Ошибка - адрес картинки не был найден
@@ -435,10 +458,9 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
             string downloadPath, filename;
             manga buff;
             bool loadImage;
-            
 
             //Проходимся по списку манги
-            for (int i = 0; i < dList.downloadList.Count; i++)
+            for (int i = 0; limites && (i < dList.downloadList.Count); i++)
             {
                 //Флаг того, что хоть одно изображение было загружено
                 //Изначально ставится в False
@@ -465,14 +487,26 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
                     {
                         //Грузим страницу, и получаем результат
                         result = downloadPage(buff.pages[j].url, downloadPath, j, out filename);
-                        //Возвращаем результат загрузки
-                        buff.pages[j].loaded = (PageLoadStatus.status)result;
-                        //Сохраняем имя файла, для последующих проверок
-                        buff.pages[j].filename = filename;
-                        //Говорим, что изображение было загружено
-                        loadImage = true;
-                        //Спим, чтобы сайт особо не бузил
-                        Thread.Sleep(Program.settingsStorage.settings.downloadMangaPageDelay);
+                        //Если мы превысили лимиты на загрузки
+                        if (result == 255)
+                        {
+                            //Говорим, что у нас проблема с лимитами
+                            limites = false;
+                            //Выходим из этого цикла
+                            break;
+                        }
+                        //Если всё ок
+                        else
+                        {
+                            //Возвращаем результат загрузки
+                            buff.pages[j].loaded = (PageLoadStatus.status)result;
+                            //Сохраняем имя файла, для последующих проверок
+                            buff.pages[j].filename = filename;
+                            //Говорим, что изображение было загружено
+                            loadImage = true;
+                            //Спим, чтобы сайт особо не бузил
+                            Thread.Sleep(Program.settingsStorage.settings.downloadMangaPageDelay);
+                        }
                     }
                     //Если файл в папке таки есть
                     else
@@ -767,13 +801,10 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
                 //Загружаем страницы манги
                 downloadPages();
 
-                //Возвращаемся к сбору ссылок
-                workStep = DownloadStep.Steps.Сбор_ссылок;
-                //Обновляем инфу на форме, указав что работа была завершена
-                updateDownloadExec(-1, true);
 
                 //Если загрузка была успешно завершена
-                if (dList.checkComplete())
+                //И лимиты в порядке
+                if (!limites || dList.checkComplete())
                     //Выходим из цикла
                     break;
 
@@ -781,14 +812,29 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
                 twinWork++;
                 //Спим 10 секунд, между попытками загрузки
                 Thread.Sleep(1000 * 10);
-            //Идём, пока у нас есть попытки
+                //Идём, пока у нас есть попытки
             } while (twinWork < Program.settingsStorage.settings.twinLoadCount);
 
-
-            //Если стоит флаг открытия папки загрузки
-            if (Program.settingsStorage.settings.openDownloadFolder)
-                //Открываем папку, куда всё это грузили
-                openDownloadDirectory();
+            //Если с лимитами всё ок
+            if (limites)
+            {
+                //Возвращаемся к сбору ссылок
+                workStep = DownloadStep.Steps.Сбор_ссылок;
+                //Обновляем инфу на форме, указав что работа была завершена
+                updateDownloadExec(-1, true);
+                //Если стоит флаг открытия папки загрузки
+                if (Program.settingsStorage.settings.openDownloadFolder)
+                    //Открываем папку, куда всё это грузили
+                    openDownloadDirectory();
+            }
+            //Если ошибка по лимитам
+            else
+            {
+                //Обновляем форму
+                updateDownloadExec(-1);
+                //Вызываем ивент ошибки
+                onLimiteError?.Invoke(null, null);
+            }
         }
 
         /// <summary>
@@ -877,6 +923,8 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
                 //Прерываем его выполнение
                 main.Abort();
 
+            //Сбрасываем флаг лимитов
+            limites = true;
 
             //Инициализируем поток
             main = new Thread(downloadManga);
