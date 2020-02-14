@@ -24,7 +24,10 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
         /// <param name="downloadInfo">ИНформация о процессе загрузки</param>
         /// <param name="mangaTable">Список манги, для вывода в таблицу</param>
         /// <param name="finalWork">Флаг завершения работы</param>
-        public delegate void updateDownload(DownloadProgressInfo downloadInfo, List<TableMangaInfo> mangaTable, bool finalWork);
+        /// <param name="toDown">Флаг необходимости прокрутки страницы вниз</param>
+        /// <param name="selected">Id выбранной задачи</param>
+        public delegate void updateDownload(DownloadProgressInfo downloadInfo, 
+            List<TableMangaInfo> mangaTable, bool finalWork, bool toDown, int selected);
         /// <summary>
         /// Событие обновления процесса загрузки манги
         /// </summary>
@@ -79,7 +82,10 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
         /// </summary>
         private decimal averageLoadInfoTime;
 
-
+        /// <summary>
+        /// Счётчик повторных перезапусков
+        /// </summary>
+        private int twinWork;
 
         /// <summary>
         /// Конструктор класса
@@ -108,7 +114,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
             //Запускаем поиск ссылок
             cs.start();
         }
-        
+
         /// <summary>
         /// Событие нахождения адреса страницы манги в буфере обмена
         /// </summary>
@@ -116,11 +122,15 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
         private void Cs_findUrl(string url)
         {
             //Ссылки не могут добавляться во время работы
-            if(workStep == DownloadStep.Steps.Сбор_ссылок)
+            if (workStep == DownloadStep.Steps.Сбор_ссылок)
+            {
+                //Чистим адрес от лишних частей
+                url = verificateUrl(url);
                 //Если манга не найдена в списке
                 if (dList.downloadList.Count(mn => (mn.url.Equals(url))) == 0)
                     //Добавляем страницу манги в список
                     addMangaToList(url);
+            }
         }
 
 
@@ -336,7 +346,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
                     //Сохраняем инфу обратно
                     dList.downloadList[i] = buff;
                     //Обновляем инфу на форме
-                    updateDownloadExec();
+                    updateDownloadExec(i);
                     //Если загрузка была произведена
                     if (loadFlag)
                         //Спим, чтобы сайт особо не бузил
@@ -470,7 +480,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
                         buff.pages[j].loaded = PageLoadStatus.status.Загрузка_успешна;
 
                     //Обновляем инфу на форме
-                    updateDownloadExec();
+                    updateDownloadExec(i);
                 }
 
                 //Если манга была загружена 
@@ -485,7 +495,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
                     buff.status = MangaStatus.status.Ошибка_количества_страниц;
 
                 //Обновляем инфу на форме
-                updateDownloadExec();
+                updateDownloadExec(-1);
 
                 //Спим только в случае, если хоть одно изображение было загружено
                 if(loadImage)
@@ -532,7 +542,9 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
         /// Вызываем обновление списков загрузки
         /// </summary>
         /// <param name="finalWork">Флаг завершения работы</param>
-        public void updateDownloadExec(bool finalWork = false)
+        /// <param name="onDown">Флаг необходимости прокрутки вниз</param>
+        /// <param name="selected">Id задачи, над которой идёт работа</param>
+        public void updateDownloadExec(int selected, bool finalWork = false, bool onDown = false)
         {
             //Инициализируем переменные
             DownloadProgressInfo info = new DownloadProgressInfo();
@@ -627,7 +639,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
             }
 
             //Вызываем событие обновления
-            onUpdateDownload?.Invoke(info, mangaTable, finalWork);
+            onUpdateDownload?.Invoke(info, mangaTable, finalWork, onDown, selected);
         }
 
 
@@ -663,8 +675,6 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
         /// <param name="url">Адрес манги</param>
         public void addMangaToList(string url)
         {
-            //Чистим адрес от лишних частей
-            url = verificateUrl(url);
             //Добавляем информацию о манге
             dList.addManga(url);
 
@@ -674,7 +684,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
                 saveManga();
 
             //Обновляем инфу на форме
-            updateDownloadExec();
+            updateDownloadExec(-2, false, true);
         }
 
         /// <summary>
@@ -692,7 +702,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
                 saveManga();
 
             //Обновляем инфу на форме
-            updateDownloadExec();
+            updateDownloadExec(-1);
         }
 
         /// <summary>
@@ -709,7 +719,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
                 saveManga();
 
             //Обновляем инфу на форме
-            updateDownloadExec();
+            updateDownloadExec(-1);
         }
 
 
@@ -718,44 +728,62 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
         /// </summary>
         private void downloadManga()
         {
-            //Если нужно проводить автосохранение перед проверкой статусов
-            if (Program.settingsStorage.settings.checkStatusesAutosave)
-                //Сохраняем изменения
-                saveManga();
-            //Переходим к первому шагу загрузки
-            workStep = DownloadStep.Steps.Проверка_статусов_загрузки;
-            //Обновляем инфу на форме
-            updateDownloadExec();
-            //Проверяем все статусы загрузки
-            checkDownloadStatuses();
+            //Сбрасываем счётчик повторных попыток загрузки
+            twinWork = -1;
+
+            do
+            {
+                //Если нужно проводить автосохранение перед проверкой статусов
+                if (Program.settingsStorage.settings.checkStatusesAutosave)
+                    //Сохраняем изменения
+                    saveManga();
+                //Переходим к первому шагу загрузки
+                workStep = DownloadStep.Steps.Проверка_статусов_загрузки;
+                //Обновляем инфу на форме
+                updateDownloadExec(-2);
+                //Проверяем все статусы загрузки
+                checkDownloadStatuses();
 
 
-            //Если нужно проводить автосохранение перед загрузкой информации
-            if (Program.settingsStorage.settings.loadInfoAutosave)
-                //Сохраняем изменения
-                saveManga();
-            //Переходим к первому шагу загрузки
-            workStep = DownloadStep.Steps.Загрузка_информации_о_манге;
-            //Обновляем инфу на форме
-            updateDownloadExec();
-            //Загружаем информацию о манге
-            loadMangaInfo();
+                //Если нужно проводить автосохранение перед загрузкой информации
+                if (Program.settingsStorage.settings.loadInfoAutosave)
+                    //Сохраняем изменения
+                    saveManga();
+                //Переходим к первому шагу загрузки
+                workStep = DownloadStep.Steps.Загрузка_информации_о_манге;
+                //Обновляем инфу на форме
+                updateDownloadExec(-2);
+                //Загружаем информацию о манге
+                loadMangaInfo();
 
-            //Если нужно проводить автосохранение перед загрузкой страниц
-            if (Program.settingsStorage.settings.loadPagesAutosave)
-                //Сохраняем изменения
-                saveManga();
-            //Переходим ко второму шагу загрузки
-            workStep = DownloadStep.Steps.Загрузка_страниц_манги;
-            //Обновляем инфу на форме
-            updateDownloadExec();
-            //Загружаем страницы манги
-            downloadPages();
+                //Если нужно проводить автосохранение перед загрузкой страниц
+                if (Program.settingsStorage.settings.loadPagesAutosave)
+                    //Сохраняем изменения
+                    saveManga();
+                //Переходим ко второму шагу загрузки
+                workStep = DownloadStep.Steps.Загрузка_страниц_манги;
+                //Обновляем инфу на форме
+                updateDownloadExec(-2);
+                //Загружаем страницы манги
+                downloadPages();
 
-            //Возвращаемся к сбору ссылок
-            workStep = DownloadStep.Steps.Сбор_ссылок;
-            //Обновляем инфу на форме, указав что работа была завершена
-            updateDownloadExec(true);
+                //Возвращаемся к сбору ссылок
+                workStep = DownloadStep.Steps.Сбор_ссылок;
+                //Обновляем инфу на форме, указав что работа была завершена
+                updateDownloadExec(-1, true);
+
+                //Если загрузка была успешно завершена
+                if (dList.checkComplete())
+                    //Выходим из цикла
+                    break;
+
+                //Переходим к следующей попытке
+                twinWork++;
+                //Спим 10 секунд, между попытками загрузки
+                Thread.Sleep(1000 * 10);
+            //Идём, пока у нас есть попытки
+            } while (twinWork < Program.settingsStorage.settings.twinLoadCount);
+
 
             //Если стоит флаг открытия папки загрузки
             if (Program.settingsStorage.settings.openDownloadFolder)
@@ -848,6 +876,8 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
             if (main != null)
                 //Прерываем его выполнение
                 main.Abort();
+
+
             //Инициализируем поток
             main = new Thread(downloadManga);
             //Запускаем основной рабочий поток

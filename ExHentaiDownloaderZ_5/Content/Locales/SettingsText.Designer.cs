@@ -257,5 +257,32 @@ namespace Resources {
                 return ResourceManager.GetString("saveSettingsGroupBox", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Прокрутка до активной строки.
+        /// </summary>
+        public static string scrollToActiveCheckBox {
+            get {
+                return ResourceManager.GetString("scrollToActiveCheckBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Прокрутка до добавленной строки.
+        /// </summary>
+        public static string scrollToAddCheckBox {
+            get {
+                return ResourceManager.GetString("scrollToAddCheckBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Количество попыток повторной загрузки:.
+        /// </summary>
+        public static string twinLoadLabel {
+            get {
+                return ResourceManager.GetString("twinLoadLabel", resourceCulture);
+            }
+        }
     }
 }

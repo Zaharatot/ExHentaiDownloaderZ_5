@@ -13,7 +13,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.DataClases
     {
         /// <summary>
         /// Список загрузки
-        /// </summary>
+        /// </summary> 
         public string downloadPath { get; set; }
 
         /// <summary>
@@ -133,5 +133,13 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.DataClases
 
             return ex;
         }
+
+        /// <summary>
+        /// Проверка завершения загрузки
+        /// </summary>
+        /// <returns>True - если вся манга загружена</returns>
+        public bool checkComplete() =>
+            //Проверка на то, что не загруженной манги нет
+            (downloadList.Count(dl => (!dl.checkLoad())) == 0);
     }
 }

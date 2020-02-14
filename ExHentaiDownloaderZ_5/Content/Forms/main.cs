@@ -54,6 +54,7 @@ namespace ExHentaiDownloaderZ_5
         /// </summary>
         private void init()
         {
+
             //Инициализхируем класс всплывающих сообщений
             pl = new PopupLoader();
             //Инициализируем основной рабочий класс
@@ -125,7 +126,7 @@ namespace ExHentaiDownloaderZ_5
         private void Main_Load(object sender, EventArgs e)
         {
             //Запрашиваем обновление данных на форме 
-            mw.updateDownloadExec();
+            mw.updateDownloadExec(-1);
         }
 
         /// <summary>
@@ -134,7 +135,10 @@ namespace ExHentaiDownloaderZ_5
         /// <param name="downloadInfo">Информация о процессе загрузки</param>
         /// <param name="mangaTable">Список манги, для таблицы</param>
         /// <param name="finalWork">Флаг завершения работы</param>
-        private void Mw_onUpdateDownload(DownloadProgressInfo downloadInfo, List<TableMangaInfo> mangaTable, bool finalWork)
+        /// <param name="toDown">Флаг необходимости прокрутки страницы вниз</param>
+        /// <param name="selected">Id выбранной задачи</param>
+        private void Mw_onUpdateDownload(DownloadProgressInfo downloadInfo, 
+            List<TableMangaInfo> mangaTable, bool finalWork, bool toDown, int selected)
         {
             //Выполняем действия в основном потоке
             this.BeginInvoke(new Action(()=> {
@@ -143,10 +147,18 @@ namespace ExHentaiDownloaderZ_5
                 //Обновляем значения контроллов
                 updateElems(downloadInfo);
 
+                //Если нужно опустить вниз
+                if (toDown)
+                    //Опускаем
+                    scrollToDown();
+
                 //Если работа была завершена
-                if(finalWork)
+                if (finalWork)
                     //Вызываем сообщение о завершении загрузки
                     pl.showMessage(0);
+
+                //Выделяем строку активной задачи
+                scrollToActive(selected);
             }));
         }
 
@@ -191,29 +203,40 @@ namespace ExHentaiDownloaderZ_5
         /// <param name="mangaTable">Список манги, для таблицы</param>
         private void updateTable(List<TableMangaInfo> mangaTable)
         {
+            object[] buff;
             //Получаем id выделенной строки
             int selId = getSelectedRowId();
             //Получаем id первой видимой в элементе строки
-            int scrollId = downloadTable.FirstDisplayedScrollingRowIndex;            
-
-            //Очищаем список строк
-            downloadTable.Rows.Clear();
-
-            //Проходимся по списку
-            foreach (var row in mangaTable)
-                //Добавляем строку
-                downloadTable.Rows.Add(row.getRow());
+            int scrollId = downloadTable.FirstDisplayedScrollingRowIndex;
 
 
+            //Считаем разницу в количестве строк
+            int diff = downloadTable.RowCount - mangaTable.Count;
+            //Если строк нужно больше
+            if (diff < 0)
+                //Добавляем пустые строки в таблицу
+                for (int i = 0; i < -diff; i++)
+                    downloadTable.Rows.Add(new object[6]);
+            else if (diff > 0)
+                //Удаляем из таблицы лишние строки
+                for (int i = 0; i < diff; i++)
+                    downloadTable.Rows.RemoveAt(0);
+
+            //Проходимся по списку манги
+            for (int i = 0; i < mangaTable.Count; i++)
+            {
+                //Получаем массив значений
+                buff = mangaTable[i].getRow();
+                //Проходимся по ячейкам строки
+                for (int j = 0; j < buff.Length; j++)
+                    //Обновляем ячейку
+                    downloadTable.Rows[i].Cells[j].Value = buff[j];
+            }
+         
             //Проставляем выделение строке
             setSelectedRow(selId);
             //Проставляем скролл
             setFirstDisplayedRow(scrollId);
-
-            /*
-             Этот метод самый примитивный, и имеет много минусов.
-             Но, на первое время сойдёт.
-             */
         }
 
 
@@ -298,7 +321,7 @@ namespace ExHentaiDownloaderZ_5
                 //Если загрузка была успешна
                 if (result == 0)
                     //Обновляем инфу на форме
-                    mw.updateDownloadExec();
+                    mw.updateDownloadExec(-2);
                 
                 //Результат загрузки манги
                 pl.showMessage(1, result);
@@ -515,6 +538,44 @@ namespace ExHentaiDownloaderZ_5
         {
             //Отображаем форму предзагрузчика
             df.Show();
+        }
+
+        /// <summary>
+        /// Прокрутка таблицы вниз
+        /// </summary>
+        private void scrollToDown()
+        {
+            //Если включен параметр прокрутки к добавленной строке
+            if(Program.settingsStorage.settings.scrollToAdd)
+                //Указываем последнюю строку, как первую видимую строку
+                downloadTable.FirstDisplayedScrollingRowIndex = downloadTable.RowCount - 1;
+        }
+
+        /// <summary>
+        /// Прокрутка таблицы к активной строке
+        /// </summary>
+        /// <param name="id">
+        ///     Id активной строки.
+        ///         -1 - сброс выделения. 
+        ///         -2 - последняя строка.
+        /// </param>
+        private void scrollToActive(int id)
+        {
+            //Если включен параметр прокрутки к активной строке
+            if (Program.settingsStorage.settings.scrollToActive)
+            {
+                //Если нужно последний id указать
+                if (id == -2)
+                    id = downloadTable.RowCount - 1;
+
+                //Если не нужно сбросить выделение
+                if (id != -1)
+                    //Указываем нашу строку, как первую видимую строку
+                    downloadTable.FirstDisplayedScrollingRowIndex = id;
+
+                //Выделяем строку
+                setSelectedRow(id);
+            }
         }
     }
 }

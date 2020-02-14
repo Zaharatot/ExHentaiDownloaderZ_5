@@ -183,4 +183,13 @@
   <data name="saveSettingsGroupBox" xml:space="preserve">
     <value>Параметры сохранения</value>
   </data>
+  <data name="scrollToActiveCheckBox" xml:space="preserve">
+    <value>Прокрутка до активной строки</value>
+  </data>
+  <data name="scrollToAddCheckBox" xml:space="preserve">
+    <value>Прокрутка до добавленной строки</value>
+  </data>
+  <data name="twinLoadLabel" xml:space="preserve">
+    <value>Количество попыток повторной загрузки:</value>
+  </data>
 </root>

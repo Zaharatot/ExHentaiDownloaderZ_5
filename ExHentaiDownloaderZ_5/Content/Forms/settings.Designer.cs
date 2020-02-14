@@ -33,6 +33,8 @@
             this.cancelSettingsButton = new System.Windows.Forms.Button();
             this.saveSettingsButton = new System.Windows.Forms.Button();
             this.elementsPanel = new System.Windows.Forms.Panel();
+            this.scrollToAddCheckBox = new System.Windows.Forms.CheckBox();
+            this.scrollToActiveCheckBox = new System.Windows.Forms.CheckBox();
             this.autosaveBackupFlag = new System.Windows.Forms.CheckBox();
             this.loadPagesAutosaveFlag = new System.Windows.Forms.CheckBox();
             this.checkStatusesAutosaveFlag = new System.Windows.Forms.CheckBox();
@@ -59,12 +61,15 @@
             this.downloadPathTextBox = new System.Windows.Forms.TextBox();
             this.downloadPathLabel = new System.Windows.Forms.Label();
             this.downloadSettingsGroupBox = new customGroupBox.customGroupBox();
+            this.twinLoadLabel = new System.Windows.Forms.Label();
+            this.twinLoadVal = new System.Windows.Forms.NumericUpDown();
             this.buttonsPanel.SuspendLayout();
             this.elementsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.downloadMangaPageDelayVal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.downloadMangaDelayVal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mangaInfoLoadDelayVal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rootPageLoadDelayVal)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.twinLoadVal)).BeginInit();
             this.SuspendLayout();
             // 
             // customTopBar1
@@ -92,7 +97,7 @@
             this.buttonsPanel.Controls.Add(this.cancelSettingsButton);
             this.buttonsPanel.Controls.Add(this.saveSettingsButton);
             this.buttonsPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.buttonsPanel.Location = new System.Drawing.Point(3, 501);
+            this.buttonsPanel.Location = new System.Drawing.Point(3, 555);
             this.buttonsPanel.Name = "buttonsPanel";
             this.buttonsPanel.Size = new System.Drawing.Size(794, 55);
             this.buttonsPanel.TabIndex = 1;
@@ -123,6 +128,10 @@
             // 
             // elementsPanel
             // 
+            this.elementsPanel.Controls.Add(this.twinLoadLabel);
+            this.elementsPanel.Controls.Add(this.twinLoadVal);
+            this.elementsPanel.Controls.Add(this.scrollToAddCheckBox);
+            this.elementsPanel.Controls.Add(this.scrollToActiveCheckBox);
             this.elementsPanel.Controls.Add(this.autosaveBackupFlag);
             this.elementsPanel.Controls.Add(this.loadPagesAutosaveFlag);
             this.elementsPanel.Controls.Add(this.checkStatusesAutosaveFlag);
@@ -153,13 +162,35 @@
             this.elementsPanel.Location = new System.Drawing.Point(3, 38);
             this.elementsPanel.Name = "elementsPanel";
             this.elementsPanel.Padding = new System.Windows.Forms.Padding(10);
-            this.elementsPanel.Size = new System.Drawing.Size(794, 463);
+            this.elementsPanel.Size = new System.Drawing.Size(794, 517);
             this.elementsPanel.TabIndex = 2;
+            // 
+            // scrollToAddCheckBox
+            // 
+            this.scrollToAddCheckBox.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.scrollToAddCheckBox.Location = new System.Drawing.Point(38, 258);
+            this.scrollToAddCheckBox.Name = "scrollToAddCheckBox";
+            this.scrollToAddCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.scrollToAddCheckBox.Size = new System.Drawing.Size(343, 17);
+            this.scrollToAddCheckBox.TabIndex = 37;
+            this.scrollToAddCheckBox.Text = "Прокрутка до добавленной строки";
+            this.scrollToAddCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // scrollToActiveCheckBox
+            // 
+            this.scrollToActiveCheckBox.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.scrollToActiveCheckBox.Location = new System.Drawing.Point(389, 258);
+            this.scrollToActiveCheckBox.Name = "scrollToActiveCheckBox";
+            this.scrollToActiveCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.scrollToActiveCheckBox.Size = new System.Drawing.Size(378, 17);
+            this.scrollToActiveCheckBox.TabIndex = 36;
+            this.scrollToActiveCheckBox.Text = "Прокрутка до активной строки";
+            this.scrollToActiveCheckBox.UseVisualStyleBackColor = true;
             // 
             // autosaveBackupFlag
             // 
             this.autosaveBackupFlag.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.autosaveBackupFlag.Location = new System.Drawing.Point(387, 418);
+            this.autosaveBackupFlag.Location = new System.Drawing.Point(389, 469);
             this.autosaveBackupFlag.Name = "autosaveBackupFlag";
             this.autosaveBackupFlag.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.autosaveBackupFlag.Size = new System.Drawing.Size(377, 17);
@@ -170,7 +201,7 @@
             // loadPagesAutosaveFlag
             // 
             this.loadPagesAutosaveFlag.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.loadPagesAutosaveFlag.Location = new System.Drawing.Point(387, 395);
+            this.loadPagesAutosaveFlag.Location = new System.Drawing.Point(389, 446);
             this.loadPagesAutosaveFlag.Name = "loadPagesAutosaveFlag";
             this.loadPagesAutosaveFlag.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.loadPagesAutosaveFlag.Size = new System.Drawing.Size(377, 17);
@@ -181,7 +212,7 @@
             // checkStatusesAutosaveFlag
             // 
             this.checkStatusesAutosaveFlag.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.checkStatusesAutosaveFlag.Location = new System.Drawing.Point(38, 418);
+            this.checkStatusesAutosaveFlag.Location = new System.Drawing.Point(40, 469);
             this.checkStatusesAutosaveFlag.Name = "checkStatusesAutosaveFlag";
             this.checkStatusesAutosaveFlag.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.checkStatusesAutosaveFlag.Size = new System.Drawing.Size(343, 17);
@@ -192,7 +223,7 @@
             // addElementAutosaveFlag
             // 
             this.addElementAutosaveFlag.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.addElementAutosaveFlag.Location = new System.Drawing.Point(38, 395);
+            this.addElementAutosaveFlag.Location = new System.Drawing.Point(40, 446);
             this.addElementAutosaveFlag.Name = "addElementAutosaveFlag";
             this.addElementAutosaveFlag.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.addElementAutosaveFlag.Size = new System.Drawing.Size(343, 17);
@@ -203,7 +234,7 @@
             // loadInfoAutosaveFlag
             // 
             this.loadInfoAutosaveFlag.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.loadInfoAutosaveFlag.Location = new System.Drawing.Point(387, 372);
+            this.loadInfoAutosaveFlag.Location = new System.Drawing.Point(389, 423);
             this.loadInfoAutosaveFlag.Name = "loadInfoAutosaveFlag";
             this.loadInfoAutosaveFlag.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.loadInfoAutosaveFlag.Size = new System.Drawing.Size(377, 17);
@@ -214,7 +245,7 @@
             // exitAutosaveFlag
             // 
             this.exitAutosaveFlag.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.exitAutosaveFlag.Location = new System.Drawing.Point(38, 372);
+            this.exitAutosaveFlag.Location = new System.Drawing.Point(40, 423);
             this.exitAutosaveFlag.Name = "exitAutosaveFlag";
             this.exitAutosaveFlag.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.exitAutosaveFlag.Size = new System.Drawing.Size(343, 17);
@@ -228,7 +259,7 @@
             this.saveSettingsGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.saveSettingsGroupBox.headerColor = System.Drawing.Color.MediumSlateBlue;
             this.saveSettingsGroupBox.headerText = "SaveSettings";
-            this.saveSettingsGroupBox.Location = new System.Drawing.Point(10, 345);
+            this.saveSettingsGroupBox.Location = new System.Drawing.Point(10, 395);
             this.saveSettingsGroupBox.MaximumSize = new System.Drawing.Size(5000, 5000);
             this.saveSettingsGroupBox.MinimumSize = new System.Drawing.Size(200, 100);
             this.saveSettingsGroupBox.Name = "saveSettingsGroupBox";
@@ -239,7 +270,7 @@
             // newFolderRequestFlag
             // 
             this.newFolderRequestFlag.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.newFolderRequestFlag.Location = new System.Drawing.Point(35, 209);
+            this.newFolderRequestFlag.Location = new System.Drawing.Point(38, 235);
             this.newFolderRequestFlag.Name = "newFolderRequestFlag";
             this.newFolderRequestFlag.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.newFolderRequestFlag.Size = new System.Drawing.Size(729, 17);
@@ -251,7 +282,7 @@
             // openDownloadFolderFlag
             // 
             this.openDownloadFolderFlag.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.openDownloadFolderFlag.Location = new System.Drawing.Point(35, 186);
+            this.openDownloadFolderFlag.Location = new System.Drawing.Point(38, 212);
             this.openDownloadFolderFlag.Name = "openDownloadFolderFlag";
             this.openDownloadFolderFlag.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.openDownloadFolderFlag.Size = new System.Drawing.Size(343, 17);
@@ -262,7 +293,7 @@
             // createChildFolderFlag
             // 
             this.createChildFolderFlag.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.createChildFolderFlag.Location = new System.Drawing.Point(386, 186);
+            this.createChildFolderFlag.Location = new System.Drawing.Point(389, 212);
             this.createChildFolderFlag.Name = "createChildFolderFlag";
             this.createChildFolderFlag.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.createChildFolderFlag.Size = new System.Drawing.Size(378, 17);
@@ -408,7 +439,7 @@
             // 
             // passHashTextBox
             // 
-            this.passHashTextBox.Location = new System.Drawing.Point(386, 302);
+            this.passHashTextBox.Location = new System.Drawing.Point(388, 352);
             this.passHashTextBox.Name = "passHashTextBox";
             this.passHashTextBox.Size = new System.Drawing.Size(378, 20);
             this.passHashTextBox.TabIndex = 14;
@@ -416,7 +447,7 @@
             // passHashLabel
             // 
             this.passHashLabel.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.passHashLabel.Location = new System.Drawing.Point(35, 300);
+            this.passHashLabel.Location = new System.Drawing.Point(37, 350);
             this.passHashLabel.Name = "passHashLabel";
             this.passHashLabel.Size = new System.Drawing.Size(345, 23);
             this.passHashLabel.TabIndex = 13;
@@ -425,7 +456,7 @@
             // 
             // memberIdTextBox
             // 
-            this.memberIdTextBox.Location = new System.Drawing.Point(386, 276);
+            this.memberIdTextBox.Location = new System.Drawing.Point(388, 326);
             this.memberIdTextBox.Name = "memberIdTextBox";
             this.memberIdTextBox.Size = new System.Drawing.Size(378, 20);
             this.memberIdTextBox.TabIndex = 12;
@@ -433,7 +464,7 @@
             // memberIdLabel
             // 
             this.memberIdLabel.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.memberIdLabel.Location = new System.Drawing.Point(35, 274);
+            this.memberIdLabel.Location = new System.Drawing.Point(37, 324);
             this.memberIdLabel.Name = "memberIdLabel";
             this.memberIdLabel.Size = new System.Drawing.Size(345, 23);
             this.memberIdLabel.TabIndex = 11;
@@ -446,7 +477,7 @@
             this.exhentaiSettingsGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.exhentaiSettingsGroupBox.headerColor = System.Drawing.Color.MediumSlateBlue;
             this.exhentaiSettingsGroupBox.headerText = "exHentaiSettings";
-            this.exhentaiSettingsGroupBox.Location = new System.Drawing.Point(10, 245);
+            this.exhentaiSettingsGroupBox.Location = new System.Drawing.Point(10, 295);
             this.exhentaiSettingsGroupBox.MaximumSize = new System.Drawing.Size(5000, 5000);
             this.exhentaiSettingsGroupBox.MinimumSize = new System.Drawing.Size(200, 100);
             this.exhentaiSettingsGroupBox.Name = "exhentaiSettingsGroupBox";
@@ -482,15 +513,44 @@
             this.downloadSettingsGroupBox.MinimumSize = new System.Drawing.Size(200, 100);
             this.downloadSettingsGroupBox.Name = "downloadSettingsGroupBox";
             this.downloadSettingsGroupBox.Padding = new System.Windows.Forms.Padding(7);
-            this.downloadSettingsGroupBox.Size = new System.Drawing.Size(774, 235);
+            this.downloadSettingsGroupBox.Size = new System.Drawing.Size(774, 285);
             this.downloadSettingsGroupBox.TabIndex = 7;
+            // 
+            // twinLoadLabel
+            // 
+            this.twinLoadLabel.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.twinLoadLabel.Location = new System.Drawing.Point(32, 174);
+            this.twinLoadLabel.Name = "twinLoadLabel";
+            this.twinLoadLabel.Size = new System.Drawing.Size(348, 23);
+            this.twinLoadLabel.TabIndex = 39;
+            this.twinLoadLabel.Text = "Количество попыток повторной загрузки:";
+            this.twinLoadLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // twinLoadVal
+            // 
+            this.twinLoadVal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.twinLoadVal.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.twinLoadVal.Location = new System.Drawing.Point(386, 177);
+            this.twinLoadVal.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.twinLoadVal.Name = "twinLoadVal";
+            this.twinLoadVal.Size = new System.Drawing.Size(378, 20);
+            this.twinLoadVal.TabIndex = 38;
+            this.twinLoadVal.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.ClientSize = new System.Drawing.Size(800, 559);
+            this.ClientSize = new System.Drawing.Size(800, 613);
             this.Controls.Add(this.elementsPanel);
             this.Controls.Add(this.buttonsPanel);
             this.Controls.Add(this.customTopBar1);
@@ -506,6 +566,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.downloadMangaDelayVal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mangaInfoLoadDelayVal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rootPageLoadDelayVal)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.twinLoadVal)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -543,5 +604,9 @@
         private System.Windows.Forms.CheckBox checkStatusesAutosaveFlag;
         private System.Windows.Forms.CheckBox addElementAutosaveFlag;
         private System.Windows.Forms.CheckBox loadInfoAutosaveFlag;
+        private System.Windows.Forms.CheckBox scrollToAddCheckBox;
+        private System.Windows.Forms.CheckBox scrollToActiveCheckBox;
+        private System.Windows.Forms.Label twinLoadLabel;
+        private System.Windows.Forms.NumericUpDown twinLoadVal;
     }
 }

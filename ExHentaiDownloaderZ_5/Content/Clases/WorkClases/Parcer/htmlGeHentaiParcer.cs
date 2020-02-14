@@ -26,6 +26,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases.Parcer
             this.code = code;
         }
 
+
         /// <summary>
         /// Возвращает заголовок страницы
         /// </summary>

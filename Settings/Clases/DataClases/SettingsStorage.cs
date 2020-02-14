@@ -59,6 +59,17 @@ namespace SettingsStorageZ.Clases.DataClases
         public bool newFolderRequest { get; set; }
 
 
+        /// <summary>
+        /// В случае, если флаг будет проставлен, при добавлении манги в 
+        /// список, произойдёт автоматическая прокрутка к добавленной манге.
+        /// </summary>
+        public bool scrollToAdd { get; set; }
+        /// <summary>
+        /// В случае, если флаг будет проставлен, будет выполняться 
+        /// автоматическая прокрутка к активной в данный момент манге.
+        /// </summary>
+        public bool scrollToActive { get; set; }
+
 
         /* Параметры подключения */
 
@@ -106,6 +117,12 @@ namespace SettingsStorageZ.Clases.DataClases
 
 
         /// <summary>
+        /// Максимальное количество повторных попыток загрузки 
+        /// манги, в случае, если не вся манга была загружена
+        /// </summary>
+        public int twinLoadCount { get; set; }
+
+        /// <summary>
         /// Конструктор класса
         /// </summary>
         public SettingsStorage()
@@ -120,14 +137,14 @@ namespace SettingsStorageZ.Clases.DataClases
             downloadMangaPageDelay = 2000;
             createChildFolder = openDownloadFolder = newFolderRequest = true;
 
+            twinLoadCount = 3;
             //Параметры подключения
             ipb_pass_hash = ipb_member_id = "";
 
             //Параметры сохранения
-            exitAutosave = addElementAutosave = checkStatusesAutosave = loadInfoAutosave =
-                loadPagesAutosave = true;
-            autosaveBackup = false;
-
+            scrollToAdd = exitAutosave = addElementAutosave = checkStatusesAutosave = loadInfoAutosave =
+                scrollToActive = loadPagesAutosave = true;
+            autosaveBackup = false;            
         }
     }
 }

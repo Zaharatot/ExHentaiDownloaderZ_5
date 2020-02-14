@@ -71,6 +71,9 @@ namespace ExHentaiDownloaderZ_5
             openDownloadFolderFlag.Text = SettingsText.openDownloadFolderFlag;
             newFolderRequestFlag.Text = SettingsText.newFolderRequestFlag;
             createChildFolderFlag.Text = SettingsText.createChildFolderFlag;
+            scrollToAddCheckBox.Text = SettingsText.scrollToAddCheckBox;
+            scrollToActiveCheckBox.Text = SettingsText.scrollToActiveCheckBox;       
+            twinLoadLabel.Text = SettingsText.twinLoadLabel;
 
             //Настройки подключения к exhentai
             exhentaiSettingsGroupBox.headerText = SettingsText.exhentaiSettingsGroupBox;
@@ -172,6 +175,12 @@ namespace ExHentaiDownloaderZ_5
             loadInfoAutosaveFlag.Checked = Program.settingsStorage.settings.loadInfoAutosave;
             loadPagesAutosaveFlag.Checked = Program.settingsStorage.settings.loadPagesAutosave;
             autosaveBackupFlag.Checked = Program.settingsStorage.settings.autosaveBackup;
+
+            scrollToAddCheckBox.Checked = Program.settingsStorage.settings.scrollToAdd;
+            scrollToActiveCheckBox.Checked = Program.settingsStorage.settings.scrollToActive;
+
+
+            twinLoadVal.Value = Program.settingsStorage.settings.twinLoadCount;
         }
 
 
@@ -210,6 +219,11 @@ namespace ExHentaiDownloaderZ_5
                 Program.settingsStorage.settings.loadInfoAutosave = loadInfoAutosaveFlag.Checked;
                 Program.settingsStorage.settings.loadPagesAutosave = loadPagesAutosaveFlag.Checked;
                 Program.settingsStorage.settings.autosaveBackup = autosaveBackupFlag.Checked;
+
+                Program.settingsStorage.settings.scrollToAdd = scrollToAddCheckBox.Checked;
+                Program.settingsStorage.settings.scrollToActive = scrollToActiveCheckBox.Checked;
+
+                Program.settingsStorage.settings.twinLoadCount = (int)twinLoadVal.Value;
 
                 //Сохраняем изменения настроек
                 Program.settingsStorage.saveSettings();
