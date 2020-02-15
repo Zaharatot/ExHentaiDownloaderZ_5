@@ -458,6 +458,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
             string downloadPath, filename;
             manga buff;
             bool loadImage;
+            List<string> fileNames;
 
             //Проходимся по списку манги
             for (int i = 0; limites && (i < dList.downloadList.Count); i++)
@@ -478,12 +479,14 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
                 //Создаём директорию, если её нету
                 Directory.CreateDirectory(downloadPath);
 
+                //Получаем список имён файлов в папке загрузки
+                fileNames = getDirectoryFileNames(downloadPath);
+
                 //Проходимся по страницам манги
                 for (int j = 0; j < buff.pages.Count; j++)
                 {                   
-                    //Если нет имени файла или же, если файл не найден в папке
-                    if ((buff.pages[j].filename == null) 
-                        || (!File.Exists(downloadPath + buff.pages[j].filename)))
+                    //Если файл не найден в папке
+                    if (fileNames.Count(fn => (fn == j.ToString())) == 0)
                     {
                         //Грузим страницу, и получаем результат
                         result = downloadPage(buff.pages[j].url, downloadPath, j, out filename);
@@ -801,6 +804,8 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
                 //Загружаем страницы манги
                 downloadPages();
 
+                //Сохраняем изменения
+                saveManga();
 
                 //Если загрузка была успешно завершена
                 //И лимиты в порядке

@@ -54,7 +54,6 @@ namespace ExHentaiDownloaderZ_5
         /// </summary>
         private void init()
         {
-
             //Инициализхируем класс всплывающих сообщений
             pl = new PopupLoader();
             //Инициализируем основной рабочий класс
@@ -127,10 +126,13 @@ namespace ExHentaiDownloaderZ_5
         /// </summary>
         private void Mw_onLimiteError(object sender, EventArgs e)
         {
-            //Выводим сообщение об ошибке
-            pl.showMessage(9);
-            //Проставляем активность кнопкам
-            setButtonsEnableStatus(true);
+            //Запускаем событие в UI-потоке
+            this.BeginInvoke(new Action(() => { 
+                //Выводим сообщение об ошибке
+                pl.showMessage(9);
+                //Проставляем активность кнопкам
+                setButtonsEnableStatus(true);
+            }));
         }
 
         /// <summary>
