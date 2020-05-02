@@ -8,10 +8,11 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>ExHentaiDownloaderZ_5</RootNamespace>
     <AssemblyName>ExHentaiDownloaderZ_5</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -212,6 +213,10 @@
     <ProjectReference Include="..\CustomProgressBar\customProgressBar.csproj">
       <Project>{5A87BDDC-ED2C-4537-9CDC-1039039292F7}</Project>
       <Name>customProgressBar</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\customSettingsPanel\customSettingsPanel.csproj">
+      <Project>{6a2e00df-e631-48ae-9d8d-2258be8ca559}</Project>
+      <Name>customSettingsPanel</Name>
     </ProjectReference>
     <ProjectReference Include="..\CustomTabPage\CustomGroupBox.csproj">
       <Project>{9089c863-455a-4aad-b43a-693f4689446b}</Project>

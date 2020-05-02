@@ -33,6 +33,8 @@
             this.cancelSettingsButton = new System.Windows.Forms.Button();
             this.saveSettingsButton = new System.Windows.Forms.Button();
             this.elementsPanel = new System.Windows.Forms.Panel();
+            this.twinLoadLabel = new System.Windows.Forms.Label();
+            this.twinLoadVal = new System.Windows.Forms.NumericUpDown();
             this.scrollToAddCheckBox = new System.Windows.Forms.CheckBox();
             this.scrollToActiveCheckBox = new System.Windows.Forms.CheckBox();
             this.autosaveBackupFlag = new System.Windows.Forms.CheckBox();
@@ -61,15 +63,13 @@
             this.downloadPathTextBox = new System.Windows.Forms.TextBox();
             this.downloadPathLabel = new System.Windows.Forms.Label();
             this.downloadSettingsGroupBox = new customGroupBox.customGroupBox();
-            this.twinLoadLabel = new System.Windows.Forms.Label();
-            this.twinLoadVal = new System.Windows.Forms.NumericUpDown();
             this.buttonsPanel.SuspendLayout();
             this.elementsPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.twinLoadVal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.downloadMangaPageDelayVal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.downloadMangaDelayVal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mangaInfoLoadDelayVal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rootPageLoadDelayVal)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.twinLoadVal)).BeginInit();
             this.SuspendLayout();
             // 
             // customTopBar1
@@ -97,7 +97,7 @@
             this.buttonsPanel.Controls.Add(this.cancelSettingsButton);
             this.buttonsPanel.Controls.Add(this.saveSettingsButton);
             this.buttonsPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.buttonsPanel.Location = new System.Drawing.Point(3, 555);
+            this.buttonsPanel.Location = new System.Drawing.Point(3, 554);
             this.buttonsPanel.Name = "buttonsPanel";
             this.buttonsPanel.Size = new System.Drawing.Size(794, 55);
             this.buttonsPanel.TabIndex = 1;
@@ -162,8 +162,37 @@
             this.elementsPanel.Location = new System.Drawing.Point(3, 38);
             this.elementsPanel.Name = "elementsPanel";
             this.elementsPanel.Padding = new System.Windows.Forms.Padding(10);
-            this.elementsPanel.Size = new System.Drawing.Size(794, 517);
+            this.elementsPanel.Size = new System.Drawing.Size(794, 516);
             this.elementsPanel.TabIndex = 2;
+            // 
+            // twinLoadLabel
+            // 
+            this.twinLoadLabel.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.twinLoadLabel.Location = new System.Drawing.Point(32, 174);
+            this.twinLoadLabel.Name = "twinLoadLabel";
+            this.twinLoadLabel.Size = new System.Drawing.Size(348, 23);
+            this.twinLoadLabel.TabIndex = 39;
+            this.twinLoadLabel.Text = "Количество попыток повторной загрузки:";
+            this.twinLoadLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // twinLoadVal
+            // 
+            this.twinLoadVal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.twinLoadVal.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.twinLoadVal.Location = new System.Drawing.Point(386, 177);
+            this.twinLoadVal.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.twinLoadVal.Name = "twinLoadVal";
+            this.twinLoadVal.Size = new System.Drawing.Size(378, 20);
+            this.twinLoadVal.TabIndex = 38;
+            this.twinLoadVal.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // scrollToAddCheckBox
             // 
@@ -516,41 +545,12 @@
             this.downloadSettingsGroupBox.Size = new System.Drawing.Size(774, 285);
             this.downloadSettingsGroupBox.TabIndex = 7;
             // 
-            // twinLoadLabel
-            // 
-            this.twinLoadLabel.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.twinLoadLabel.Location = new System.Drawing.Point(32, 174);
-            this.twinLoadLabel.Name = "twinLoadLabel";
-            this.twinLoadLabel.Size = new System.Drawing.Size(348, 23);
-            this.twinLoadLabel.TabIndex = 39;
-            this.twinLoadLabel.Text = "Количество попыток повторной загрузки:";
-            this.twinLoadLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // twinLoadVal
-            // 
-            this.twinLoadVal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.twinLoadVal.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.twinLoadVal.Location = new System.Drawing.Point(386, 177);
-            this.twinLoadVal.Maximum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.twinLoadVal.Name = "twinLoadVal";
-            this.twinLoadVal.Size = new System.Drawing.Size(378, 20);
-            this.twinLoadVal.TabIndex = 38;
-            this.twinLoadVal.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
             // settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.ClientSize = new System.Drawing.Size(800, 613);
+            this.ClientSize = new System.Drawing.Size(800, 612);
             this.Controls.Add(this.elementsPanel);
             this.Controls.Add(this.buttonsPanel);
             this.Controls.Add(this.customTopBar1);
@@ -562,11 +562,11 @@
             this.buttonsPanel.ResumeLayout(false);
             this.elementsPanel.ResumeLayout(false);
             this.elementsPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.twinLoadVal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.downloadMangaPageDelayVal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.downloadMangaDelayVal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mangaInfoLoadDelayVal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rootPageLoadDelayVal)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.twinLoadVal)).EndInit();
             this.ResumeLayout(false);
 
         }

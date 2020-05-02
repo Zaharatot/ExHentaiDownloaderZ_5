@@ -438,7 +438,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
                     //Ошибка - страница не была загружена
                     ex = 3;
             }
-            catch
+            catch (Exception e)
             {
                 ex = 1;
                 //Ставим дефолтное значение

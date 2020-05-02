@@ -42,6 +42,23 @@ namespace SettingsStorageZ.Clases.DataClases
 
 
         /// <summary>
+        /// Количество дополнительных ожиданий (-1 если отключено)
+        /// </summary>
+        public int addWaitCount { get; set; }
+        /// <summary>
+        /// Минимальное время дополнительного ожидания
+        /// </summary>
+        public int addWaitTimeMin { get; set; }
+        /// <summary>
+        /// Максимальное время дополнттельного ожидания
+        /// </summary>
+        public int addWaitTimeMax { get; set; }
+
+
+
+
+
+        /// <summary>
         /// Автоматическое открытие папки, куда велась загрузка, после её завершения.
         /// </summary>
         public bool openDownloadFolder { get; set; }
@@ -131,10 +148,10 @@ namespace SettingsStorageZ.Clases.DataClases
 
             //Параметры загрузки
             downloadPath = Application.StartupPath + @"\Files\";
-            rootPageLoadDelay = 2000;
-            mangaInfoLoadDelay = 3000;
-            downloadMangaDelay = 10000;
-            downloadMangaPageDelay = 2000;
+            rootPageLoadDelay = 3000;
+            mangaInfoLoadDelay = 4000;
+            downloadMangaDelay = 15000;
+            downloadMangaPageDelay = 3000;
             createChildFolder = openDownloadFolder = newFolderRequest = true;
 
             twinLoadCount = 3;

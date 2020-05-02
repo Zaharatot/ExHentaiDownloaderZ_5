@@ -41,6 +41,8 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases.Parcer
                 string title = getFirstEntrance("<title>(.*?)</title>");
                 //Удаляем лишние вхождения
                 ex = clearString(title, new string[] { "<title>", "</title>" });
+                //Удаляем пробелы из начала и конца заголовка
+                ex = ex.Trim(' ');
             }
             catch { ex = ""; }
 
@@ -227,7 +229,8 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases.Parcer
                 //Добавляем однозначно удаляемые элементы, если это надо
                 if (clearAdd)
                     clear.AddRange(new string[] {
-                        "&#039;", "&amp;", ":", @"\\", "/", @"\|", ";", @"\*", @"\?", "#", "\"", "<", ">", "'" });
+                        "&#039;", "&amp;", ":", @"\\", "/", @"\|", ";", @"\*",
+                        @"\?", "#", "\"", "<", ">", "'", "\t", "\r", "\n" });
 
                 //Проходимся по массиву и убираем символы
                 foreach (string val in clear)

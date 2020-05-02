@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SettingsStorageZ", "Setting
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomGroupBox", "CustomTabPage\CustomGroupBox.csproj", "{9089C863-455A-4AAD-B43A-693F4689446B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "customSettingsPanel", "customSettingsPanel\customSettingsPanel.csproj", "{6A2E00DF-E631-48AE-9D8D-2258BE8CA559}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{9089C863-455A-4AAD-B43A-693F4689446B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9089C863-455A-4AAD-B43A-693F4689446B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9089C863-455A-4AAD-B43A-693F4689446B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A2E00DF-E631-48AE-9D8D-2258BE8CA559}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A2E00DF-E631-48AE-9D8D-2258BE8CA559}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A2E00DF-E631-48AE-9D8D-2258BE8CA559}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A2E00DF-E631-48AE-9D8D-2258BE8CA559}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
