@@ -74,6 +74,8 @@ namespace ExHentaiDownloaderZ_5
             scrollToAddCheckBox.Text = SettingsText.scrollToAddCheckBox;
             scrollToActiveCheckBox.Text = SettingsText.scrollToActiveCheckBox;       
             twinLoadLabel.Text = SettingsText.twinLoadLabel;
+            keepOriginalFileNameCheckBox.Text = SettingsText.keepOriginalFileNameCheckBox;
+            tryFindOriginalSizeCheckBox.Text = SettingsText.tryFindOriginalSizeCheckBox;
 
             //Настройки подключения к exhentai
             exhentaiSettingsGroupBox.headerText = SettingsText.exhentaiSettingsGroupBox;
@@ -163,7 +165,9 @@ namespace ExHentaiDownloaderZ_5
             openDownloadFolderFlag.Checked = Program.settingsStorage.settings.openDownloadFolder;
             newFolderRequestFlag.Checked = Program.settingsStorage.settings.newFolderRequest;
             createChildFolderFlag.Checked = Program.settingsStorage.settings.createChildFolder;
-            
+            keepOriginalFileNameCheckBox.Checked = Program.settingsStorage.settings.keepOriginalFileName;
+            tryFindOriginalSizeCheckBox.Checked = Program.settingsStorage.settings.tryFindOriginalSize;
+
             //Параметры подключения к exhentai
             memberIdTextBox.Text = Program.settingsStorage.settings.ipb_member_id;
             passHashTextBox.Text = Program.settingsStorage.settings.ipb_pass_hash;
@@ -207,6 +211,8 @@ namespace ExHentaiDownloaderZ_5
                 Program.settingsStorage.settings.openDownloadFolder = openDownloadFolderFlag.Checked;
                 Program.settingsStorage.settings.newFolderRequest = newFolderRequestFlag.Checked;
                 Program.settingsStorage.settings.createChildFolder = createChildFolderFlag.Checked;
+                Program.settingsStorage.settings.keepOriginalFileName = keepOriginalFileNameCheckBox.Checked;
+                Program.settingsStorage.settings.tryFindOriginalSize = tryFindOriginalSizeCheckBox.Checked;
 
                 //Параметры подключения к exhentai
                 Program.settingsStorage.settings.ipb_member_id = memberIdTextBox.Text;

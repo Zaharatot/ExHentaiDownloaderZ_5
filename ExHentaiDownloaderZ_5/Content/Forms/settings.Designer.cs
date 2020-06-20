@@ -63,6 +63,8 @@
             this.downloadPathTextBox = new System.Windows.Forms.TextBox();
             this.downloadPathLabel = new System.Windows.Forms.Label();
             this.downloadSettingsGroupBox = new customGroupBox.customGroupBox();
+            this.keepOriginalFileNameCheckBox = new System.Windows.Forms.CheckBox();
+            this.tryFindOriginalSizeCheckBox = new System.Windows.Forms.CheckBox();
             this.buttonsPanel.SuspendLayout();
             this.elementsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.twinLoadVal)).BeginInit();
@@ -97,7 +99,7 @@
             this.buttonsPanel.Controls.Add(this.cancelSettingsButton);
             this.buttonsPanel.Controls.Add(this.saveSettingsButton);
             this.buttonsPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.buttonsPanel.Location = new System.Drawing.Point(3, 554);
+            this.buttonsPanel.Location = new System.Drawing.Point(3, 582);
             this.buttonsPanel.Name = "buttonsPanel";
             this.buttonsPanel.Size = new System.Drawing.Size(794, 55);
             this.buttonsPanel.TabIndex = 1;
@@ -128,6 +130,8 @@
             // 
             // elementsPanel
             // 
+            this.elementsPanel.Controls.Add(this.tryFindOriginalSizeCheckBox);
+            this.elementsPanel.Controls.Add(this.keepOriginalFileNameCheckBox);
             this.elementsPanel.Controls.Add(this.twinLoadLabel);
             this.elementsPanel.Controls.Add(this.twinLoadVal);
             this.elementsPanel.Controls.Add(this.scrollToAddCheckBox);
@@ -162,7 +166,7 @@
             this.elementsPanel.Location = new System.Drawing.Point(3, 38);
             this.elementsPanel.Name = "elementsPanel";
             this.elementsPanel.Padding = new System.Windows.Forms.Padding(10);
-            this.elementsPanel.Size = new System.Drawing.Size(794, 516);
+            this.elementsPanel.Size = new System.Drawing.Size(794, 544);
             this.elementsPanel.TabIndex = 2;
             // 
             // twinLoadLabel
@@ -219,7 +223,7 @@
             // autosaveBackupFlag
             // 
             this.autosaveBackupFlag.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.autosaveBackupFlag.Location = new System.Drawing.Point(389, 469);
+            this.autosaveBackupFlag.Location = new System.Drawing.Point(389, 488);
             this.autosaveBackupFlag.Name = "autosaveBackupFlag";
             this.autosaveBackupFlag.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.autosaveBackupFlag.Size = new System.Drawing.Size(377, 17);
@@ -230,7 +234,7 @@
             // loadPagesAutosaveFlag
             // 
             this.loadPagesAutosaveFlag.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.loadPagesAutosaveFlag.Location = new System.Drawing.Point(389, 446);
+            this.loadPagesAutosaveFlag.Location = new System.Drawing.Point(389, 465);
             this.loadPagesAutosaveFlag.Name = "loadPagesAutosaveFlag";
             this.loadPagesAutosaveFlag.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.loadPagesAutosaveFlag.Size = new System.Drawing.Size(377, 17);
@@ -241,7 +245,7 @@
             // checkStatusesAutosaveFlag
             // 
             this.checkStatusesAutosaveFlag.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.checkStatusesAutosaveFlag.Location = new System.Drawing.Point(40, 469);
+            this.checkStatusesAutosaveFlag.Location = new System.Drawing.Point(40, 488);
             this.checkStatusesAutosaveFlag.Name = "checkStatusesAutosaveFlag";
             this.checkStatusesAutosaveFlag.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.checkStatusesAutosaveFlag.Size = new System.Drawing.Size(343, 17);
@@ -252,7 +256,7 @@
             // addElementAutosaveFlag
             // 
             this.addElementAutosaveFlag.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.addElementAutosaveFlag.Location = new System.Drawing.Point(40, 446);
+            this.addElementAutosaveFlag.Location = new System.Drawing.Point(40, 465);
             this.addElementAutosaveFlag.Name = "addElementAutosaveFlag";
             this.addElementAutosaveFlag.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.addElementAutosaveFlag.Size = new System.Drawing.Size(343, 17);
@@ -263,7 +267,7 @@
             // loadInfoAutosaveFlag
             // 
             this.loadInfoAutosaveFlag.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.loadInfoAutosaveFlag.Location = new System.Drawing.Point(389, 423);
+            this.loadInfoAutosaveFlag.Location = new System.Drawing.Point(389, 442);
             this.loadInfoAutosaveFlag.Name = "loadInfoAutosaveFlag";
             this.loadInfoAutosaveFlag.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.loadInfoAutosaveFlag.Size = new System.Drawing.Size(377, 17);
@@ -274,7 +278,7 @@
             // exitAutosaveFlag
             // 
             this.exitAutosaveFlag.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.exitAutosaveFlag.Location = new System.Drawing.Point(40, 423);
+            this.exitAutosaveFlag.Location = new System.Drawing.Point(40, 442);
             this.exitAutosaveFlag.Name = "exitAutosaveFlag";
             this.exitAutosaveFlag.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.exitAutosaveFlag.Size = new System.Drawing.Size(343, 17);
@@ -288,7 +292,7 @@
             this.saveSettingsGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.saveSettingsGroupBox.headerColor = System.Drawing.Color.MediumSlateBlue;
             this.saveSettingsGroupBox.headerText = "SaveSettings";
-            this.saveSettingsGroupBox.Location = new System.Drawing.Point(10, 395);
+            this.saveSettingsGroupBox.Location = new System.Drawing.Point(10, 416);
             this.saveSettingsGroupBox.MaximumSize = new System.Drawing.Size(5000, 5000);
             this.saveSettingsGroupBox.MinimumSize = new System.Drawing.Size(200, 100);
             this.saveSettingsGroupBox.Name = "saveSettingsGroupBox";
@@ -468,7 +472,7 @@
             // 
             // passHashTextBox
             // 
-            this.passHashTextBox.Location = new System.Drawing.Point(388, 352);
+            this.passHashTextBox.Location = new System.Drawing.Point(388, 373);
             this.passHashTextBox.Name = "passHashTextBox";
             this.passHashTextBox.Size = new System.Drawing.Size(378, 20);
             this.passHashTextBox.TabIndex = 14;
@@ -476,7 +480,7 @@
             // passHashLabel
             // 
             this.passHashLabel.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.passHashLabel.Location = new System.Drawing.Point(37, 350);
+            this.passHashLabel.Location = new System.Drawing.Point(37, 371);
             this.passHashLabel.Name = "passHashLabel";
             this.passHashLabel.Size = new System.Drawing.Size(345, 23);
             this.passHashLabel.TabIndex = 13;
@@ -485,7 +489,7 @@
             // 
             // memberIdTextBox
             // 
-            this.memberIdTextBox.Location = new System.Drawing.Point(388, 326);
+            this.memberIdTextBox.Location = new System.Drawing.Point(388, 347);
             this.memberIdTextBox.Name = "memberIdTextBox";
             this.memberIdTextBox.Size = new System.Drawing.Size(378, 20);
             this.memberIdTextBox.TabIndex = 12;
@@ -493,7 +497,7 @@
             // memberIdLabel
             // 
             this.memberIdLabel.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            this.memberIdLabel.Location = new System.Drawing.Point(37, 324);
+            this.memberIdLabel.Location = new System.Drawing.Point(37, 345);
             this.memberIdLabel.Name = "memberIdLabel";
             this.memberIdLabel.Size = new System.Drawing.Size(345, 23);
             this.memberIdLabel.TabIndex = 11;
@@ -506,7 +510,7 @@
             this.exhentaiSettingsGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.exhentaiSettingsGroupBox.headerColor = System.Drawing.Color.MediumSlateBlue;
             this.exhentaiSettingsGroupBox.headerText = "exHentaiSettings";
-            this.exhentaiSettingsGroupBox.Location = new System.Drawing.Point(10, 295);
+            this.exhentaiSettingsGroupBox.Location = new System.Drawing.Point(10, 316);
             this.exhentaiSettingsGroupBox.MaximumSize = new System.Drawing.Size(5000, 5000);
             this.exhentaiSettingsGroupBox.MinimumSize = new System.Drawing.Size(200, 100);
             this.exhentaiSettingsGroupBox.Name = "exhentaiSettingsGroupBox";
@@ -542,15 +546,37 @@
             this.downloadSettingsGroupBox.MinimumSize = new System.Drawing.Size(200, 100);
             this.downloadSettingsGroupBox.Name = "downloadSettingsGroupBox";
             this.downloadSettingsGroupBox.Padding = new System.Windows.Forms.Padding(7);
-            this.downloadSettingsGroupBox.Size = new System.Drawing.Size(774, 285);
+            this.downloadSettingsGroupBox.Size = new System.Drawing.Size(774, 306);
             this.downloadSettingsGroupBox.TabIndex = 7;
+            // 
+            // keepOriginalFileNameCheckBox
+            // 
+            this.keepOriginalFileNameCheckBox.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.keepOriginalFileNameCheckBox.Location = new System.Drawing.Point(38, 281);
+            this.keepOriginalFileNameCheckBox.Name = "keepOriginalFileNameCheckBox";
+            this.keepOriginalFileNameCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.keepOriginalFileNameCheckBox.Size = new System.Drawing.Size(343, 17);
+            this.keepOriginalFileNameCheckBox.TabIndex = 40;
+            this.keepOriginalFileNameCheckBox.Text = "Сохранять оригинальное имя файла из галереи";
+            this.keepOriginalFileNameCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // tryFindOriginalSizeCheckBox
+            // 
+            this.tryFindOriginalSizeCheckBox.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.tryFindOriginalSizeCheckBox.Location = new System.Drawing.Point(424, 281);
+            this.tryFindOriginalSizeCheckBox.Name = "tryFindOriginalSizeCheckBox";
+            this.tryFindOriginalSizeCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.tryFindOriginalSizeCheckBox.Size = new System.Drawing.Size(343, 17);
+            this.tryFindOriginalSizeCheckBox.TabIndex = 41;
+            this.tryFindOriginalSizeCheckBox.Text = "Искать ссылку оригинальный размер изображения";
+            this.tryFindOriginalSizeCheckBox.UseVisualStyleBackColor = true;
             // 
             // settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.ClientSize = new System.Drawing.Size(800, 612);
+            this.ClientSize = new System.Drawing.Size(800, 640);
             this.Controls.Add(this.elementsPanel);
             this.Controls.Add(this.buttonsPanel);
             this.Controls.Add(this.customTopBar1);
@@ -608,5 +634,7 @@
         private System.Windows.Forms.CheckBox scrollToActiveCheckBox;
         private System.Windows.Forms.Label twinLoadLabel;
         private System.Windows.Forms.NumericUpDown twinLoadVal;
+        private System.Windows.Forms.CheckBox tryFindOriginalSizeCheckBox;
+        private System.Windows.Forms.CheckBox keepOriginalFileNameCheckBox;
     }
 }

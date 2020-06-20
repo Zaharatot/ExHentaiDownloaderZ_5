@@ -153,6 +153,9 @@
   <data name="exitAutosaveFlag" xml:space="preserve">
     <value>Автосохранение при выходе из программы</value>
   </data>
+  <data name="keepOriginalFileNameCheckBox" xml:space="preserve">
+    <value>Сохранять оригинальное имя файла из галереи</value>
+  </data>
   <data name="loadInfoAutosaveFlag" xml:space="preserve">
     <value>Автосохранение перед загрузкой информации о манге</value>
   </data>
@@ -188,6 +191,9 @@
   </data>
   <data name="scrollToAddCheckBox" xml:space="preserve">
     <value>Прокрутка до добавленной строки</value>
+  </data>
+  <data name="tryFindOriginalSizeCheckBox" xml:space="preserve">
+    <value>Искать ссылку оригинальный размер изображения</value>
   </data>
   <data name="twinLoadLabel" xml:space="preserve">
     <value>Количество попыток повторной загрузки:</value>

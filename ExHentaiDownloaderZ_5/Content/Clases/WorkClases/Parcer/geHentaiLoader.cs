@@ -173,7 +173,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases.Parcer
             try
             {
                 //Если адрес имеет длинну
-                if (url.Length > 10)
+                if ((url != null) && (url.Length > 10))
                 {
                     //Формируем URI по адресу
                     Uri uu = new Uri(url);

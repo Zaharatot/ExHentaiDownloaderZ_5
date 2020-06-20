@@ -19,7 +19,7 @@ namespace Resources {
     // с помощью такого средства, как ResGen или Visual Studio.
     // Чтобы добавить или удалить член, измените файл .ResX и снова запустите ResGen
     // с параметром /str или перестройте свой проект VS.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class SettingsText {
@@ -169,6 +169,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Сохранять оригинальное имя файла из галереи.
+        /// </summary>
+        public static string keepOriginalFileNameCheckBox {
+            get {
+                return ResourceManager.GetString("keepOriginalFileNameCheckBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Автосохранение перед загрузкой информации о манге.
         /// </summary>
         public static string loadInfoAutosaveFlag {
@@ -273,6 +282,15 @@ namespace Resources {
         public static string scrollToAddCheckBox {
             get {
                 return ResourceManager.GetString("scrollToAddCheckBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Искать ссылку оригинальный размер изображения.
+        /// </summary>
+        public static string tryFindOriginalSizeCheckBox {
+            get {
+                return ResourceManager.GetString("tryFindOriginalSizeCheckBox", resourceCulture);
             }
         }
         

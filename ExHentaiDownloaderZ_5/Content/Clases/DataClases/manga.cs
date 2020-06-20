@@ -53,7 +53,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.DataClases
         /// <summary>
         /// Добавляем страницу манги
         /// </summary>
-        /// <param name="url">Путь загрузки</param>
+        /// <param name="url">Адрес новой страницы</param>
         public void addpage(string url)
         {
             //Добавляем страницу в список

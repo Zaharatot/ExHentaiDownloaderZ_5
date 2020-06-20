@@ -12,6 +12,12 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases.Parcer
     /// </summary>
     class htmlGeHentaiParcer
     {
+        /*
+         * Старый класс парсинга
+         * Оставил для истории...             
+        */
+
+
         /// <summary>
         /// Html-код страницы
         /// </summary>

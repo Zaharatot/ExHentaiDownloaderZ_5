@@ -56,6 +56,14 @@ namespace SettingsStorageZ.Clases.DataClases
 
 
 
+        /// <summary>
+        /// Флаг сохранения оригинального имени файла
+        /// </summary>
+        public bool keepOriginalFileName { get; set; }
+        /// <summary>
+        /// Флаг поиска изображения в оригинальном размере
+        /// </summary>
+        public bool tryFindOriginalSize { get; set; }
 
 
         /// <summary>
@@ -161,7 +169,7 @@ namespace SettingsStorageZ.Clases.DataClases
             //Параметры сохранения
             scrollToAdd = exitAutosave = addElementAutosave = checkStatusesAutosave = loadInfoAutosave =
                 scrollToActive = loadPagesAutosave = true;
-            autosaveBackup = false;            
+            autosaveBackup = keepOriginalFileName = tryFindOriginalSize = false;            
         }
     }
 }

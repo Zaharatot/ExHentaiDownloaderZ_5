@@ -10,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using PopUpZ.Content.Clases;
+using static ExHentaiDownloaderZ_5.Content.Clases.WorkClases.Parcer.htmlGeHentaiParcer_NEW;
 
 namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
 {
@@ -238,11 +239,10 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
         {
             bool ex = false;
             //Объявляем переменные
-            bool complete;
+            FindNextUrlStatus loadPagesStatus;
             string pageUrl, code;
-            int pageId;
             List<string> buff;
-            htmlGeHentaiParcer hp;
+            htmlGeHentaiParcer_NEW hp;
             decimal startTime, finTime;
 
             try
@@ -256,7 +256,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
                     //Загружаем страницу 
                     code = loader.loadHtmlPage(info.url);
                     //Инициализируем парсер 
-                    hp = new htmlGeHentaiParcer(code);
+                    hp = new htmlGeHentaiParcer_NEW(code);
 
                     //Если страница была загружена корректно
                     if (code.Length > 0)
@@ -264,11 +264,10 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
                         //Получаем название манги
                         info.name = hp.getTitle();
                         //Получаем и парсим количество страниц
-                        info.countPages = otherFuncs.parceInt(hp.getCountPages());
+                        info.countPages = hp.getCountPages();
 
                         //Ставим дефолтные значения получения страниц
-                        complete = true;
-                        pageId = 0;
+                        loadPagesStatus = FindNextUrlStatus.Страница_найдена;
 
                         //В цикле подгружаем все страницы манги
                         do
@@ -278,16 +277,12 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
                             //Добавляем их в основной список
                             addMangaPages(buff, ref info);
                             //Если есть ещё одна страница - продолжаем загрузку
-                            complete = hp.nextPageExists();
+                            loadPagesStatus = hp.GetNextPageUrl(out pageUrl);
                             //Если страница есть
-                            if (complete)
+                            if (loadPagesStatus == FindNextUrlStatus.Страница_найдена)
                             {
                                 //Спим, чтобы сайт особо не бузил
                                 Thread.Sleep(Program.settingsStorage.settings.rootPageLoadDelay);
-                                //Переходим к id новой страницы
-                                pageId++;
-                                //Формируем путь к новой странице
-                                pageUrl = loader.compileUrlWithId(info.url, pageId);
                                 //Загружаем страницу 
                                 code = loader.loadHtmlPage(pageUrl);
                                 //Если ошибка загрузки страницы
@@ -299,10 +294,10 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
                                     break;
                                 }
                                 //Инициализируем парсер 
-                                hp = new htmlGeHentaiParcer(code);
+                                hp = new htmlGeHentaiParcer_NEW(code);
                             }
                             //Если нужно ещё допарсить картинок
-                        } while (complete);
+                        } while (loadPagesStatus == FindNextUrlStatus.Страница_найдена);
 
                         //Манга загружена корректно
                         info.status = MangaStatus.status.Информация_загружена;
@@ -378,12 +373,13 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
         /// <param name="url">Адрес страницы</param>
         /// <param name="path">Путь сохранения кратинки со страницы</param>
         /// <param name="id">Id страницы в списке</param>
+        /// <param name="originalFilename">Оригинальное имя файла</param>
         /// <param name="filename">Возврат итмени загруженного файла</param>
         /// <returns>0 - всё ок, оначе - ошибка загрузки</returns>
         private byte downloadPage(string url, string path, int id, out string filename)
         {
             byte ex = 1;
-            string imageUrl, code, ext, imagePath;
+            string imageUrl, code, imagePath, originalFilename;
             decimal startTime, finTime;
 
             //Ставим дефолтное значение
@@ -400,8 +396,7 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
                 if (code.Length > 0)
                 {
                     //Инициализируем парсер 
-                    var hp = new htmlGeHentaiParcer(code);
-
+                    var hp = new htmlGeHentaiParcer_NEW(code);
                     //Загружаем адрес картинки
                     imageUrl = hp.getImageUrl();
                     //Если мы получили адрес картинки
@@ -410,16 +405,14 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
                         //Если адрес не входит в список косячных
                         if (imageUrl != failURL)
                         {
-                            //Получаем расишрение файла
-                            ext = loader.getExtWithUrl(imageUrl);
+                            //Получаем оригинальное имя файла
+                            originalFilename = hp.GetOriginalFileName();
                             //Формируем имя файла
-                            filename = $"{id}{ext}";
+                            filename = CompileFileName(originalFilename, imageUrl, id);
                             //Формируем путь загрузки
                             imagePath = $"{path}{filename}";
                             //Грузим страницу, и получаем результат
                             ex = loader.downloadFile(imageUrl, imagePath);
-
-
                             //Получаем время завершения загрузки, со временем ожидания
                             finTime = timeMicro() - startTime +
                                 Program.settingsStorage.settings.downloadMangaPageDelay / 1000;
@@ -448,6 +441,58 @@ namespace ExHentaiDownloaderZ_5.Content.Clases.WorkClases
             return ex;
         }
 
+        /// <summary>
+        /// Компилируем новое имя файла
+        /// </summary>
+        /// <param name="originalFilename">Оригинальное имя файла</param>
+        /// <param name="url">Адрес файла</param>
+        /// <param name="id">Id файла</param>
+        /// <returns>Новое имя файла</returns>
+        private string CompileFileName(string originalFilename, string url, int id)
+        {
+            string ex = "";
+            //Получаем расширение файла
+            string ext = GetExt(originalFilename, url);
+            //Если оригинальное имя файла не было нормально получено
+            if(originalFilename == null)
+                //Формируем внутреннее имя файла
+                ex = $"{id}{ext}"; 
+            //Если оригинальное имя файла есть
+            else
+            {
+                //Если нужно использовать оригинальное имя файла
+                ex = (Program.settingsStorage.settings.keepOriginalFileName) ?
+                    //Используем его, а если нет - формируем внутреннее
+                    originalFilename : $"{id}{ext}";
+            }
+            return ex;
+        }
+
+        /// <summary>
+        /// Получаем расширение файла
+        /// </summary>
+        /// <param name="originalFilename">Оригинальное имя файла</param>
+        /// <param name="url">Адрес файла</param>
+        /// <returns>Строка расширения файла</returns>
+        private string GetExt(string originalFilename, string url)
+        {
+            string ext;
+            //Если оригинальное имя файла не было нормально получено
+            if (originalFilename == null)
+            {
+                //Пробуем получить расширение из имени
+                ext = loader.getExtWithUrl(url);
+                //Если ссылка ведёт на php файл загрузки оригинального размера
+                if (ext.ToLower() == ".php")
+                    //Прописываем дефолтное расширение
+                    ext = ".jpg";
+            }
+            //Если оригинальное имя файла есть
+            else
+                //Пробуем получить расширение из имени
+                ext = loader.getExtWithUrl(originalFilename);
+            return ext;
+        }
 
         /// <summary>
         /// Загружаем страницы манги
